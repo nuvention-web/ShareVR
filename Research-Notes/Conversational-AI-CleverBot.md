@@ -13,14 +13,17 @@ Apparently, most of the language models are relying on neural networks like **RN
 ### Feasibility of the Model
 The general truth of machine learning methods is that they are build upon **big big** dataset. In order for a general purpose conversational AI to reach peak performance, one might consider train it over the **100 billion word Google News corpus** [1]. Existor claim that their [Cleverbot](http://www.cleverbot.com/) was trained on a much lighter dataset of **279 million interactions** within the **1.4 billion conversational interactions and approximately 9 billion individual words**.
 
+Good news is that their API allows some high-level interaction with their language interpretation model but not sure to what degree. Plus whether or not the API permits the use of their **1.4 billion or even the 279 million interactions database** is questionable, which plays a big factor in the performance.
+
 The key questions yet to be answered here are:
 1. How open is [CleverBot's API](http://www.cleverscript.com/)? Do we have access to their model and database?
 2. Is the API and service lightweight enough to be hosted on a VR program that runs on low-end mobile platform (e.g. GearVR)?
-3. **Will the model-engaged conversation facilitate language learning? And will people use it?**
+3. **Is the model suited for our language learning scenario given most of its database are probably casual conversation?**
+4. **Will the model-engaged conversation facilitate language learning? And will people use it?**
 
 # References
-1. [**Webpage** Existor's article about current conversational AIs](http://www.existor.com/products/cleverbot-data-for-machine-learning/)
-2. [**Webpage** CleverScript Description](http://www.cleverscript.com/about/)
-2. [**Research Article** Distributed Representation of Sentences and Documents](https://arxiv.org/pdf/1405.4053v2.pdf)
-3. [**Research Article** A Neural Conversational Model](https://arxiv.org/pdf/1506.05869v1.pdf)
-4. [**Webpage** How bots will change the Web, according to a bot we built to answer that question](https://www.washingtonpost.com/news/the-intersect/wp/2016/04/15/how-bots-will-change-the-web-according-to-a-bot-we-built-to-answer-that-question/?utm_term=.2d7ac8c86265)
+1. [**[Webpage]** Existor's article about current conversational AIs](http://www.existor.com/products/cleverbot-data-for-machine-learning/)
+2. [**[Webpage]** CleverScript Description](http://www.cleverscript.com/about/)
+3. [**[Research Article]** Distributed Representation of Sentences and Documents](https://arxiv.org/pdf/1405.4053v2.pdf)
+4. [**[Research Article]** A Neural Conversational Model](https://arxiv.org/pdf/1506.05869v1.pdf)
+5. [**[Webpage]** How bots will change the Web, according to a bot we built to answer that question](https://www.washingtonpost.com/news/the-intersect/wp/2016/04/15/how-bots-will-change-the-web-according-to-a-bot-we-built-to-answer-that-question/?utm_term=.2d7ac8c86265)
