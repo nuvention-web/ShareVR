@@ -11,3 +11,6 @@ Our team members include (in alphabetical order):
 
 # Project Website
 We will put our team website in the `docs` folder and publish the first version of it by 1/17/2017.
+
+# Project Wiki
+Check out our wiki page here: https://github.com/nuvention-web/Team-H/wiki
