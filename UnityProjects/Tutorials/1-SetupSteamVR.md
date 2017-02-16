@@ -1,5 +1,6 @@
 Setup SteamVR and Create Minimal VR Project on HTC Vive
 =============================
+This tutorial helps you walk through the process of setting up a minimal SteamVR project for HTC Vive.
 
 Install Unity3D
 ---------------------
@@ -24,3 +25,5 @@ find "SteamVR Plugin" and click download.
 5. Once download is finished, you will see a *Import Unity Package* window poped up. Click *All* and then click *Import*. It it ever
 show a *API Update Required* window, simply click *I Made a Backup. Go Ahead!*.
 6. When finished, you will see a *SteamVR_Settings* window pop up, click *Accept All* and you are all done with importing SteamVR.
+
+Now you will see a folder named "SteamVR" under your Assets folder. All the related files will be stored under SteamVR.
