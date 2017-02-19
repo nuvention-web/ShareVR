@@ -16,4 +16,4 @@ Please visit our project website at
 Check out our [wiki page](https://github.com/nuvention-web/Team-H/wiki)
 
 # Project Architecture
-You can find our most recent project architecture here ([ShareVR Architecture](https://github.com/nuvention-web/Team-H/blob/MVP-Slice/Architecture/Architecture_v2.png)).
+You can find our most recent project architecture here ([ShareVR Architecture](https://github.com/nuvention-web/Team-H/wiki/Architecture)).
