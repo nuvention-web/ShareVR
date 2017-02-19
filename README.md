@@ -10,7 +10,7 @@ Our team members include (in alphabetical order):
 - Qiqi Zhang (Vivian)
 
 # Project Website
-Please visit our project website at 
+Please visit our [project website](https://nuvention-web.github.io/Team-H/)
 
 # Project Wiki
 Check out our [wiki page](https://github.com/nuvention-web/Team-H/wiki)
