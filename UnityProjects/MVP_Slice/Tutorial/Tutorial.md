@@ -17,7 +17,7 @@ There are two ways to test the project. Please start with method A as it's the m
 
 #### Method A - Executable
 
-1. I have compiled an executable of the project using Unity. Please follow [this link](https://github.com/nuvention-web/Team-H/blob/MVP-Slice/UnityProjects/MVP_Slice/Executables/ShareVR_MVP_v1_0.exe) to download the file.
+1. I have compiled an executable of the project using Unity. Please follow [this link](https://github.com/nuvention-web/Team-H/tree/MVP-Slice/UnityProjects/MVP_Slice/Executables) and make sure download **both the *.exe file and the data folder**.
 2. Once you have downloaded the file, simple launch it and you should be able to play.
 
 #### Method B - Unity Editor
