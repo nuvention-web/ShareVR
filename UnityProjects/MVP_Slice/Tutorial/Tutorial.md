@@ -48,28 +48,28 @@ There are two ways to test the project. Please start with method A as it's the m
   - Use your *touchpad* to teleport
 
 ### Implemented Features
-- Version 1.0
+#### Version 1.0
+
+Version 1.0 implemented most basic features without any cloud or database support. It will help demonstrate our idea of easy and intuitive in-app/in-game capture from third person prospective.
   
-  Version 1.0 implemented most basic features without any cloud or database support. It will help demonstrate our idea of easy and intuitive in-app/in-game capture from third person prospective.
+<img src="https://github.com/nuvention-web/Team-H/blob/MVP-Slice/UnityProjects/MVP_Slice/Tutorial/Images/Scene1.png" width="180">
   
-  <img src="https://github.com/nuvention-web/Team-H/blob/MVP-Slice/UnityProjects/MVP_Slice/Tutorial/Images/Scene1.png" width="180">
+- [x] VR interaction features including teleport (VR only), interactable objects and world space UI canvas are adopted from SteamVR's interaction system example scene.
+
+- [x] Automatic SteamVR detection to support both VR and PC mode.
+
+- [x] Visible spectator camera that automatically follow and look at player.
+
+<img src="https://github.com/nuvention-web/Team-H/blob/MVP-Slice/UnityProjects/MVP_Slice/Tutorial/Images/Scene4.png" width="180">
+
+- [x] Live camera capture feed display in the scene.
+
+<img src="https://github.com/nuvention-web/Team-H/blob/MVP-Slice/UnityProjects/MVP_Slice/Tutorial/Images/Scene3.png" width="180">
+
+- [x] Basic interactiable UI menu to turn on/off spectator camera follow and live feed feature
+
+<img src="https://github.com/nuvention-web/Team-H/blob/MVP-Slice/UnityProjects/MVP_Slice/Tutorial/Images/Scene2.png" width="180">
   
-  - [x] VR interaction features including teleport (VR only), interactable objects and world space UI canvas are adopted from SteamVR's interaction system example scene.
+- [ ] I have created a very basic (and funny) player avatar in the demo. It's easy to subsitute that with any 3D mesh including Henry's idea of realistic personalized 3D body of the player himself/herself. Furthermore, it's possible to have a system that controls what avatar will appear in the captured video/image to enable player customization.
 
-  - [x] Automatic SteamVR detection to support both VR and PC mode.
-
-  - [x] Visible spectator camera that automatically follow and look at player.
-
-  <img src="https://github.com/nuvention-web/Team-H/blob/MVP-Slice/UnityProjects/MVP_Slice/Tutorial/Images/Scene4.png" width="180">
-
-  - [x] Live camera capture feed display in the scene.
-
-  <img src="https://github.com/nuvention-web/Team-H/blob/MVP-Slice/UnityProjects/MVP_Slice/Tutorial/Images/Scene3.png" width="180">
-
-  - [x] Basic interactiable UI menu to turn on/off spectator camera follow and live feed feature
-
-  <img src="https://github.com/nuvention-web/Team-H/blob/MVP-Slice/UnityProjects/MVP_Slice/Tutorial/Images/Scene2.png" width="180">
-  
-  - [ ] I have created a very basic (and funny) player avatar in the demo. It's easy to subsitute that with any 3D mesh including Henry's idea of realistic personalized 3D body of the player himself/herself. Furthermore, it's possible to have a system that controls what avatar will appear in the captured video/image to enable player customization.
-
-<img src="https://github.com/nuvention-web/Team-H/blob/MVP-Slice/UnityProjects/MVP_Slice/Tutorial/Images/Avatar1.png" width="180">
+<img src="https://github.com/nuvention-web/Team-H/blob/MVP-Slice/UnityProjects/MVP_Slice/Tutorial/Images/Avatar1.png" width="128">
