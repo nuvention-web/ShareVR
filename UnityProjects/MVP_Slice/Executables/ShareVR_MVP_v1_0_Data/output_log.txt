@@ -1,0 +1,72 @@
+Initialize engine version: 5.5.1f1 (88d00a7498cd)
+GfxDevice: creating device client; threaded=1
+VR: OpenVR Error! OpenVR failed initialization with error code VRInitError_Init_PathRegistryNotFound: "Installation path could not be located (110)"!
+ 
+(Filename:  Line: 954)
+
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) HD Graphics 515 (ID=0x191e)
+    Vendor:   Intel
+    VRAM:     1116 MB
+    Driver:   20.19.15.4364
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\UnityProjects\MVP_Slice\Executables\ShareVR_MVP_v1_0_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\UnityProjects\MVP_Slice\Executables\ShareVR_MVP_v1_0_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\UnityProjects\MVP_Slice\Executables\ShareVR_MVP_v1_0_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\UnityProjects\MVP_Slice\Executables\ShareVR_MVP_v1_0_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\UnityProjects\MVP_Slice\Executables\ShareVR_MVP_v1_0_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\UnityProjects\MVP_Slice\Executables\ShareVR_MVP_v1_0_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\UnityProjects\MVP_Slice\Executables\ShareVR_MVP_v1_0_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\UnityProjects\MVP_Slice\Executables\ShareVR_MVP_v1_0_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\UnityProjects\MVP_Slice\Executables\ShareVR_MVP_v1_0_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\UnityProjects\MVP_Slice\Executables\ShareVR_MVP_v1_0_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+Platform assembly: C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\UnityProjects\MVP_Slice\Executables\ShareVR_MVP_v1_0_Data\Managed\UnityEngine.VR.dll (this message is harmless)
+Loading C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\UnityProjects\MVP_Slice\Executables\ShareVR_MVP_v1_0_Data\Managed\UnityEngine.VR.dll into Unity Child Domain
+- Completed reload, in  0.045 seconds
+Platform assembly: C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\UnityProjects\MVP_Slice\Executables\ShareVR_MVP_v1_0_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\UnityProjects\MVP_Slice\Executables\ShareVR_MVP_v1_0_Data\Managed\System.dll (this message is harmless)
+<RI> Initializing input.
+XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
+<RI> Input initialized.
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initialized touch support.
+VR: OpenVR Error! OpenVR failed initialization with error code VRInitError_Init_PathRegistryNotFound: "Installation path could not be located (110)"!
+ 
+(Filename:  Line: 954)
+
+VR: OpenVR Error! OpenVR failed initialization with error code VRInitError_Init_PathRegistryNotFound: "Installation path could not be located (110)"!
+ 
+(Filename:  Line: 954)
+
+The referenced script on this Behaviour (Game Object 'TrackingRestored') is missing!
+ 
+(Filename:  Line: 1754)
+
+The referenced script on this Behaviour (Game Object 'TrackingLost') is missing!
+ 
+(Filename:  Line: 1754)
+
+The referenced script on this Behaviour (Game Object 'Calibration') is missing!
+ 
+(Filename:  Line: 1754)
+
+UnloadTime: 4.193519 ms
+Failed to get IVRChaperone interface.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SteamVR HMD not detected, using PC mode
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 16a4 -> priority: 1 
+Recording stopped!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Now it will start recording a spectator view from third person perspective!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
