@@ -9,7 +9,7 @@ Testing Status:
 |:-------------:|:---------------:|:-----:|
 | PC Mode       | Executable      | **Pass** |
 | PC Mode       | Unity Editor    | **Pass** |
-| VR Mode (SteamVR + Vive)  | Executable      | *Pending* |
+| VR Mode (SteamVR + Vive)  | Executable      | **Pass** |
 | VR Mode (SteamVR + Vive)  | Unity Editor    | *Pending* |
 
 ### Setup Environment and Testing MVP Project
