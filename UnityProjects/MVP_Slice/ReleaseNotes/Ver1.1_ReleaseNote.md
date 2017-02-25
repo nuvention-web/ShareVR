@@ -9,11 +9,12 @@ Release date: **2/25/2017**
 - Modified scene to apply VRCapture. Now when you click the *Start Record* button on the ShareVR Control Panel, it will automatically start to record
   2D video from the spectator camera. Once you click the *Stop Record* button, it will automatically encode and save the captured frames in to a MP4 video.
   For PC version, the recorded video file is located in */ShareVR_v1_1_Data/VRCapture*. For Mac version, it should be in a subfolder named *VRCapture* under */ShareVR_v1_1.app/Contents*.
+- Spectator camera is now **200%** it's original scale!
+- Recording status now gets displayed on the top-left corner of the ShareVR Live Feed panel in realtime. When recording, it will also show how many frames have been captured so far.
 
 ### Known Issues
 
-- 360 Panorama recording feature works in the VRCapture plugin demo scene but not in our scene. Lauch recording in 360 panorama mode will cause Unity Editor to collapse.
-  The reason why this is happening is unknown right now. Need to get it fixed.
+- [360 Panorama recording doesn't work](https://github.com/nuvention-web/Team-H/issues/15)
   
 ### TODO
 
@@ -22,3 +23,5 @@ Release date: **2/25/2017**
   
 - The recording API (VRCapture) is not very efficient and will cause obvious frame drop especially when recording 360 panorama video.
   We need to have conprehensive knowledge of how it works and carefully redesign/optimize the process.
+
+- Inactivate the opposite button when started/stopped recording.
