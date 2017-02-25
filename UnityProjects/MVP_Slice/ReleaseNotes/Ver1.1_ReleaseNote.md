@@ -15,13 +15,9 @@ Release date: **2/25/2017**
 ### Known Issues
 
 - [360 Panorama recording doesn't work](https://github.com/nuvention-web/Team-H/issues/15)
+- [360 Panorama recording cause huge frame drop](https://github.com/nuvention-web/Team-H/issues/15)
   
 ### TODO
 
-- The *Share* button in the ShareVR control panel currently does nothing. Will look into [YouTube Data API](https://developers.google.com/youtube/v3/) or similar
-  APIs to implement one button YouTube upload feature.
-  
-- The recording API (VRCapture) is not very efficient and will cause obvious frame drop especially when recording 360 panorama video.
-  We need to have conprehensive knowledge of how it works and carefully redesign/optimize the process.
-
+- [YouTube One-click Sharing Feature](https://github.com/nuvention-web/Team-H/issues/16())
 - Inactivate the opposite button when started/stopped recording.
