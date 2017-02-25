@@ -7,8 +7,8 @@ Deployment Testing:
 
 | Platform & Version | PC Mode (Windows) | PC Mode (MacOS) | VR Mode (Windows) |
 |:--------:|:-----------------:|:---------------:|:-----------------:|
-| [ver 1.0]()  | **Pass** | **Pass** | **Pass** |
-| [ver 1.1]()  | **Pass** | *Pending* | *Pending* |
+| [ver 1.0](https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/MVP_Slice/ReleaseNotes/Ver1.0_ReleaseNote.md)  | **Pass** | **Pass** | **Pass** |
+| [ver 1.1](https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/MVP_Slice/ReleaseNotes/Ver1.1_ReleaseNote.md)  | **Pass** | *Pending* | *Pending* |
 
 ### Setup Environment and Testing MVP Project
 There are two ways to test the project. Please start with method A as it's the most simple way to start the demo. Adam and Henry, please try to test method B after you tried method A. Method B will open the entire project from Unity which allows you to look into all the details and codes.
@@ -24,11 +24,11 @@ There are two ways to test the project. Please start with method A as it's the m
 2. Once you downloaded it. Unzip the file, launch Unity Editor and open the project folder you have just unzipped. It will probably take some time to open the project.
 3. Once it's finished, you should have the *MVP_Slice* scene loaded.
 
-  <img src="https://github.com/nuvention-web/Team-H/tree/submission/UnityProjects/MVP_Slice/ReleaseNotes/Images/OpenScene1.png" width="128">
+  <img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/MVP_Slice/ReleaseNotes/Images/OpenScene1.png?raw=true" width="128">
   
   If not, you can open the main scene in the *Project* tab.
   
-  <img src="https://github.com/nuvention-web/Team-H/tree/submission/UnityProjects/MVP_Slice/ReleaseNotes/Images/OpenScene2.png" width="256">
+  <img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/MVP_Slice/ReleaseNotes/Images/OpenScene2.png?raw=true" width="256">
 
 4. Once the scene is loaded, you can simple hit play button at the near the top center of your editor to launch the play mode.
 
