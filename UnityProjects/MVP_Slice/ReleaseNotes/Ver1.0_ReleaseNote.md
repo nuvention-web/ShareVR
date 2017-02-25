@@ -29,13 +29,10 @@ Version 1.0 implemented most basic features without any cloud or database suppor
   
 ### Known Issues
 
-- 360 Panorama recording feature works in the VRCapture plugin demo scene but not in our scene. Lauch recording in 360 panorama mode will cause Unity Editor to collapse.
-  The reason why this is happening is unknown right now. Need to get it fixed.
-  
 ### TODO
 
-- The *Share* button in the ShareVR control panel currently does nothing. Will look into [YouTube Data API](https://developers.google.com/youtube/v3/) or similar
-  APIs to implement one button YouTube upload feature.
-  
-- The recording API (VRCapture) is not very efficient and will cause obvious frame drop especially when recording 360 panorama video.
-  We need to have conprehensive knowledge of how it works and carefully redesign/optimize the process.
+- There's no recording functionality right now. The spectator camera will only update the live feed panel but won't record any actual frames. Will implement video recording and saving feature in the next release.
+ 
+- Henry suggested while testing the demo that the spectator camera needs to be larger in order for people to actually notice the existance of it and the fact that it's following them.
+
+- Inactivate the opposite button when start/stop recording.
