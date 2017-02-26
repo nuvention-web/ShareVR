@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>Mac</string>
+	<string>ShareVR_v1_1</string>
 	<key>CFBundleGetInfoString</key>
 	<string>Unity Player version 5.5.1f1 (88d00a7498cd). (c) 2017 Unity Technologies ApS. All rights reserved.</string>
 	<key>CFBundleIconFile</key>
