@@ -31,6 +31,6 @@ Release date: **3/1/2017**
 
 ### TODO
 
-- [ ] Test all head
+- [ ] Test VR Mode on HTC Vive
 - [YouTube One-click Sharing Feature](https://github.com/nuvention-web/Team-H/issues/16)
 - [Implement and test hand integration with HTC Vive controllers](https://github.com/nuvention-web/Team-H/issues/18)
