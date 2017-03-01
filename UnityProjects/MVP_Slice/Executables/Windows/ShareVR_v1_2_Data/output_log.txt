@@ -1,0 +1,464 @@
+Initialize engine version: 5.5.1f1 (88d00a7498cd)
+GfxDevice: creating device client; threaded=1
+VR: OpenVR Error! OpenVR failed initialization with error code VRInitError_Init_PathRegistryNotFound: "Installation path could not be located (110)"!
+ 
+(Filename:  Line: 954)
+
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) HD Graphics 515 (ID=0x191e)
+    Vendor:   Intel
+    VRAM:     1116 MB
+    Driver:   20.19.15.4364
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\branches\submission\UnityProjects\MVP_Slice\Executables\Windows\ShareVR_v1_2_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\branches\submission\UnityProjects\MVP_Slice\Executables\Windows\ShareVR_v1_2_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\branches\submission\UnityProjects\MVP_Slice\Executables\Windows\ShareVR_v1_2_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\branches\submission\UnityProjects\MVP_Slice\Executables\Windows\ShareVR_v1_2_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\branches\submission\UnityProjects\MVP_Slice\Executables\Windows\ShareVR_v1_2_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\branches\submission\UnityProjects\MVP_Slice\Executables\Windows\ShareVR_v1_2_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\branches\submission\UnityProjects\MVP_Slice\Executables\Windows\ShareVR_v1_2_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\branches\submission\UnityProjects\MVP_Slice\Executables\Windows\ShareVR_v1_2_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\branches\submission\UnityProjects\MVP_Slice\Executables\Windows\ShareVR_v1_2_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\branches\submission\UnityProjects\MVP_Slice\Executables\Windows\ShareVR_v1_2_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+Platform assembly: C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\branches\submission\UnityProjects\MVP_Slice\Executables\Windows\ShareVR_v1_2_Data\Managed\UnityEngine.VR.dll (this message is harmless)
+Loading C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\branches\submission\UnityProjects\MVP_Slice\Executables\Windows\ShareVR_v1_2_Data\Managed\UnityEngine.VR.dll into Unity Child Domain
+- Completed reload, in  0.048 seconds
+Platform assembly: C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\branches\submission\UnityProjects\MVP_Slice\Executables\Windows\ShareVR_v1_2_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\zhaoruizhi\Desktop\Chen\Unity\Repo\Team-H\branches\submission\UnityProjects\MVP_Slice\Executables\Windows\ShareVR_v1_2_Data\Managed\System.dll (this message is harmless)
+<RI> Initializing input.
+XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
+<RI> Input initialized.
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initialized touch support.
+VR: OpenVR Error! OpenVR failed initialization with error code VRInitError_Init_PathRegistryNotFound: "Installation path could not be located (110)"!
+ 
+(Filename:  Line: 954)
+
+VR: OpenVR Error! OpenVR failed initialization with error code VRInitError_Init_PathRegistryNotFound: "Installation path could not be located (110)"!
+ 
+(Filename:  Line: 954)
+
+The referenced script on this Behaviour (Game Object 'Calibration') is missing!
+ 
+(Filename:  Line: 1754)
+
+The referenced script on this Behaviour (Game Object 'TrackingLost') is missing!
+ 
+(Filename:  Line: 1754)
+
+The referenced script on this Behaviour (Game Object 'TrackingRestored') is missing!
+ 
+(Filename:  Line: 1754)
+
+UnloadTime: 2.425220 ms
+Failed to get IVRChaperone interface.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SteamVR HMD not detected, using PC mode
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 1534 -> priority: 1 
+VRCaptureVideo: Encoded 1 frames. 10 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 2 frames. 11 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 3 frames. 10 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 4 frames. 10 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 5 frames. 10 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 6 frames. 9 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 7 frames. 9 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 8 frames. 9 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 9 frames. 9 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 10 frames. 9 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 11 frames. 12 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 12 frames. 12 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 13 frames. 13 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 14 frames. 13 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 15 frames. 14 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 16 frames. 14 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 17 frames. 15 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 18 frames. 16 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 19 frames. 18 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 20 frames. 20 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 21 frames. 22 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 22 frames. 23 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 23 frames. 27 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 24 frames. 27 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 25 frames. 28 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 26 frames. 28 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 27 frames. 30 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 28 frames. 32 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 29 frames. 33 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 30 frames. 34 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 31 frames. 34 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 32 frames. 34 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 33 frames. 34 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 34 frames. 34 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 35 frames. 36 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 36 frames. 37 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 37 frames. 37 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 38 frames. 42 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 39 frames. 43 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 40 frames. 44 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 41 frames. 57 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 42 frames. 56 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 43 frames. 55 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 44 frames. 54 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 45 frames. 53 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 46 frames. 52 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 47 frames. 51 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 48 frames. 50 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 49 frames. 49 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 50 frames. 48 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 51 frames. 47 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 52 frames. 46 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 53 frames. 45 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 54 frames. 44 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 55 frames. 43 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 56 frames. 42 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: capture not start yet!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 57 frames. 41 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 58 frames. 40 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 59 frames. 39 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 60 frames. 38 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 61 frames. 37 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 62 frames. 36 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 63 frames. 35 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 64 frames. 34 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 65 frames. 33 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 66 frames. 32 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 67 frames. 31 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 68 frames. 30 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 69 frames. 29 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 70 frames. 28 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 71 frames. 27 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 72 frames. 26 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 73 frames. 25 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 74 frames. 24 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 75 frames. 23 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 76 frames. 22 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 77 frames. 21 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 78 frames. 20 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 79 frames. 19 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 80 frames. 18 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 81 frames. 17 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 82 frames. 16 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 83 frames. 15 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 84 frames. 14 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 85 frames. 13 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 86 frames. 12 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 87 frames. 11 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 88 frames. 10 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 89 frames. 9 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 90 frames. 8 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 91 frames. 7 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 92 frames. 6 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 93 frames. 5 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 94 frames. 4 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 95 frames. 3 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 96 frames. 2 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 97 frames. 1 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encoded 98 frames. 0 frames remaining.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+VRCaptureVideo: Encode process finish!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
