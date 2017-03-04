@@ -1,7 +1,7 @@
 ## ShareVR MVP Slice Project
-Released version: **1.2**
+Released version: **1.2 Beta**
 
-Release date: **3/1/2017**
+Release date: **3/4/2017**
 
 ### Implemented Features
 
@@ -23,6 +23,9 @@ Release date: **3/1/2017**
   <img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/MVP_Slice/ReleaseNotes/Images/Avatar3.png?raw=true" width="180">
   <img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/MVP_Slice/ReleaseNotes/Images/Avatar4.png?raw=true" width="180">
 - Added avatar offset control. Avatar height offset can be controlled by the **-** and **=** key on your keyboard (on the left of your backspace key).
+- **(Beta Feature)** Head gaze and hand coordination are now updated through the animator Invert Kinematics (IK) system.
+  <img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/MVP_Slice/ReleaseNotes/Images/HandIK.gif?raw=true" width="180">
+  <img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/MVP_Slice/ReleaseNotes/Images/GazeIK.gif?raw=true" width="180">
 
 ### Known Issues
 
@@ -31,6 +34,7 @@ Release date: **3/1/2017**
 
 ### TODO
 
-- [ ] Test VR Mode on HTC Vive
+- [x] Test VR Mode on HTC Vive.
+- [ ] Test Avatar Hand Invert Kinematics feature with Vive controllers. Fix any offset or alignment issues.
 - [YouTube One-click Sharing Feature](https://github.com/nuvention-web/Team-H/issues/16)
 - [Implement and test hand integration with HTC Vive controllers](https://github.com/nuvention-web/Team-H/issues/18)
