@@ -29,7 +29,8 @@ If you are using HTC Vive and have SteamVR installed, ShareVR will automatically
 - **Finish recording** : Stop the capture session by hitting the "Stop Recording" button.
 
 Once you finished a capture session, you will see a new message displayed below the "Stop Recording" button. In the message you will find a full path which will lead you to the video file that you just recorded.
-<img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/Q1-Deliverable/Images/Q1-Deliverable-Scene3.png?raw=true" width="200">
+
+<img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/Q1-Deliverable/Images/Q1-Deliverable-Scene3.png?raw=true" width="300">
 
 ### Q1 Deliverable Feature Overview
 - ShareVR adopted some interactive contents from SteamVR's interaction system.
