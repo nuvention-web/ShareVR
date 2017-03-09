@@ -29,19 +29,21 @@ If you are using HTC Vive and have SteamVR installed, ShareVR will automatically
 - **Finish recording** : Stop the capture session by hitting the "Stop Recording" button.
 
 Once you finished a capture session, you will see a new message displayed below the "Stop Recording" button. In the message you will find a full path which will lead you to the video file that you just recorded.
-<img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/MVP_Slice/ReleaseNotes/Images/Q1-Deliverable-Scene3.png?raw=true" width="200">
+
+<img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/MVP_Slice/ReleaseNotes/Images/Q1-Deliverable-Scene3.png?raw=true" width="260">
 
 #### ShareVR Feature Overview
 - ShareVR adopted some interactive contents from SteamVR's interaction system.
 
-  <img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/MVP_Slice/ReleaseNotes/Images/Q1-Deliverable-Scene1.png?raw=true" width="320">
+  <img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/MVP_Slice/ReleaseNotes/Images/Q1-Deliverable-Scene1.png?raw=true" width="480">
 
   The scene has six tables with each one featuring standard interactive objects used by SteamVR. You are able to interact with these objects in both PC and VR mode.
 
 - There is a 3D camera model that's hovering in the air and will follow smoothly you as you move. The camera is a visualization of our in-game spectator camera which will record third person view.
 
 - In the center of the scene you will see a giant screen called "ShareVR Live Feed". This is a live preview of what our spectator camera sees right now.
-  <img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/MVP_Slice/ReleaseNotes/Images/Q1-Deliverable-Scene2.png?raw=true" width="320">
+
+  <img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/MVP_Slice/ReleaseNotes/Images/Q1-Deliverable-Scene2.png?raw=true" width="240">
 
 - We implemented an in-app interactive UI (ShareVR Control Panel) to control the capturing and are planning to upgrade that with a more intuitive voice controlled interface in future iterations.
 
