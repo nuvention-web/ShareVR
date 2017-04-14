@@ -5,7 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/MVP_Slice.unity
   - enabled: 1
-    path: Assets/Scenes/MVP_Capture.unity
+    path: Assets/ShareVR/Scenes/example.unity
+    guid: 073bb067170a46444872cac5dcf3a8a2

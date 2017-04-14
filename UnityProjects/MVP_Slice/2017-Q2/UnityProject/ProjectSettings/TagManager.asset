@@ -6,8 +6,8 @@ TagManager:
   tags:
   - projectile
   - FxTemporaire
-  - SpectatorCamera
   - RecStatusText
+  - SpectatorCamera
   layers:
   - Default
   - TransparentFX
@@ -17,30 +17,30 @@ TagManager:
   - UI
   - 
   - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - IgnoreInCapture
-  - IgnoreInView
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
