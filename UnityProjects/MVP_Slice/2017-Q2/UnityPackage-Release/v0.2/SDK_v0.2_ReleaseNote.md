@@ -20,10 +20,9 @@ We observed our rendering time during recording dropped from *13.67ms* to *4.20m
 ##### Stabilized Frame Rate
 In addition to rendering time improvement, it's also obvious that the frame rate is now way more stable than SDK v0.1. The main reason behind that is the pipline stall problem. In SDK v0.1 our recording coroutine will cause pipline stall which forces CPU and GPU to sync event with each other. It's costly operation that will lead to significantly increased rendering time. After our fix, the CPU-GPU sync will be managed by SteamVR and Unity which delivers a smooth frame rate.
 
-<img src="./Imgs/Profiling-v0.1-Base.png" alt="Baseline of SteamVR in SDK v0.1" style="width: 350px;"/>
-<img src="./Imgs/Profiling-v0.1-Rec.png" alt="During Recording in SDK v0.1" style="width: 350px;"/>
-<img src="./Imgs/Profiling-v0.2-Base.png" alt="Baseline of SteamVR in SDK v0.2" style="width: 350px;"/>
-<img src="./Imgs/Profiling-v0.2-Rec.png" alt="During Recording in SDK v0.2" style="width: 350px;"/>
+<img src="./Imgs/Profiling-v0.1-Base.png" alt="Baseline of SteamVR in SDK v0.1" width="400"/><img src="./Imgs/Profiling-v0.1-Rec.png" alt="During Recording in SDK v0.1" width="400"/>
+
+<img src="./Imgs/Profiling-v0.2-Base.png" alt="Baseline of SteamVR in SDK v0.2" width="400"/><img src="./Imgs/Profiling-v0.2-Rec.png" alt="During Recording in SDK v0.2" width="400"/>
 
 ###### ShareVR Team
 4.15.2017
