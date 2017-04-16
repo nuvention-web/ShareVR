@@ -14,6 +14,6 @@ public class PostBuildProcess
 			Directory.CreateDirectory (saveFolder);
 		
 		File.Copy (VRCaptureUtils.FFmpegEditorPath, saveFolder + "/ffmpeg.exe");
-		Debug.Log ("ffmpeg plugin copied to " + saveFolder);
+		File.Copy (Application.dataPath + "/ShareVR/Watson/Config.json", saveFolder + "/Config.json");
 	}
 }
