@@ -108,6 +108,8 @@ namespace ShareVR.Core
 		[HideInInspector]
 		public bool isViveDeviceFound = false;
 
+
+
 		protected enum ViveCtrlerMapping
 		{
 			bothTriggerPressed,

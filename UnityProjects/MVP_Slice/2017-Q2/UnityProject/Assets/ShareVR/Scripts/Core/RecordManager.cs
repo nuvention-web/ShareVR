@@ -32,7 +32,10 @@ namespace ShareVR.Core
 		public Vector3 avatarOffset = new Vector3 (0, -1.0f, 0);
 
 		[Header ("ShareVR Input Control")]
+		[Tooltip ("Specify your preferred input method")]
 		public ViveCtrlerMapping toggleRecordingInput = ViveCtrlerMapping.KeyboardOnly_Key_X;
+		[Tooltip ("Do you want to use our voice command (beta) feature?")]
+		public bool useVoiceCommand = true;
 
 
 		[Header ("ShareVR Game Object Reference (Please link your game objects here)")]
@@ -117,6 +120,10 @@ namespace ShareVR.Core
 			// Initialize Camera Model
 			if (showCameraModel)
 				camCtrler.ShowCameraModel (true, cameraModelScale);
+
+			// Attach WatsonService Object if using voice command feature
+			if (useVoiceCommand)
+				gameObject.AddComponent <WatsonService> ();
 		}
 
 		void Update ()
