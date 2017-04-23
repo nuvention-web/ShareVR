@@ -1,17 +1,9 @@
-﻿//======= Copyright (c) NUVention TeamH ShareVR ===============
+﻿//======= Copyright (c) ShareVR ===============
 //
 // Purpose: Contains methods that allow the spectator camera
 //          to smoothly follow the player
-// Version: 1.0
-// Date: 4/5/2017
-// Revision History:  v1.0 - Adam - Created class for SDK v1.0
-// 
-// Still to do in v1.0 - set game object references for vrGameObj,
-//                       pcGameObj, camStatus & camModel (lines 27 - 30)
-//                     - set game object references for targetCam
-//                       and capCam (lines 41 & 43)
-//                     - define GetPlayerTransform in RecordManager
-//                       (line 74)
+// Version: 0.3
+// Date: 4/23/2017
 //=============================================================
 using System.Collections;
 using UnityEngine;
@@ -21,6 +13,13 @@ using VRCapture;
 
 namespace ShareVR.Core
 {
+	[System.Serializable]
+	public enum CameraFollowMethod
+	{
+		FixedSmooth,
+		OrbitSmooth
+	}
+
 	// Make sure a Camera component is attached
 	[RequireComponent (typeof(Camera))]
 	[RequireComponent (typeof(VRCapture.VRCapture))]
@@ -33,7 +32,7 @@ namespace ShareVR.Core
 		public bool isCamModelEnabled = false;
 
 		// Game object reference - to be set internally
-		protected Material camStatusLight;
+		protected GameObject camStatusLight;
 		protected GameObject camModelPrefab;
 		protected Camera capCam;
 		protected Transform playerTr;
@@ -49,6 +48,10 @@ namespace ShareVR.Core
 		private Vector3 targetDirection = new Vector3 (-0.9f, 0.5f, 1.1f);
 		private Vector3 camPos;
 		private Quaternion camRot;
+		private Color camIdleColor = Color.gray;
+
+		private float turnSpeed = 1.0f;
+		private Vector3 offset;
 
 		void Awake ()
 		{
@@ -60,19 +63,28 @@ namespace ShareVR.Core
 		{
 			// Initialize Camera
 			InitializeCamera ();
+			offset = playerTr.position + new Vector3 (0, 2, 3);
 		}
 
 
 		void LateUpdate ()
 		{
 			if (isCapturing || isCamModelEnabled) {
-				SmoothLookAt (playerTr);
+				switch (recManager.cameraFollowMethod) {
+				case CameraFollowMethod.FixedSmooth:
+					SmoothLookAt (playerTr);
+					break;
+				case CameraFollowMethod.OrbitSmooth:
+					SmoothFollow (playerTr);
+					break;
+				}
 			}
 		}
 
 		private void InitializeRefernece ()
 		{
 			capCam = GetComponent <Camera> ();
+
 			recManager = FindObjectOfType (typeof(RecordManager)) as RecordManager;
 			playerTr = recManager.GetPlayerTransform ();
 
@@ -90,13 +102,17 @@ namespace ShareVR.Core
 			vrcap.CaptureVideos = new []{ vrcapVideo };
 
 			// Find main AudioListener in the scene and attach VRCaptureAudio component to it
-			//var audioListener = FindObjectOfType (typeof(AudioListener)) as AudioListener;
-			//vrcap.CaptureAudio = audioListener.gameObject.AddComponent <VRCaptureAudio> ();
-			//Debug.Log (vrcap.CaptureAudio);
+			var audioListener = FindObjectOfType (typeof(AudioListener)) as AudioListener;
+			if (audioListener != null) {
+				vrcap.CaptureAudio = audioListener.gameObject.AddComponent <VRCaptureAudio> ();
+				if (recManager.showDebugMessage)
+					Debug.Log ("ShareVR: Found main AudioSource - " + vrcap.CaptureAudio);
+			} else {
+				// Maybe add AudioSource in the Main Player?
+			}
 
 			if (camModelPrefab == null)
 				camModelPrefab = Resources.Load ("Prefabs/CameraModel") as GameObject;
-			camStatusLight = Resources.Load ("Materials/CamStatus") as Material;
 		}
 
 		private void InitializeCamera ()
@@ -105,6 +121,9 @@ namespace ShareVR.Core
 			capCam.fieldOfView = 60.0f;
 			capCam.farClipPlane = 500.0f;
 			capCam.nearClipPlane = 0.8f;
+
+			capCam.cullingMask &= ~(1 << LayerMask.NameToLayer ("IgnoreInCapture"));
+			capCam.cullingMask |= (1 << LayerMask.NameToLayer ("IgnoreInView"));
 		}
 
 		// Purpose: Get current spectator recording status
@@ -143,6 +162,9 @@ namespace ShareVR.Core
 					m_camModelInstance.transform.localPosition = Vector3.zero;
 					m_camModelInstance.transform.localEulerAngles = Vector3.zero;
 					m_camModelInstance.transform.localScale *= scale;
+
+					camStatusLight = m_camModelInstance.transform.FindChild ("Status").gameObject;
+					camStatusLight.SetActive (false);
 				} else {
 					// Destroy current instance
 					Destroy (m_camModelInstance);
@@ -163,8 +185,9 @@ namespace ShareVR.Core
 
 			if (recManager.showDebugMessage)
 				Debug.Log ("ShareVR: Start Recording!");
-			
-			camStatusLight.color = new Color (0, 1, 0);
+
+			StartCoroutine (BlinkCameraLight ());
+
 			vrcap.StartCapture ();
 		}
 
@@ -177,8 +200,9 @@ namespace ShareVR.Core
 
 			if (recManager.showDebugMessage)
 				Debug.Log ("Stop Recording!");
-			
-			camStatusLight.color = new Color (1, 0, 0);
+
+			StopCoroutine (BlinkCameraLight ());
+
 			vrcap.StopCapture ();
 		}
 
@@ -196,6 +220,26 @@ namespace ShareVR.Core
 
 			// Smoothly rotate camera to look at target
 			transform.rotation = Quaternion.Slerp (transform.rotation, camRot, damp * Time.deltaTime);
+		}
+
+		private void SmoothFollow (Transform target)
+		{
+			offset = Quaternion.AngleAxis (turnSpeed * Time.deltaTime * 10.0f, Vector3.up) * offset;
+			transform.position = target.position + offset; 
+			transform.LookAt (target.position);
+		}
+
+		IEnumerator BlinkCameraLight ()
+		{
+			while (true) {
+				if (isCapturing) {
+					yield return new WaitForSeconds (0.4f);
+					camStatusLight.SetActive (true);
+					yield return new WaitForSeconds (0.4f);
+					camStatusLight.SetActive (false);
+				} else
+					yield break;
+			}
 		}
 	}
 }

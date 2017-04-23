@@ -151,11 +151,13 @@ namespace ShareVR.Core
 						avatarHandAnchor = recManager.playerHandTransforms;
 						EnableHandIK = true;
 					}
-					
-					anim.SetIKPosition (AvatarIKGoal.LeftHand, avatarHandAnchor [0].transform.position);
-					anim.SetIKPosition (AvatarIKGoal.RightHand, avatarHandAnchor [1].transform.position);
-					anim.SetIKRotation (AvatarIKGoal.LeftHand, avatarHandAnchor [0].transform.rotation);
-					anim.SetIKRotation (AvatarIKGoal.RightHand, avatarHandAnchor [1].transform.rotation);
+
+					if (avatarHandAnchor [0] != null && avatarHandAnchor [1] != null) {
+						anim.SetIKPosition (AvatarIKGoal.LeftHand, avatarHandAnchor [0].transform.position);
+						anim.SetIKPosition (AvatarIKGoal.RightHand, avatarHandAnchor [1].transform.position);
+						anim.SetIKRotation (AvatarIKGoal.LeftHand, avatarHandAnchor [0].transform.rotation);
+						anim.SetIKRotation (AvatarIKGoal.RightHand, avatarHandAnchor [1].transform.rotation);
+					}
 				}
 			}
 		}

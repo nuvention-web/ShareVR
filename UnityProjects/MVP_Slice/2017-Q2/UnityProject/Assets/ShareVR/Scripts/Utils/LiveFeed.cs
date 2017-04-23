@@ -87,23 +87,18 @@ namespace ShareVR.Core
 					capCam.targetTexture = livePlayRT;
 					camFound = true;
 				}
-
-				StartCoroutine (LiveFeedRenderThread ());
-			} else
-				StopCoroutine (LiveFeedRenderThread ());
+			}
 		}
 
 		public void TerminateRenderThread ()
 		{
 			enableLiveFeed = false;
-			StopCoroutine (LiveFeedRenderThread ());
 		}
 
 		public void ContinueRenderThread ()
 		{
 			enableLiveFeed = true;
 			capCam.targetTexture = livePlayRT;
-			StartCoroutine (LiveFeedRenderThread ());
 		}
 
 		IEnumerator LiveFeedRenderThread ()
@@ -118,9 +113,6 @@ namespace ShareVR.Core
 					capCam.targetTexture = livePlayRT;
 					camFound = true;
 				}
-
-				if (camFound)
-					capCam.Render ();
 			}
 		}
 	}

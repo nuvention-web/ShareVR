@@ -11,9 +11,12 @@
 using System.Collections;
 using UnityEngine;
 using VRCapture;
+using ShareVR.Utils;
+using Amazon;
 
 namespace ShareVR.Core
 {
+
 	[RequireComponent (typeof(InputManager))]
 	public class RecordManager : MonoBehaviour
 	{
@@ -21,22 +24,26 @@ namespace ShareVR.Core
 		[Tooltip ("Make the spectator camera visible")]
 		public bool showCameraModel = false;
 		[Tooltip ("Adjust camera model scale if it's too big or small")]
+		[Range (0.0f, 10.0f)] 
 		public float cameraModelScale = 1.0f;
-
+		[Space (10)] 
+	
 		[Header ("ShareVR Avatar Control")]
 		[Tooltip ("Show a cute avatar for demo")]
 		public bool showPlayerAvatar = false;
 		[Tooltip ("Adjust avatar scale if it's too big or small")]
+		[Range (0.0f, 10.0f)] 
 		public float avatarScale = 1.0f;
 		[Tooltip ("Adjust avatar offset")]
-		public Vector3 avatarOffset = new Vector3 (0, -1.0f, 0);
+		public Vector3 avatarOffset = new Vector3 (0, -1.5f, 0);
+		[Space (10)] 
 
 		[Header ("ShareVR Input Control")]
 		[Tooltip ("Specify your preferred input method")]
 		public ViveCtrlerMapping toggleRecordingInput = ViveCtrlerMapping.KeyboardOnly_Key_X;
 		[Tooltip ("Do you want to use our voice command (beta) feature?")]
 		public bool useVoiceCommand = true;
-
+		[Space (10)] 
 
 		[Header ("ShareVR Game Object Reference (Please link your game objects here)")]
 		[Tooltip ("Specify your main player gameobject")]
@@ -45,14 +52,26 @@ namespace ShareVR.Core
 		public Transform[] playerHandTransforms;
 		[Tooltip ("Display debug message")]
 		public bool showDebugMessage = false;
+		[Space (10)] 
 
-		[Header ("ShareVR Video Format")]
+		[Header ("ShareVR Video Recording Control")]
+		public CameraFollowMethod cameraFollowMethod = CameraFollowMethod.FixedSmooth;
 		[Tooltip ("Specify recording video resolution")]
 		public VRCaptureVideo.FrameSizeType frameSize = VRCaptureVideo.FrameSizeType._1280x720;
+		[Tooltip ("Specify recording video framerate")]
 		public VRCaptureVideo.TargetFramerateType frameRate = VRCaptureVideo.TargetFramerateType._30;
+		[Tooltip ("Specify video file save folder (leave it blank if want to use default: Documents/ShareVR/)")]
+		public string saveFolder;
+		[Space (10)] 
+
+		[Header ("ShareVR Video Sharing Control")]
+		[Tooltip ("Do you want to automatically upload video online?")]
+		public bool uploadFileOnline = false;
 
 		[HideInInspector]
 		public bool isSteamVRActive = false;
+		[HideInInspector]
+		public S3Uploader s3Uploader;
 
 		// Internal Scripts Reference
 		private GameObject cameraRigPrefab;
@@ -64,6 +83,11 @@ namespace ShareVR.Core
 		private AvatarController avatarCtrler;
 		private LiveFeed liveFeed;
 		private bool isUsingLiveFeed = false;
+
+		void Awake ()
+		{
+			DontDestroyOnLoad (gameObject);
+		}
 
 		IEnumerator Start ()
 		{
@@ -96,11 +120,14 @@ namespace ShareVR.Core
 			// Instantiate a new capture camera
 			cameraRigPrefab = Resources.Load ("Prefabs/ShareVRCameraRig") as GameObject;
 			camCtrler = Instantiate (cameraRigPrefab).GetComponent <CameraController> ();
+			DontDestroyOnLoad (camCtrler.gameObject);
 
 			// Avatar Control
 			playerAvatarPrefab = Resources.Load ("Prefabs/PlayerAvatar-1") as GameObject;
 			if (showPlayerAvatar) {
 				avatarCtrler = Instantiate (playerAvatarPrefab).GetComponent <AvatarController> ();
+				DontDestroyOnLoad (avatarCtrler.gameObject);
+				SetLayer (avatarCtrler.gameObject, LayerMask.NameToLayer ("IgnoreInView"));
 				if (playerHandTransforms.Length == 2)
 					avatarCtrler.EnableAvatar (showPlayerAvatar, avatarScale, playerHandTransforms);
 				else
@@ -112,6 +139,8 @@ namespace ShareVR.Core
 			// Initialize LiveFeed Object
 			liveFeed = FindObjectOfType (typeof(LiveFeed)) as LiveFeed;
 			if (liveFeed != null) {
+				DontDestroyOnLoad (liveFeed.gameObject);
+				SetLayer (liveFeed.gameObject, LayerMask.NameToLayer ("IgnoreInCapture"));
 				isUsingLiveFeed = true;
 				liveFeed.InitializeReference ();
 				liveFeed.EnableLiveFeed (true);
@@ -124,6 +153,14 @@ namespace ShareVR.Core
 			// Attach WatsonService Object if using voice command feature
 			if (useVoiceCommand)
 				gameObject.AddComponent <WatsonService> ();
+
+			if (uploadFileOnline)
+				s3Uploader = gameObject.AddComponent <S3Uploader> ();
+
+			// Update save folder
+			if (saveFolder.Length > 3) {
+				VRCaptureUtils.SaveFolder = saveFolder;
+			}
 		}
 
 		void Update ()
@@ -172,6 +209,17 @@ namespace ShareVR.Core
 		public Transform GetPlayerTransform ()
 		{
 			return playerHeadGameObject.transform;
+		}
+
+		// Purpose: Recursively apply a given layer to a gameobject
+		public static void SetLayer (GameObject parentGameObj, int layerID, bool applyChild = true)
+		{
+			parentGameObj.layer = layerID;
+			if (applyChild) {
+				foreach (Transform tr in parentGameObj.transform.GetComponentsInChildren <Transform>(true)) {
+					tr.gameObject.layer = layerID;
+				}
+			}
 		}
 	}
 }

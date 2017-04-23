@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33582704721932610}
   - component: {fileID: 65360754924277914}
   - component: {fileID: 23409917966125412}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 33494934216155942}
   - component: {fileID: 135505117905893668}
   - component: {fileID: 23558330245982430}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Status
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 33197184296042522}
   - component: {fileID: 136240026328366484}
   - component: {fileID: 23268428375867438}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Lens
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4531775760912382}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: CameraModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,6 +165,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23409917966125412
 MeshRenderer:
@@ -196,6 +197,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23558330245982430
 MeshRenderer:
@@ -227,6 +229,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33197184296042522
 MeshFilter:
