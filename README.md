@@ -3,7 +3,6 @@ Welcome! This is repository of team H. We have 6 team members from different bac
 
 Our team members include (in alphabetical order):
 - Adam Muhammad
-- Andy Woods
 - Chen Chen
 - Ellie Burgess
 - Henry Keyser
