@@ -554,8 +554,8 @@ namespace VRCapture
 			Graphics.Blit (src, dest);
 
 			// Copy rendertexture for live play rendertexture
-			if (liveFeed != null && liveFeed.enableLiveFeed) {
-				Graphics.Blit (src, liveFeed.livePlayRT);
+			if (liveFeed != null) {
+				Graphics.Blit (null, liveFeed.livePlayRT);
 			}
 		}
 

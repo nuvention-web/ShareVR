@@ -71,11 +71,15 @@ MonoBehaviour:
   avatarScale: 1
   avatarOffset: {x: 0, y: -1.5, z: 0}
   toggleRecordingInput: 5
+  useVoiceCommand: 0
   playerHeadGameObject: {fileID: 0}
   playerHandTransforms:
   - {fileID: 0}
   - {fileID: 0}
   showDebugMessage: 0
-  frameSize: 2
+  frameSize: 3
   frameRate: 2
+  saveFolder: 
+  uploadFileOnline: 0
   isSteamVRActive: 0
+  s3Uploader: {fileID: 0}

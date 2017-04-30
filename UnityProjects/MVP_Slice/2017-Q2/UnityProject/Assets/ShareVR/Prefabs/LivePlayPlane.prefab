@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 223606166306219364}
   - component: {fileID: 114147276354094706}
   - component: {fileID: 114500213802928846}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: TitleCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 33093658763045574}
   - component: {fileID: 23576783736867772}
   - component: {fileID: 114351809912397440}
-  m_Layer: 8
+  m_Layer: 31
   m_Name: LivePlayPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 222403983201937522}
   - component: {fileID: 114304344179593240}
   - component: {fileID: 114961744479141506}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,6 +109,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33093658763045574
 MeshFilter:
@@ -227,7 +228,7 @@ Canvas:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1309905517272548}
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
@@ -236,6 +237,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

@@ -3,6 +3,8 @@ using System.IO;
 using System.Threading;
 using System.Runtime.InteropServices;
 using System;
+using ShareVR.Core;
+using ShareVR.Utils;
 
 namespace VRCapture
 {
@@ -156,6 +158,13 @@ namespace VRCapture
 		/// The garbage collect thread.
 		/// </summary>
 		Thread gcThread;
+
+		RecordManager recManager;
+
+		void Start ()
+		{
+			recManager = FindObjectOfType (typeof(RecordManager)) as RecordManager;
+		}
 
 		/// <summary>
 		/// Get or set the capture videos.
@@ -349,7 +358,8 @@ namespace VRCapture
 				}
 			}
 
-			Cleanup ();
+			if (vrCaptureAudio == null || !vrCaptureAudio.isEnabled)
+				Cleanup ();
 		}
 
 		/// <summary>
@@ -357,6 +367,8 @@ namespace VRCapture
 		/// </summary>
 		void HandleAudioCaptureComplete ()
 		{
+			//Debug.Log ("ShareVR: Audio Complete");
+
 			if (isInterrupted) {
 				isInterrupted = false;
 				Cleanup ();
@@ -400,7 +412,12 @@ namespace VRCapture
 					captureVideo.formatType == VRCaptureVideo.FormatType.PANORAMA) {
 					continue;
 				}
-				VRCaptureMerger merger = new VRCaptureMerger (captureVideo, vrCaptureAudio);
+				VRCaptureMerger merger;
+				if (recManager.uploadFileOnline)
+					merger = new VRCaptureMerger (captureVideo, vrCaptureAudio, recManager.s3Uploader);
+				else
+					merger = new VRCaptureMerger (captureVideo, vrCaptureAudio);
+
 				merger.Merge ();
 				if (merger.Failed) {
 					sessionStatus = StatusCode.MergeProcessFailed;
@@ -496,7 +513,8 @@ namespace VRCapture
 			get {
 				if (destinationPath != null)
 					return destinationPath;
-				destinationPath = VRCaptureUtils.SaveFolder + VRCommonUtils.GetMp4FileName (captureVideo.Index.ToString ());
+				videoFileName = VRCommonUtils.GetMp4FileName (captureVideo.Index.ToString ());
+				destinationPath = VRCaptureUtils.SaveFolder + videoFileName;
 				return destinationPath;
 			}
 			set {
@@ -508,6 +526,8 @@ namespace VRCapture
 		/// Destination of merged video/audio.
 		/// </summary>
 		string destinationPath = null;
+		string videoFileName = null;
+		S3Uploader s3Uploader;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:VRCapture.VRCaptureMerger"/> class.
@@ -518,6 +538,13 @@ namespace VRCapture
 		{
 			captureVideo = video;
 			captureAudio = audio;
+		}
+
+		public VRCaptureMerger (VRCaptureVideo video, VRCaptureAudio audio, S3Uploader s3)
+		{
+			captureVideo = video;
+			captureAudio = audio;
+			s3Uploader = s3;
 		}
 
 		/// <summary>
@@ -541,9 +568,11 @@ namespace VRCapture
 				                captureAudio.DestinationPath,
 				                VRCaptureUtils.FFmpegPath
 			                );
+			//Debug.Log ("Merge Thread: captureVideo = " + captureVideo.DestinationPath);
+			//Debug.Log ("Merge Thread: captureAudio = " + captureAudio.DestinationPath);
 
 			if (libAPI == IntPtr.Zero) {
-				Debug.LogWarning ("VRCapture: get native LibVideoMergeAPI failed!");
+				Debug.LogWarning ("ShareVR: get native LibVideoMergeAPI failed!");
 				return;
 			}
 			LibVideoMergeAPI_Merge (libAPI);
@@ -558,6 +587,22 @@ namespace VRCapture
 				Failed = true;
 			}
 			LibVideoMergeAPI_Clean (libAPI);
+
+			// Delete Existing Video and Audio file
+			if (File.Exists (captureVideo.DestinationPath))
+				File.Delete (captureVideo.DestinationPath);
+			if (File.Exists (captureAudio.DestinationPath))
+				File.Delete (captureAudio.DestinationPath);
+
+			// Upload Video to AWS
+			//Debug.Log ("Uploading " + VRCaptureUtils.SaveFolder + videoFileName);
+			if (s3Uploader != null) {
+				Debug.Log ("ShareVR (AWS): Video uploading... local copy created at " + DestinationPath.Replace ("//", "\\").Replace ('/', '\\'));
+				s3Uploader.PostObject (VRCaptureUtils.SaveFolder, videoFileName);
+			} else {
+				// User choose not to upload
+				Debug.Log ("ShareVR: Video created at " + DestinationPath.Replace ("//", "\\").Replace ('/', '\\'));
+			}
 		}
 
 		[DllImport ("VRCaptureLib")]

@@ -18,7 +18,7 @@ namespace VRCapture
 
 		static string GetTimeString ()
 		{
-			return DateTime.Now.ToString ("yyyy-MM-dd-HH-mm-ss");
+			return DateTime.Now.ToString ("yyyy-MM-dd-HH-mm");
 		}
 
 		public static string GetPngFileName ()
@@ -57,7 +57,16 @@ namespace VRCapture
 
 		public static string GetWavFileName (string name)
 		{
-			return GetMp4FileName ().Replace (".mp4", ".wav");
+			string fileName;
+			int audioFileID = 0;
+
+			fileName = GetTimeString () + "-Session-" + audioFileID + ".wav";
+			while (File.Exists (VRCaptureUtils.SaveFolder + fileName)) {
+				audioFileID++;
+				fileName = GetTimeString () + "-Session-" + audioFileID + ".wav";
+			}
+
+			return fileName;
 		}
 
 		public static string GetTxtFileName ()
@@ -76,10 +85,29 @@ namespace VRCapture
 	////////////////////////////////////////////////////////////////////////////
 	public class VRCaptureUtils
 	{
+		// ShareVR
+		private static bool m_userDefinedSaveFolder = false;
+		private static string m_saveFolder;
 
 		public static string SaveFolder {
 			get {
-				return VRCommonUtils.MY_DOCUMENTS_PATH + "/ShareVR/";
+				if (m_userDefinedSaveFolder) {
+					// Check folder
+					if (m_saveFolder != null) {
+						if (!Directory.Exists (m_saveFolder))
+							Directory.CreateDirectory (m_saveFolder);
+						return m_saveFolder;
+					} else
+						return VRCommonUtils.MY_DOCUMENTS_PATH + "/ShareVR/";
+				} else
+					return VRCommonUtils.MY_DOCUMENTS_PATH + "/ShareVR/";
+			}
+			set {
+				m_saveFolder = value + "/";
+				Debug.Log (m_saveFolder);
+				if (!Directory.Exists (m_saveFolder))
+					Directory.CreateDirectory (m_saveFolder);
+				m_userDefinedSaveFolder = true;
 			}
 		}
 
@@ -121,22 +149,6 @@ namespace VRCapture
 #endif
 			}
 		}
-	}
-
-	////////////////////////////////////////////////////////////////////////////
-	///                     Basic Utils for VRReplay.                        ///
-	////////////////////////////////////////////////////////////////////////////
-	public class VRReplayUtils
-	{
-
-		public static string SaveFolder {
-			get {
-				return VRCommonUtils.MY_DOCUMENTS_PATH + "/ShareVR/Replays/";
-			}
-		}
-
-		public const string UPLOAD_ADDRESS = "";
-		public const int MAX_DEVICE_NUM = 16;
 	}
 
 	////////////////////////////////////////////////////////////////////////////
