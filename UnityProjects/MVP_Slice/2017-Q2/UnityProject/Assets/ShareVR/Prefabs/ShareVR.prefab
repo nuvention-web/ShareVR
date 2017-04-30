@@ -65,6 +65,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97edca19b28c8214b8bfcbf809141e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraFollowMethod: 0
+  cameraOrbitSpeed: 1
+  camHeight: 2
+  camDistance: 3.5
   showCameraModel: 1
   cameraModelScale: 1
   showPlayerAvatar: 1
@@ -73,9 +77,9 @@ MonoBehaviour:
   toggleRecordingInput: 5
   useVoiceCommand: 0
   playerHeadGameObject: {fileID: 0}
-  playerHandTransforms:
-  - {fileID: 0}
-  - {fileID: 0}
+  playerHandTransform:
+    leftHand: {fileID: 0}
+    rightHand: {fileID: 0}
   showDebugMessage: 0
   frameSize: 3
   frameRate: 2

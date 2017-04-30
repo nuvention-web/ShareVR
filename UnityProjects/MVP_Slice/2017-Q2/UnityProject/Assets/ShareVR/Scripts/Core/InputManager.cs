@@ -12,6 +12,7 @@ using System.Collections;
 using UnityEngine;
 using Valve.VR;
 using System;
+using UnityEditor;
 
 namespace ShareVR.Core
 {
@@ -98,7 +99,21 @@ namespace ShareVR.Core
 		TriggerAndGripPressed,
 		KeyboardOnly_Key_R,
 		KeyboardOnly_Key_V,
-		KeyboardOnly_Key_X
+		KeyboardOnly_Key_X,
+		DontUseAnyKey
+	}
+
+	[Serializable]
+	public class PlayerHandTransform
+	{
+		public Transform leftHand;
+		public Transform rightHand;
+
+		public bool isHandTransformValid {
+			get {
+				return (leftHand != null) & (rightHand != null);
+			}
+		}
 	}
 
 	public class InputManager : MonoBehaviour

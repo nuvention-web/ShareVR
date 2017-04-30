@@ -38,9 +38,9 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - IgnoreInView
-  - IgnoreInCapture
+  - ShareVRIgnoreAll
+  - ShareVRIgnoreCaptureOnly
+  - ShareVRIgnoreViewOnly
   m_SortingLayers:
   - name: Default
     uniqueID: 0

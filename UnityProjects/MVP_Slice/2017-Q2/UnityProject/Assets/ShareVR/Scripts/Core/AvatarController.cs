@@ -1,18 +1,12 @@
 ﻿//======= Copyright (c) NUVention TeamH ShareVR ===============
 //
 // Purpose: Controls avatar animation and status
-// Version: 1.0
-// Date: 4/5/2017
-// Revision History:  v1.0 - Adam - Created class for SDK v1.0
+// Version: 0.4
+// Date: 4/29/2017
+// Revision History:  v0.1 - Adam - Created class
+//                    v0.4 - Chen
+//
 // 
-// Still to do in v1.0 - define GetPlayerTransform() and
-//                       GetSteamVRStatus() in RecordManager
-//                       (lines 77, 96, 152)
-//                     - set reference to avatarGameObjVR & PC
-//                       (lines 69, 70)
-//                     - set reference to avatarHandAnchor and
-//                       LookatTarget internally in script
-//                       (lines 44, 45)
 //=============================================================
 using System.Collections;
 using System.Collections.Generic;
@@ -51,7 +45,7 @@ namespace ShareVR.Core
 		// Avatar References
 		private bool avatarHandAnchorFound = false;
 		private Transform[] avatarHandAnchor;
-		private Transform lookatTarget;
+		private Transform lookatTarget = null;
 		private AvatarHandTr avatarHandTr;
 		private Transform avatarHeadTr;
 
@@ -115,7 +109,7 @@ namespace ShareVR.Core
 			avatarRefPos = offset;
 		}
 
-		public void EnableAvatar (bool state, float scale = 1.0f, Transform[] handTr = null, Vector3? offset = null)
+		public void EnableAvatar (bool state, float scale = 1.0f, PlayerHandTransform handTr = null, Vector3? offset = null)
 		{
 			isAvatarEnabled = state;
 
@@ -123,7 +117,7 @@ namespace ShareVR.Core
 			this.gameObject.SetActive (isAvatarEnabled);
 
 			if (handTr != null) {
-				avatarHandAnchor = handTr;
+				avatarHandAnchor = new []{ handTr.leftHand, handTr.rightHand };
 				avatarHandAnchorFound = true;
 				EnableHandIK = true;
 			}
@@ -147,8 +141,8 @@ namespace ShareVR.Core
 				anim.SetIKRotationWeight (AvatarIKGoal.RightHand, 1);
 
 				if (inputManager.isViveDeviceFound) {
-					if (!avatarHandAnchorFound && recManager.playerHandTransforms.Length == 2 && recManager.playerHandTransforms [0] != null && recManager.playerHandTransforms [1] != null) {
-						avatarHandAnchor = recManager.playerHandTransforms;
+					if (!avatarHandAnchorFound && recManager.playerHandTransform.isHandTransformValid) {
+						avatarHandAnchor = new[]{ recManager.playerHandTransform.leftHand, recManager.playerHandTransform.rightHand };
 						EnableHandIK = true;
 					}
 

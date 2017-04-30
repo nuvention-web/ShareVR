@@ -1,9 +1,9 @@
 ﻿//======= Copyright (c) ShareVR ===============
 //
-// Purpose: Contains methods that allow the spectator camera
-//          to smoothly follow the player
-// Version: 0.3
-// Date: 4/23/2017
+// Purpose: Spectator Camera Controller
+// Version: 0.4
+// Chen Chen
+// 4/23/2017
 //=============================================================
 using System.Collections;
 using UnityEngine;
@@ -34,6 +34,7 @@ namespace ShareVR.Core
 		// Game object reference - to be set internally
 		protected GameObject camStatusLight;
 		protected GameObject camModelPrefab;
+		protected GameObject camPreviewPanelPrefab;
 		protected Camera capCam;
 		protected Transform playerTr;
 
@@ -41,17 +42,15 @@ namespace ShareVR.Core
 		private VRCaptureVideo vrcapVideo;
 		private RecordManager recManager;
 		private GameObject m_camModelInstance;
+		private GameObject m_camPreviewPanelInstance;
 
 		// Smooth LookAt function related variables and parameters
-		private const float damp = 2.0f;
-		private const float camDist = 4.0f;
-		private Vector3 targetDirection = new Vector3 (-0.9f, 0.5f, 1.1f);
 		private Vector3 camPos;
 		private Quaternion camRot;
-		private Color camIdleColor = Color.gray;
+		private Color camIdleColor;
 
-		private float turnSpeed = 1.0f;
-		private Vector3 offset;
+		private Vector3 m_orbitOffset;
+		private Vector3 m_playerRefOffset;
 
 		void Awake ()
 		{
@@ -63,12 +62,18 @@ namespace ShareVR.Core
 		{
 			// Initialize Camera
 			InitializeCamera ();
-			offset = playerTr.position + new Vector3 (0, 2, 3);
+			m_playerRefOffset = playerTr.position;
+			UpdateOrbitCameraParameters ();
 		}
 
+		public void UpdateOrbitCameraParameters ()
+		{
+			m_orbitOffset = m_playerRefOffset + new Vector3 (0.0f, recManager.camHeight, recManager.camDistance);
+		}
 
 		void LateUpdate ()
 		{
+			// Update Internal Parameters
 			if (isCapturing || isCamModelEnabled) {
 				switch (recManager.cameraFollowMethod) {
 				case CameraFollowMethod.FixedSmooth:
@@ -113,6 +118,9 @@ namespace ShareVR.Core
 
 			if (camModelPrefab == null)
 				camModelPrefab = Resources.Load ("Prefabs/CameraModel") as GameObject;
+
+			if (camPreviewPanelPrefab == null)
+				camPreviewPanelPrefab = Resources.Load ("Prefabs/CameraPreviewPanel") as GameObject;
 		}
 
 		private void InitializeCamera ()
@@ -122,8 +130,8 @@ namespace ShareVR.Core
 			capCam.farClipPlane = 500.0f;
 			capCam.nearClipPlane = 0.8f;
 
-			capCam.cullingMask &= ~(1 << LayerMask.NameToLayer ("IgnoreInCapture"));
-			capCam.cullingMask |= (1 << LayerMask.NameToLayer ("IgnoreInView"));
+			capCam.cullingMask &= ~(1 << LayerMask.NameToLayer ("ShareVRIgnoreCaptureOnly"));
+			capCam.cullingMask |= (1 << LayerMask.NameToLayer ("ShareVRIgnoreViewOnly"));
 		}
 
 		// Purpose: Get current spectator recording status
@@ -148,15 +156,35 @@ namespace ShareVR.Core
 			return capCam;
 		}
 
+		public void ShowCameraPreviewPanel (bool state)
+		{
+			if (state) {
+				if (m_camPreviewPanelInstance == null) {
+					m_camPreviewPanelInstance = Instantiate (camPreviewPanelPrefab);
+					m_camPreviewPanelInstance.transform.SetParent (transform);
+
+					m_camPreviewPanelInstance.transform.localPosition = new Vector3 (0.75f, 0, 0.5f);
+					m_camPreviewPanelInstance.transform.localEulerAngles = new Vector3 (90, 0, 0);
+					m_camPreviewPanelInstance.transform.localScale = new Vector3 (0.07f, 1.0f, 0.05f) * recManager.cameraModelScale;
+				
+					// Enable Preview
+					m_camPreviewPanelInstance.GetComponent <LiveFeed> ().InitializeReference ();
+					m_camPreviewPanelInstance.GetComponent <LiveFeed> ().EnableLiveFeed (true);
+				}
+			} else {
+				if (m_camPreviewPanelInstance != null)
+					Destroy (m_camPreviewPanelInstance);
+				m_camPreviewPanelInstance = null;
+			}
+		}
+
 		// Purpose: Toggle the camera model while in game
 		public void ShowCameraModel (bool state, float scale = 1.0f)
 		{
 			// Create or Destroy Current Camera Model Instance
-			if (m_camModelInstance == null) {
-				if (state) {
-					// Instantiate a new camera model
-					if (camModelPrefab == null)
-						camModelPrefab = Resources.Load ("Prefabs/CameraModel") as GameObject;
+			if (state) {
+				// Instantiate a new camera model
+				if (m_camModelInstance == null) {
 					m_camModelInstance = Instantiate (camModelPrefab);
 					m_camModelInstance.transform.SetParent (transform);
 					m_camModelInstance.transform.localPosition = Vector3.zero;
@@ -165,11 +193,12 @@ namespace ShareVR.Core
 
 					camStatusLight = m_camModelInstance.transform.FindChild ("Status").gameObject;
 					camStatusLight.SetActive (false);
-				} else {
-					// Destroy current instance
-					Destroy (m_camModelInstance);
-					m_camModelInstance = null;
 				}
+			} else {
+				// Destroy current instance
+				if (m_camModelInstance != null)
+					Destroy (m_camModelInstance);
+				m_camModelInstance = null;
 			}
 
 			// Update the toggle status of camera model
@@ -210,22 +239,23 @@ namespace ShareVR.Core
 		private void SmoothLookAt (Transform target)
 		{
 			// Calculate target camera position
-			camPos = target.position + (targetDirection.normalized * camDist);
+			camPos = target.position + new Vector3 (0.0f, recManager.camHeight, recManager.camDistance);
+			camPos = Quaternion.AngleAxis (recManager.camAngle, Vector3.up) * camPos;
 
 			// Smoothly move camera to target position
-			transform.position = Vector3.Lerp (transform.position, camPos, damp * Time.deltaTime);
+			transform.position = Vector3.Lerp (transform.position, camPos, recManager.camMotionDamp * Time.deltaTime);
 
 			// Calculate target camera rotation
 			camRot = Quaternion.LookRotation (target.position - transform.position);
 
 			// Smoothly rotate camera to look at target
-			transform.rotation = Quaternion.Slerp (transform.rotation, camRot, damp * Time.deltaTime);
+			transform.rotation = Quaternion.Slerp (transform.rotation, camRot, recManager.camMotionDamp * Time.deltaTime);
 		}
 
 		private void SmoothFollow (Transform target)
 		{
-			offset = Quaternion.AngleAxis (turnSpeed * Time.deltaTime * 10.0f, Vector3.up) * offset;
-			transform.position = target.position + offset; 
+			m_orbitOffset = Quaternion.AngleAxis (recManager.cameraOrbitSpeed * Time.deltaTime * 10.0f, Vector3.up) * m_orbitOffset;
+			transform.position = target.position + m_orbitOffset;
 			transform.LookAt (target.position);
 		}
 

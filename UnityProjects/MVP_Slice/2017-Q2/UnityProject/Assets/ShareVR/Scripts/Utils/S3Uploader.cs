@@ -1,16 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.Runtime;
 using System.IO;
 using System;
-using Amazon.S3.Util;
 using System.Collections.Generic;
 using Amazon.CognitoIdentity;
 using Amazon;
-using VRCapture;
 
 namespace ShareVR.Utils
 {
@@ -69,11 +65,11 @@ namespace ShareVR.Utils
 		{
 			Debug.Log (string.Format ("fetching {0} from bucket {1}", objName, S3BucketName));
 			Client.GetObjectAsync (S3BucketName, objName, (responseObj) => {
-				string data = null;
+				//string data = null;
 				var response = responseObj.Response;
 				if (response.ResponseStream != null) {
 					using (StreamReader reader = new StreamReader (response.ResponseStream)) {
-						data = reader.ReadToEnd ();
+						//data = reader.ReadToEnd ();
 					}
 
 					// ShareVR - will do something here

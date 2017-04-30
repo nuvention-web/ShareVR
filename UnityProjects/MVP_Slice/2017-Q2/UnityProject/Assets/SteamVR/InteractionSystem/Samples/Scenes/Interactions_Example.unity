@@ -552,81 +552,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 428928, guid: 73ac470d3d909d645a6c89a4664b6849, type: 2}
   m_PrefabInternal: {fileID: 147711595}
---- !u!1001 &147713084
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4282302150068994, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4282302150068994, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4282302150068994, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4282302150068994, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4282302150068994, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4282302150068994, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4282302150068994, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4282302150068994, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 114654457408441582, guid: a45f5d197a891c045bdfc593534f1486,
-        type: 2}
-      propertyPath: playerHeadGameObject
-      value: 
-      objectReference: {fileID: 527431126}
-    - target: {fileID: 114654457408441582, guid: a45f5d197a891c045bdfc593534f1486,
-        type: 2}
-      propertyPath: playerHandTransforms.Array.data[0]
-      value: 
-      objectReference: {fileID: 1260939759}
-    - target: {fileID: 114654457408441582, guid: a45f5d197a891c045bdfc593534f1486,
-        type: 2}
-      propertyPath: playerHandTransforms.Array.data[1]
-      value: 
-      objectReference: {fileID: 153551346}
-    - target: {fileID: 114654457408441582, guid: a45f5d197a891c045bdfc593534f1486,
-        type: 2}
-      propertyPath: useVoiceCommand
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114654457408441582, guid: a45f5d197a891c045bdfc593534f1486,
-        type: 2}
-      propertyPath: uploadFileOnline
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1936687934628518, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
-  m_IsPrefabParent: 0
---- !u!4 &153551346 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 485514, guid: dc06161b6d97feb419f45f03b62e14b9, type: 2}
-  m_PrefabInternal: {fileID: 820438116}
 --- !u!1001 &163688483
 Prefab:
   m_ObjectHideFlags: 0
@@ -2066,10 +1991,6 @@ Transform:
   m_Father: {fileID: 779152337}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &527431126 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 101548, guid: dc06161b6d97feb419f45f03b62e14b9, type: 2}
-  m_PrefabInternal: {fileID: 820438116}
 --- !u!4 &556164203 stripped
 Transform:
   m_PrefabParentObject: {fileID: 461140, guid: 380bbbca09a806c4c8607dd111d9ed8f, type: 2}
@@ -4041,7 +3962,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: Valve.VR.InteractionSystem.CustomEvents+UnityEventHand, Assembly-CSharp,
-      Version=1.0.2.29141, Culture=neutral, PublicKeyToken=null
+      Version=1.0.2.39413, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1202137145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4328,10 +4249,6 @@ Transform:
   m_Father: {fileID: 946939068}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1260939759 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 476540, guid: dc06161b6d97feb419f45f03b62e14b9, type: 2}
-  m_PrefabInternal: {fileID: 820438116}
 --- !u!1 &1316167243
 GameObject:
   m_ObjectHideFlags: 0
@@ -5011,7 +4928,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: Valve.VR.InteractionSystem.CustomEvents+UnityEventHand, Assembly-CSharp,
-      Version=1.0.2.29141, Culture=neutral, PublicKeyToken=null
+      Version=1.0.2.39413, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1411722471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5184,7 +5101,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: Valve.VR.InteractionSystem.CustomEvents+UnityEventHand, Assembly-CSharp,
-      Version=1.0.2.29141, Culture=neutral, PublicKeyToken=null
+      Version=1.0.2.39413, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1434184163
 MonoBehaviour:
   m_ObjectHideFlags: 0

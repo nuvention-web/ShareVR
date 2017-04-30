@@ -103,11 +103,20 @@ namespace VRCapture
 					return VRCommonUtils.MY_DOCUMENTS_PATH + "/ShareVR/";
 			}
 			set {
-				m_saveFolder = value + "/";
-				Debug.Log (m_saveFolder);
-				if (!Directory.Exists (m_saveFolder))
-					Directory.CreateDirectory (m_saveFolder);
-				m_userDefinedSaveFolder = true;
+				if (value.Length > 1) {
+					m_saveFolder = value + "/";
+					m_saveFolder = Path.GetFullPath (m_saveFolder);
+					m_userDefinedSaveFolder = true;
+				} else {
+					m_saveFolder = Path.GetFullPath (VRCommonUtils.MY_DOCUMENTS_PATH + "/ShareVR/");
+					m_userDefinedSaveFolder = false;
+				}
+			}
+		}
+
+		public static string GetCurrentSaveFolder {
+			get {
+				return m_saveFolder;
 			}
 		}
 

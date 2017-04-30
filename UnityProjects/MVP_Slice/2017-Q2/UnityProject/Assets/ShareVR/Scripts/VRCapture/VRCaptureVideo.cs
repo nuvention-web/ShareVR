@@ -544,7 +544,7 @@ namespace VRCapture
 		string destinationPath = null;
 
 
-		private CameraController camCtrler;
+		//private CameraController camCtrler;
 		private LiveFeed liveFeed;
 		private RecordManager recManager;
 
@@ -713,7 +713,7 @@ namespace VRCapture
 
 		void Start ()
 		{
-			camCtrler = FindObjectOfType (typeof(CameraController)) as CameraController;
+			//camCtrler = FindObjectOfType (typeof(CameraController)) as CameraController;
 			liveFeed = FindObjectOfType (typeof(LiveFeed)) as LiveFeed;
 			recManager = FindObjectOfType (typeof(RecordManager)) as RecordManager;
 

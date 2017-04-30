@@ -157,7 +157,7 @@ namespace VRCapture
 		/// <summary>
 		/// The garbage collect thread.
 		/// </summary>
-		Thread gcThread;
+		//Thread gcThread;
 
 		RecordManager recManager;
 
@@ -249,13 +249,13 @@ namespace VRCapture
 				);
 				return sessionStatus;
 			}
-			if (gcThread != null && gcThread.IsAlive) {
-				Debug.LogWarning (
-					"VRCapture: StartCapture called before, and " +
-					"gcThread still running!"
-				);
-				return sessionStatus;
-			}
+			//if (gcThread != null && gcThread.IsAlive) {
+			//	Debug.LogWarning (
+			//		"VRCapture: StartCapture called before, and " +
+			//		"gcThread still running!"
+			//	);
+			//	return sessionStatus;
+			//}
 			if (!File.Exists (VRCaptureUtils.FFmpegPath)) {
 				Debug.LogError (
 					"VRCapture: FFmpeg not found, please fix this " +
