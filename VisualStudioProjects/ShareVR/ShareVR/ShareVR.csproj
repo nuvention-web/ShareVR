@@ -57,6 +57,10 @@
     <Compile Include="LogManager.cs" />
     <Compile Include="S3Uploader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VRCapture.cs" />
+    <Compile Include="VRCaptureAudio.cs" />
+    <Compile Include="VRCaptureVideo.cs" />
+    <Compile Include="VRUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
