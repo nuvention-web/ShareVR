@@ -17,8 +17,13 @@ namespace ShareVR.Utils
         {
             vrcap = VRCapture.Instance;
 
+            // SDK Info
+            metadata["sdk_version"] = GlobalParameters.SDKversion;
+            metadata["unity_version"] = Application.version;
+
             // Client Info
-            metadata["ClientID"] = "VR Monster Awaken Team";
+            metadata["client_id"] = GlobalParameters.ClientID;
+            metadata["game_string"] = GlobalParameters.GameString;
 
             // Recording Settings
 
