@@ -12,13 +12,14 @@ s3 = boto3.client('s3')
 def uploadMetadata(bucket, key, response):
     metadataFile = bucket + "-metadata.txt" 
     download_path = '/tmp/{}'.format(metadataFile)
-    s3.download_file(bucket, metadataFile, download_path)
     
     # deletes file in /tmp folder if there exists one
     try:
         os.remove(download_path)
     except OSError:
         pass
+    
+    s3.download_file(bucket, metadataFile, download_path)
     
     # writes metadata into a txt file and uploads to bucket
     with open(download_path, "a") as file:
@@ -29,7 +30,7 @@ def uploadMetadata(bucket, key, response):
         file.write(response['Metadata']['player_name'] + "\t")
         file.write(response['Metadata']['sdk_version'] + "\t")
         file.write(response['Metadata']['unity_version'] + "\t")
-        file.write(response['Metadata']['video_id'] + "\t")
+        file.write(response['Metadata']['video_id'])
         file.close()
     s3.upload_file(download_path, bucket, metadataFile)
     print('Metadafile updated')
