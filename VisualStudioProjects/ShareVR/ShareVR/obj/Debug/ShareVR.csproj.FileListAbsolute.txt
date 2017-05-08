@@ -1,0 +1,63 @@
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\bin\Debug\ShareVR.dll
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\bin\Debug\ShareVR.pdb
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\bin\Debug\AWSSDK.CognitoIdentity.dll
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\bin\Debug\AWSSDK.Core.dll
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\bin\Debug\AWSSDK.S3.dll
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\bin\Debug\AWSSDK.SecurityToken.dll
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\bin\Debug\UnityEditor.dll
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\bin\Debug\UnityEngine.dll
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\bin\Debug\AWSSDK.CognitoIdentity.pdb
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\bin\Debug\AWSSDK.CognitoIdentity.xml
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\bin\Debug\AWSSDK.Core.pdb
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\bin\Debug\AWSSDK.Core.xml
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\bin\Debug\AWSSDK.S3.pdb
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\bin\Debug\AWSSDK.S3.xml
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\bin\Debug\AWSSDK.SecurityToken.pdb
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\bin\Debug\AWSSDK.SecurityToken.xml
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\bin\Debug\UnityEditor.xml
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\bin\Debug\UnityEngine.xml
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\obj\Debug\ShareVR.csprojResolveAssemblyReference.cache
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\obj\Debug\ShareVR.dll
+c:\users\slayer\documents\visual studio 2017\Projects\ShareVR\ShareVR\obj\Debug\ShareVR.pdb
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\bin\Debug\ShareVR.dll
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\bin\Debug\ShareVR.pdb
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\bin\Debug\AWSSDK.CognitoIdentity.dll
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\bin\Debug\AWSSDK.Core.dll
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\bin\Debug\AWSSDK.S3.dll
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\bin\Debug\AWSSDK.SecurityToken.dll
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\bin\Debug\UnityEditor.dll
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\bin\Debug\UnityEngine.dll
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\bin\Debug\AWSSDK.CognitoIdentity.pdb
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\bin\Debug\AWSSDK.CognitoIdentity.xml
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\bin\Debug\AWSSDK.Core.pdb
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\bin\Debug\AWSSDK.Core.xml
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\bin\Debug\AWSSDK.S3.pdb
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\bin\Debug\AWSSDK.S3.xml
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\bin\Debug\AWSSDK.SecurityToken.pdb
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\bin\Debug\AWSSDK.SecurityToken.xml
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\bin\Debug\UnityEditor.xml
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\bin\Debug\UnityEngine.xml
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\obj\Debug\ShareVR.csprojResolveAssemblyReference.cache
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\obj\Debug\ShareVR.dll
+C:\Users\chenc\Documents\NUvention\Visual-Studio\ShareVR\ShareVR\obj\Debug\ShareVR.pdb
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\ShareVR.dll
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\ShareVR.pdb
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\AWSSDK.CognitoIdentity.dll
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\AWSSDK.Core.dll
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\AWSSDK.S3.dll
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\AWSSDK.SecurityToken.dll
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\UnityEditor.dll
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\UnityEngine.dll
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\AWSSDK.CognitoIdentity.pdb
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\AWSSDK.CognitoIdentity.xml
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\AWSSDK.Core.pdb
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\AWSSDK.Core.xml
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\AWSSDK.S3.pdb
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\AWSSDK.S3.xml
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\AWSSDK.SecurityToken.pdb
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\AWSSDK.SecurityToken.xml
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\UnityEditor.xml
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\UnityEngine.xml
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\obj\Debug\ShareVR.dll
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\obj\Debug\ShareVR.pdb
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\obj\Debug\ShareVR.csprojResolveAssemblyReference.cache
