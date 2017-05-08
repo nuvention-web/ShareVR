@@ -1,8 +1,9 @@
 ﻿//======= Copyright (c) ShareVR ===============================
 //
 // Purpose: Automatically checks if ShareVR's layer is registered
-// Version: 0.3
-// Date: 4/23/2017
+// Version: 0.4
+// Chen Chen 
+// 4/29/2017
 //=============================================================
 using UnityEngine;
 using UnityEditor;
@@ -15,43 +16,52 @@ public class LayerEditor
 		SerializedObject tagManager = new SerializedObject (AssetDatabase.LoadAllAssetsAtPath ("ProjectSettings/TagManager.asset") [0]);
 		SerializedProperty layers = tagManager.FindProperty ("layers");
 
-		bool ExistViewLayer = false;
-		bool ExistCaptureLayer = false;
+		bool existViewLayer = false;
+		bool existCaptureLayer = false;
+		bool existShareVRLayer = false;
 
 		for (int i = layers.arraySize - 1; i >= 8; i--) {
 			SerializedProperty layerSP = layers.GetArrayElementAtIndex (i);
 
-			if (layerSP.stringValue == "IgnoreInView") {
-				ExistViewLayer = true;
+			if (layerSP.stringValue == "ShareVRIgnoreViewOnly") {
+				existViewLayer = true;
 				continue;
 			}
-			if (layerSP.stringValue == "IgnoreInCapture") {
-				ExistCaptureLayer = true;
+			if (layerSP.stringValue == "ShareVRIgnoreCaptureOnly") {
+				existCaptureLayer = true;
 				continue;
 			}
-
-			if (ExistCaptureLayer && ExistViewLayer) {
+			if (layerSP.stringValue == "ShareVRIgnoreAll") {
+				existShareVRLayer = true;
+				continue;
+			}
+			if (existCaptureLayer && existViewLayer && existShareVRLayer) {
 				// Both Layer found
-				Debug.Log ("ShareVR: Render layer check passed!");
+				//Debug.Log ("ShareVR: Render layer check passed!");
 				EditorApplication.update -= CreateLayer;
 				return;
 			}
 		}
 		for (int j = layers.arraySize - 1; j >= 8; j--) {
 			SerializedProperty layerSP = layers.GetArrayElementAtIndex (j);
-			if (layerSP.stringValue == "" && !ExistViewLayer) {
-				ExistViewLayer = true;
-				layerSP.stringValue = "IgnoreInView";
+			if (layerSP.stringValue == "" && !existViewLayer) {
+				existViewLayer = true;
+				layerSP.stringValue = "ShareVRIgnoreViewOnly";
 				continue;
 			}
-			if (layerSP.stringValue == "" && !ExistCaptureLayer) {
-				ExistCaptureLayer = true;
-				layerSP.stringValue = "IgnoreInCapture";
+			if (layerSP.stringValue == "" && !existCaptureLayer) {
+				existCaptureLayer = true;
+				layerSP.stringValue = "ShareVRIgnoreCaptureOnly";
+				continue;
+			}
+			if (layerSP.stringValue == "" && !existShareVRLayer) {
+				existShareVRLayer = true;
+				layerSP.stringValue = "ShareVRIgnoreAll";
 				continue;
 			}
 
-			if (ExistCaptureLayer && ExistViewLayer) {
-				// Both Layer found
+			if (existCaptureLayer && existViewLayer && existShareVRLayer) {
+				// All Layers found
 				break;
 			}
 		}
