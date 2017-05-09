@@ -35,11 +35,20 @@ def uploadMetadata(bucket, key, response):
     s3.upload_file(download_path, bucket, metadataFile)
     print('Metadafile updated')
 
+def get_bucket_key(event):
+    message = event['Records'][0]['Sns']['Message']
+    message_json = json.loads(message)
+    bucket = message_json['Records'][0]['s3']['bucket']['name'].encode('utf8')
+    key = message_json['Records'][0]['s3']['object']['key'].encode('utf8')
+    return bucket, key
+
 def lambda_handler(event, context):
 
-    # Get the object from the event and show its content type
-    bucket = event['Records'][0]['s3']['bucket']['name']
-    key = urllib.unquote_plus(event['Records'][0]['s3']['object']['key'].encode('utf8'))
+    # Get the bucket and key from event message
+    bucket, key = get_bucket_key(event)
     
+    # Get object details from bucket and key
     response = s3.get_object(Bucket=bucket, Key=key)
+    
+    # Calls function to update metadata
     uploadMetadata(bucket, key, response)
