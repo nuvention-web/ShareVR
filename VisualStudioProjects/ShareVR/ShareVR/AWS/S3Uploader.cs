@@ -21,8 +21,8 @@ namespace ShareVR.Utils
 
     public class S3Uploader : MonoBehaviour
     {
-        const string IdentityPoolId = "us-east-1:5b2bd164-6a84-421b-b29f-d400528169aa";
-        const string S3BucketName = "sharevr-beta-test-video";
+        internal const string IdentityPoolId = "us-east-1:5b2bd164-6a84-421b-b29f-d400528169aa";
+        internal const string S3BucketName = "sharevr-beta-test-video";
         string CognitoIdentityRegion = RegionEndpoint.USEast1.SystemName;
 
         private RegionEndpoint _CognitoIdentityRegion
@@ -98,8 +98,6 @@ namespace ShareVR.Utils
         /// </summary>
         public void PostObject( string objPath, string objName )
         {
-            //Debug.Log ("Uploading the file");
-
             FileStream stream;
             if (File.Exists(objPath + objName))
                 stream = new FileStream(objPath + objName, FileMode.Open, FileAccess.Read, FileShare.Read);
@@ -114,14 +112,14 @@ namespace ShareVR.Utils
                 Bucket = S3BucketName,
                 Key = objName,
                 InputStream = stream,
-                CannedACL = S3CannedACL.Private
+                CannedACL = S3CannedACL.Private,
+                Metadata=LogManager.Metadata
             };
 
             Client.PostObjectAsync(request, ( responseObj ) =>
             {
                 if (responseObj.Exception == null)
                 {
-                    //Debug.Log (string.Format ("\nobject {0} posted to bucket {1}", responseObj.Request.Key, responseObj.Request.Bucket));
                     Debug.Log("ShareVR (AWS): Video posted to ShareVR server on AWS! Here's the URL to your video: https://s3.amazonaws.com/sharevr-beta-test-video/" + responseObj.Request.Key);
                 }
                 else
@@ -130,10 +128,11 @@ namespace ShareVR.Utils
                 }
             });
         }
+
         /// <summary>
         /// Post Object to S3 Bucket. 
         /// </summary>
-        public void PostObject( string objPath, string objName, MetaData meta)
+        public void PostObject( string objPath, string objName, MetaData meta )
         {
             //Debug.Log ("Uploading the file");
 

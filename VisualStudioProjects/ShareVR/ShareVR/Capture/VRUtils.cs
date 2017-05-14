@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.IO;
+using ShareVR.Utils;
 
 namespace ShareVR.Capture
 {
@@ -41,13 +42,55 @@ namespace ShareVR.Capture
             string fileName;
             int videoID = 0;
 
-            fileName = GetTimeString() + "-Camera-" + ( name ?? "?" ) + "-Session-" + videoID + ".mp4";
+            //fileName = GetTimeString () + "-Camera-" + (name ?? "?") + "-Session-" + videoID + ".mp4";
+            fileName = GlobalParameters.ClientID + "-Session-" + videoID + ".mp4";
             while (File.Exists(VRCaptureUtils.SaveFolder + fileName))
             {
                 videoID++;
-                fileName = GetTimeString() + "-Camera-" + ( name ?? "?" ) + "-Session-" + videoID + ".mp4";
+                fileName = GlobalParameters.ClientID + "-Session-" + videoID + ".mp4";
             }
 
+            return fileName;
+        }
+
+        public static string GetFinalVideoFileName()
+        {
+            string fileName;
+            string namePrefix = null;
+            int videoID = 0;
+            string playerNameFile = VRCaptureUtils.ShareVRConfigPath + "ShareVR_Config.txt";
+
+            if (File.Exists(playerNameFile))
+            {
+                // Open the text file using a stream reader.
+                using (StreamReader sr = new StreamReader(playerNameFile))
+                {
+                    // Read the stream to a string
+                    namePrefix = sr.ReadToEnd().Replace(" ", "_");
+                }
+            }
+            else if (!String.IsNullOrEmpty(VRCaptureUtils.SaveFileName))
+                namePrefix = VRCaptureUtils.SaveFileName;
+
+            if (String.IsNullOrEmpty(namePrefix))
+                fileName = GlobalParameters.GameName + "-Demo-" + videoID + ".mp4";
+            else
+                fileName = GlobalParameters.GameName + "-" + namePrefix + "-Demo-" + videoID + ".mp4";
+
+            // Make sure there's no space in the filename, otherwise it will raise exception on AWS Lambda
+            fileName = fileName.Replace(" ", "_");
+
+            while (File.Exists(VRCaptureUtils.SaveFolder + fileName))
+            {
+                videoID++;
+                if (String.IsNullOrEmpty(namePrefix))
+                    fileName = GlobalParameters.GameName.Replace(" ", "_") + "-Demo-" + videoID + ".mp4";
+                else
+                    fileName = GlobalParameters.GameName.Replace(" ", "_") + "-" + namePrefix + "-Demo-" + videoID + ".mp4";
+
+                fileName = fileName.Replace(" ", "_");
+            }
+            GlobalParameters.VideoID = videoID;
             return fileName;
         }
 
@@ -61,11 +104,12 @@ namespace ShareVR.Capture
             string fileName;
             int audioFileID = 0;
 
-            fileName = GetTimeString() + "-Session-" + audioFileID + ".wav";
+            //fileName = GetTimeString () + "-Session-" + audioFileID + ".wav";
+            fileName = GlobalParameters.ClientID + "-Session-" + audioFileID + ".wav";
             while (File.Exists(VRCaptureUtils.SaveFolder + fileName))
             {
                 audioFileID++;
-                fileName = GetTimeString() + "-Session-" + audioFileID + ".wav";
+                fileName = GlobalParameters.ClientID + "-Session-" + audioFileID + ".wav";
             }
 
             return fileName;
@@ -90,6 +134,7 @@ namespace ShareVR.Capture
         // ShareVR
         private static bool m_userDefinedSaveFolder = false;
         private static string m_saveFolder;
+        private static string m_saveFileName = null;
 
         public static string SaveFolder
         {
@@ -126,6 +171,12 @@ namespace ShareVR.Capture
             }
         }
 
+        public static string SaveFileName
+        {
+            get { return m_saveFileName; }
+            set { m_saveFileName = value; }
+        }
+
         public static string GetCurrentSaveFolder
         {
             get
@@ -158,7 +209,22 @@ namespace ShareVR.Capture
             }
         }
 
-        // TODO, fix path using Unity Build Pipeline
+        public static string ShareVRAssetsPath
+        {
+            get
+            {
+                return VRCommonUtils.STREAMING_ASSETS_PATH + "/ShareVR/";
+            }
+        }
+
+        public static string ShareVRConfigPath
+        {
+            get
+            {
+                return VRCommonUtils.MY_DOCUMENTS_PATH + "/ShareVR/";
+            }
+        }
+
         public static string FFmpegBuildPath
         {
             get

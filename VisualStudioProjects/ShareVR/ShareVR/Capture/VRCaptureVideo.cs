@@ -481,7 +481,7 @@ namespace ShareVR.Capture
         /// <summary>
         /// The original color space.
         /// </summary>
-        ColorSpace originalColorSpace;
+        //ColorSpace originalColorSpace;
 
         /// <summary>
         /// Whether this camera is enabled for capture.

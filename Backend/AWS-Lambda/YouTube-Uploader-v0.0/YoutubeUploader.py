@@ -108,8 +108,8 @@ def initialize_upload(youtube, options, videoPath):
     snippet=dict(
       title=options["title"],
       description=options["description"],
-      tags=tags
-      #categoryId=options["categoryID"]
+      tags=tags,
+      categoryId=options["categoryID"]
     ),
     status=dict(
       privacyStatus=options["privacyStatus"]
@@ -167,17 +167,25 @@ def resumable_upload(insert_request):
       if retry > MAX_RETRIES:
         exit("No longer attempting to retry.")
 
-      max_sleep = 2 ** retry
+      max_sleep = 1 + retry
       sleep_seconds = random.random() * max_sleep
       print ("Sleeping %f seconds and then retrying..." % sleep_seconds)
       time.sleep(sleep_seconds)
 
 # ShareVR
 def parseMetaData(k, metadata):
+    # Generate desctiption string
+    if "player_name" in metadata.keys():
+        desctiptionString = "An awesome VR experience in " + metadata["game_string"] + " featuring " + metadata["player_name"] + " , brought to you by ShareVR (http://sharevr.io/)!"
+        titleString = "ShareVR Presents - " + metadata["game_name"] + " Game Experience" + " featuring " + metadata["player_name"]
+    else:
+        desctiptionString = "An awesome VR experience in " + metadata["game_string"] + " , brought to you by ShareVR (http://sharevr.io/)!"
+        titleString = "ShareVR Presents - " + metadata["game_name"] + " Game Experience" + " (#%s)" % metadata["video_id"]
+
     options = dict(
-        title=k,
-        description="An awesome VR experience in " + metadata["game_string"] + " featuring " + metadata["user_name"] + " , brought to you by ShareVR (http://sharevr.io/)!",
-        keywords="vr,virtual reality,gaming",
+        title=titleString,
+        description=desctiptionString,
+        keywords="vr,virtual reality,gaming,"+metadata["game_name"],
         privacyStatus="public",
         categoryID=20 # Gaming
     )

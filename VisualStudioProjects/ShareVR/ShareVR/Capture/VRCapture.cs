@@ -321,11 +321,14 @@ namespace ShareVR.Capture
         /// when the video file is complete, register a CompleteDelegate.
         /// </summary>
         /// <returns>The capture session.</returns>
-        public StatusCode StopCapture()
+        public StatusCode StopCapture( string playerName = null )
         {
             // If the client calls EndRecordingSession for a failed session, do nothing.
             if (sessionStatus != StatusCode.Success)
                 return sessionStatus;
+
+            // Update ShareVR Log
+            LogManager.UpdateMetaData(playerName);
 
             foreach (VRCaptureVideo captureVideo in vrCaptureVideos)
             {
@@ -543,7 +546,7 @@ namespace ShareVR.Capture
             {
                 if (destinationPath != null)
                     return destinationPath;
-                videoFileName = VRCommonUtils.GetMp4FileName(captureVideo.Index.ToString());
+                videoFileName = VRCommonUtils.GetFinalVideoFileName();
                 destinationPath = VRCaptureUtils.SaveFolder + videoFileName;
                 return destinationPath;
             }

@@ -24,7 +24,7 @@ namespace ShareVR.Capture
         System.IntPtr audioPointer;
         System.Byte[] audioByteBuffer;
 
-        AudioListener audioListener;
+        //AudioListener audioListener;
 
         /// <summary>
         /// Get/Set the destination path.
