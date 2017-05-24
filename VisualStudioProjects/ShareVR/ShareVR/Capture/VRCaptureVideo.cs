@@ -623,7 +623,9 @@ namespace ShareVR.Capture
         /// </summary>
         string destinationPath = null;
 
+        [HideInInspector]
         public RenderTexture copyTargetRT;
+        [HideInInspector]
         public bool showDebugMessage = false;
 
         void OnRenderImage( RenderTexture src, RenderTexture dest )

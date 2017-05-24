@@ -10,10 +10,10 @@ namespace ShareVR.Utils
     public static class GlobalParameters
     {
         public const string SDKversion = "0.4c";
-        internal const string ClientID = "VRMA";
-        internal const string GameName = "VR Monster Awakens";
+        internal const string ClientID = "August";
+        internal const string GameName = "Beta Testing";
 
-        internal const string GameString = GameName + " (http://store.steampowered.com/app/566870/VR_Monster_Awakens/)";
+        internal const string GameString = GameName;
         internal const string GameTag = ClientID;
 
         public static int VideoID = 0;
