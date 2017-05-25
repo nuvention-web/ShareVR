@@ -60,4 +60,4 @@ H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProject
 H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\UnityEngine.xml
 H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\obj\Debug\ShareVR.dll
 H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\obj\Debug\ShareVR.pdb
-H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\obj\Debug\ShareVR.csprojResolveAssemblyReference.cache
+H:\Indi-Projects\VR\NUvention\TeamH-Repo\branches\submission\VisualStudioProjects\ShareVR\ShareVR\bin\Debug\UnityEngine.UI.dll
