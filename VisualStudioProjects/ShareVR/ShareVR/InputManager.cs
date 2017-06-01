@@ -1,15 +1,14 @@
 ﻿//======= Copyright (c) ShareVR ===============
 //
 // Purpose: Manage input events
-// Version: SDK v0.4b
+// Version: SDK v0.4
+// Date: 4/5/2017
 // Chen Chen
-// 4/30/2017
-//=============================================
+//=============================================================================
 
 using System.Collections;
 using UnityEngine;
 using System;
-using Valve.VR;
 
 namespace ShareVR.Core
 {
@@ -21,6 +20,15 @@ namespace ShareVR.Core
         bool m_toggleRec = false;
         bool m_toggleCam = false;
         bool m_toggleAvatar = false;
+
+        public UserAction()
+        {
+            m_startRec = false;
+            m_stopRec = false;
+            m_toggleRec = false;
+            m_toggleCam = false;
+            m_toggleAvatar = false;
+        }
 
         // Auto-reset
         public bool startRec
@@ -107,8 +115,6 @@ namespace ShareVR.Core
     public enum ViveCtrlerMapping
     {
         bothTriggerPressed,
-        bothGripPressed,
-        TriggerAndGripPressed,
         bothMenuKeyPressed,
         leftMenuKeyPressed,
         rightMenuKeyPressed,
@@ -136,11 +142,25 @@ namespace ShareVR.Core
     public class InputManager : MonoBehaviour
     {
         [HideInInspector]
-        public UserAction userAct = new UserAction ();
+        public static UserAction userAct = new UserAction ();
         [HideInInspector]
-        public bool isViveDeviceFound = false;
+        public static bool isBothCtrlerFound = false;
 
-        [HideInInspector]
+        // Controller Input KeyCode Mapping
+        private static class CtrlerKeyCode
+        {
+            public const KeyCode viveTriggerL = KeyCode.JoystickButton14;
+            public const KeyCode viveTriggerR = KeyCode.JoystickButton15;
+            public const KeyCode viveMenuL = KeyCode.JoystickButton2;
+            public const KeyCode viveMenuR = KeyCode.JoystickButton0;
+            public const KeyCode viveGripL = KeyCode.JoystickButton2;
+            public const KeyCode viveGripR = KeyCode.JoystickButton0;
+            public const KeyCode viveTrackpadPressL = KeyCode.JoystickButton8;
+            public const KeyCode viveTrackpadPressR = KeyCode.JoystickButton9;
+            public const KeyCode viveTrackpadTouchL = KeyCode.JoystickButton16;
+            public const KeyCode viveTrackpadTouchR = KeyCode.JoystickButton17;
+        }
+
         protected enum ViveCtrler
         {
             leftHand,
@@ -154,15 +174,9 @@ namespace ShareVR.Core
             public bool TriggerAndGripPressed = true;
         }
 
-        // SteamVR Objects
-        protected  uint leftHand, rightHand;
-        [NonSerializedAttribute]
-        public SteamVR_Controller.Device leftCtrlerDevice;
-        [NonSerializedAttribute]
-        public SteamVR_Controller.Device rightCtrlerDevice;
-        [HideInInspector]
-        public SteamVR_TrackedController[] viveCtrlers;
-
+        // Controller Objects
+        protected bool isLeftHandFound = false;
+        protected bool isRightHandFound = false;
 
         // Internal Reference
         protected RecordManager recManager;
@@ -178,40 +192,57 @@ namespace ShareVR.Core
         protected bool rMenuPressed = false;
         protected bool anyMenuPressed = false;
 
-        // Use this for initialization
-        protected virtual IEnumerator Start()
+        private IEnumerator Start()
         {
-            yield break;
+            //Debug.Log ("Instantiated!");
+            recManager = FindObjectOfType(typeof(RecordManager)) as RecordManager;
+
+            // Search for avtive Vive controllers every one second until both hand has been found
+            if (recManager.showDebugMessage)
+                Debug.Log("Checking tracked Controllers...");
+
+            while (true)
+            {
+                // This will get refreshed every one second
+                yield return new WaitForSeconds(1.0f);
+
+                string[] joyStickName = Input.GetJoystickNames ();
+                isLeftHandFound = Array.BinarySearch(joyStickName, "OpenVR Controller - Left") >= 0;
+                isRightHandFound = Array.BinarySearch(joyStickName, "OpenVR Controller - Right") >= 0;
+
+                isBothCtrlerFound = isLeftHandFound && isRightHandFound;
+
+                if (isBothCtrlerFound)
+                {
+                    if (recManager.showDebugMessage)
+                        Debug.Log("Found active OpenVR controller pair...");
+                    yield break;
+                }
+
+            }
         }
 
-        // Update is called once per frame
-        protected void Update()
+        private void Update()
         {
             UpdateUserAction();
         }
 
-        public void ViveHapticPulse( ushort duration = 500 )
-        {
-            leftCtrlerDevice.TriggerHapticPulse(duration);
-            rightCtrlerDevice.TriggerHapticPulse(duration);
-        }
-
         protected void UpdateUserAction()
         {
-            // Update Vive Input
-            if (isViveDeviceFound)
+            // Update Input
+            if (isBothCtrlerFound)
             {
                 switch (CheckViveInput())
                 {
-                    case ViveCtrlerMapping.TriggerAndGripPressed:
-                        userAct.toggleRec |= recManager.toggleRecordingInput == ViveCtrlerMapping.TriggerAndGripPressed;
-                        //Debug.Log ("Vive - Toggle Camera");
-                        break;
-                    case ViveCtrlerMapping.bothGripPressed:
-                        userAct.toggleRec |= recManager.toggleRecordingInput == ViveCtrlerMapping.bothGripPressed;
-                        //userAct.toggleAvatar = true;
-                        //Debug.Log ("Vive - Toggle Avatar");
-                        break;
+                    //case ViveCtrlerMapping.TriggerAndGripPressed:
+                    //    userAct.toggleCam |= recManager.toggleRecordingInput == ViveCtrlerMapping.TriggerAndGripPressed;
+                    //Debug.Log ("Vive - Toggle Camera");
+                    //    break;
+                    //case ViveCtrlerMapping.bothGripPressed:
+                    //   userAct.toggleCam |= recManager.toggleRecordingInput == ViveCtrlerMapping.bothGripPressed;
+                    //userAct.toggleAvatar = true;
+                    //Debug.Log ("Vive - Toggle Avatar");
+                    //   break;
                     case ViveCtrlerMapping.bothTriggerPressed:
                         userAct.toggleRec |= recManager.toggleRecordingInput == ViveCtrlerMapping.bothTriggerPressed;
                         //userAct.toggleRec = true;
@@ -232,15 +263,20 @@ namespace ShareVR.Core
             CheckKeyboardInput();
         }
 
-        protected ViveCtrlerMapping? CheckViveInput()
+        protected void RefreshButtonState()
         {
             // Refresh State
             lTriggerPressed |= GetTriggerDown(ViveCtrler.leftHand);
             rTriggerPressed |= GetTriggerDown(ViveCtrler.rightHand);
-            lGripPressed |= GetGripDown(ViveCtrler.leftHand);
-            rGripPressed |= GetGripDown(ViveCtrler.rightHand);
+            //lGripPressed |= GetGripDown(ViveCtrler.leftHand);
+            //rGripPressed |= GetGripDown(ViveCtrler.rightHand);
             lMenuPressed |= GetMenuDown(ViveCtrler.leftHand);
             rMenuPressed |= GetMenuDown(ViveCtrler.rightHand);
+        }
+
+        protected ViveCtrlerMapping? CheckViveInput()
+        {
+            RefreshButtonState();
 
             anyTriggerPressed = lTriggerPressed || rTriggerPressed;
             anyGripPressed = lGripPressed || rGripPressed;
@@ -251,16 +287,16 @@ namespace ShareVR.Core
                 lTriggerPressed = rTriggerPressed = false;
                 return ViveCtrlerMapping.bothTriggerPressed;
             }
-            else if (lGripPressed && rGripPressed)
-            {
-                lGripPressed = rGripPressed = false;
-                return ViveCtrlerMapping.bothGripPressed;
-            }
-            else if (anyTriggerPressed && anyGripPressed)
-            {
-                lGripPressed = rGripPressed = lTriggerPressed = rTriggerPressed = false;
-                return ViveCtrlerMapping.TriggerAndGripPressed;
-            }
+            //else if (lGripPressed && rGripPressed)
+            //{
+            //   lGripPressed = rGripPressed = false;
+            //  return ViveCtrlerMapping.bothGripPressed;
+            //}
+            //else if (anyTriggerPressed && anyGripPressed)
+            //{
+            //   lGripPressed = rGripPressed = lTriggerPressed = rTriggerPressed = false;
+            //  return ViveCtrlerMapping.TriggerAndGripPressed;
+            //}
             else if (lMenuPressed && rMenuPressed)
             {
                 lMenuPressed = rMenuPressed = false;
@@ -285,21 +321,23 @@ namespace ShareVR.Core
 
         protected void CheckKeyboardInput()
         {
-            if (recManager.toggleRecordingInput == ShareVR.Core.ViveCtrlerMapping.KeyboardOnly_Key_R)
+            if (recManager.toggleRecordingInput == ViveCtrlerMapping.KeyboardOnly_Key_R)
                 userAct.toggleRec |= Input.GetKeyDown(KeyCode.R);
-            else if (recManager.toggleRecordingInput == ShareVR.Core.ViveCtrlerMapping.KeyboardOnly_Key_X)
+            if (recManager.toggleRecordingInput == ViveCtrlerMapping.KeyboardOnly_Key_X)
                 userAct.toggleRec |= Input.GetKeyDown(KeyCode.X);
-            else if (recManager.toggleRecordingInput == ShareVR.Core.ViveCtrlerMapping.KeyboardOnly_Key_V)
+            if (recManager.toggleRecordingInput == ViveCtrlerMapping.KeyboardOnly_Key_V)
                 userAct.toggleRec |= Input.GetKeyDown(KeyCode.V);
+            //userAct.toggleAvatar |= Input.GetKeyDown (KeyCode.V);
+            //userAct.toggleCam |= Input.GetKeyDown (KeyCode.B);
         }
 
         // Wrapper function for vive controller button state
         protected bool GetTriggerDown( ViveCtrler ctrler )
         {
             if (ctrler == ViveCtrler.leftHand)
-                return leftCtrlerDevice.GetPressDown(EVRButtonId.k_EButton_SteamVR_Trigger);
-            else if (ctrler == ViveCtrler.rightHand)
-                return rightCtrlerDevice.GetPressDown(EVRButtonId.k_EButton_SteamVR_Trigger);
+                return Input.GetKeyDown(CtrlerKeyCode.viveTriggerL);
+            if (ctrler == ViveCtrler.rightHand)
+                return Input.GetKeyDown(CtrlerKeyCode.viveTriggerR);
 
             return false;
         }
@@ -307,39 +345,29 @@ namespace ShareVR.Core
         protected bool GetTriggerUp( ViveCtrler ctrler )
         {
             if (ctrler == ViveCtrler.leftHand)
-                return leftCtrlerDevice.GetPressUp(EVRButtonId.k_EButton_SteamVR_Trigger);
+                return Input.GetKeyUp(CtrlerKeyCode.viveTriggerL);
             if (ctrler == ViveCtrler.rightHand)
-                return rightCtrlerDevice.GetPressUp(EVRButtonId.k_EButton_SteamVR_Trigger);
+                return Input.GetKeyUp(CtrlerKeyCode.viveTriggerR);
 
             return false;
         }
         // Wrapper function for vive controller button state
         protected bool GetGripDown( ViveCtrler ctrler )
         {
-            if (ctrler == ViveCtrler.leftHand)
-                return leftCtrlerDevice.GetPressDown(EVRButtonId.k_EButton_Grip);
-            else if (ctrler == ViveCtrler.rightHand)
-                return rightCtrlerDevice.GetPressDown(EVRButtonId.k_EButton_Grip);
-
             return false;
         }
         // Wrapper function for vive controller button state
         protected bool GetGripUp( ViveCtrler ctrler )
         {
-            if (ctrler == ViveCtrler.leftHand)
-                return leftCtrlerDevice.GetPressUp(EVRButtonId.k_EButton_Grip);
-            else if (ctrler == ViveCtrler.rightHand)
-                return rightCtrlerDevice.GetPressUp(EVRButtonId.k_EButton_Grip);
-
             return false;
         }
         // Wrapper function for vive controller button state
         protected bool GetMenuUp( ViveCtrler ctrler )
         {
             if (ctrler == ViveCtrler.leftHand)
-                return leftCtrlerDevice.GetPressUp(EVRButtonId.k_EButton_ApplicationMenu);
-            else if (ctrler == ViveCtrler.rightHand)
-                return rightCtrlerDevice.GetPressUp(EVRButtonId.k_EButton_ApplicationMenu);
+                return Input.GetKeyUp(CtrlerKeyCode.viveMenuL);
+            if (ctrler == ViveCtrler.rightHand)
+                return Input.GetKeyUp(CtrlerKeyCode.viveMenuR);
 
             return false;
         }
@@ -347,9 +375,9 @@ namespace ShareVR.Core
         protected bool GetMenuDown( ViveCtrler ctrler )
         {
             if (ctrler == ViveCtrler.leftHand)
-                return leftCtrlerDevice.GetPressUp(EVRButtonId.k_EButton_ApplicationMenu);
-            else if (ctrler == ViveCtrler.rightHand)
-                return rightCtrlerDevice.GetPressUp(EVRButtonId.k_EButton_ApplicationMenu);
+                return Input.GetKeyDown(CtrlerKeyCode.viveMenuL);
+            if (ctrler == ViveCtrler.rightHand)
+                return Input.GetKeyDown(CtrlerKeyCode.viveMenuR);
 
             return false;
         }

@@ -6,6 +6,7 @@
 // Date: 4/30/2017
 //=========================================================
 using UnityEngine;
+using UnityEngine.VR;
 
 namespace ShareVR.Core
 {
@@ -22,7 +23,6 @@ namespace ShareVR.Core
 
         // Interal References
         private RecordManager recManager;
-        private InputManager inputManager;
 
         // Player Animator
         private Animator anim;
@@ -38,7 +38,6 @@ namespace ShareVR.Core
 
         // Avatar References
         private bool avatarHandAnchorFound = false;
-        private Transform[] avatarHandAnchor;
         private Transform lookatTarget = null;
         private AvatarHandTr avatarHandTr;
         private Transform avatarHeadTr;
@@ -60,10 +59,15 @@ namespace ShareVR.Core
         private const float veloSmoothFactor = 4.0f;
         private float angle = 0.0f;
 
+        // ShareVR Object Reference
+        private InputManager inputManager;
+
         // Use this for initialization
         void Start()
         {
             prevPos = transform.position;
+
+            inputManager = FindObjectOfType(typeof(InputManager)) as InputManager;
 
             InitializeReference();
             InitializeIK();
@@ -73,7 +77,6 @@ namespace ShareVR.Core
         void InitializeReference()
         {
             recManager = FindObjectOfType(typeof(RecordManager)) as RecordManager;
-            inputManager = FindObjectOfType(typeof(InputManager)) as InputManager;
 
             playerTr = recManager.GetPlayerTransform();
 
@@ -102,19 +105,14 @@ namespace ShareVR.Core
             avatarRefPos = offset;
         }
 
-        public void EnableAvatar( bool state, float scale = 1.0f, PlayerHandTransform handTr = null, Vector3? offset = null )
+        public void EnableAvatar( bool state, float scale = 1.0f, Vector3? offset = null )
         {
             isAvatarEnabled = state;
 
             this.transform.localScale *= scale;
             this.gameObject.SetActive(isAvatarEnabled);
 
-            if (handTr != null)
-            {
-                avatarHandAnchor = new[] { handTr.leftHand, handTr.rightHand };
-                avatarHandAnchorFound = true;
-                EnableHandIK = true;
-            }
+            EnableHandIK = InputManager.isBothCtrlerFound;
 
             if (offset != null)
                 this.transform.position = new Vector3(offset.Value.x, offset.Value.y, offset.Value.z);
@@ -131,27 +129,21 @@ namespace ShareVR.Core
 
             if (EnableHandIK)
             {
+                // Set weight
                 anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
                 anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
                 anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
                 anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
 
-                if (inputManager.isViveDeviceFound)
-                {
-                    if (!avatarHandAnchorFound && recManager.playerHandTransform.isHandTransformValid)
-                    {
-                        avatarHandAnchor = new[] { recManager.playerHandTransform.leftHand, recManager.playerHandTransform.rightHand };
-                        EnableHandIK = true;
-                    }
-
-                    if (avatarHandAnchor[0] != null && avatarHandAnchor[1] != null)
-                    {
-                        anim.SetIKPosition(AvatarIKGoal.LeftHand, avatarHandAnchor[0].transform.position);
-                        anim.SetIKPosition(AvatarIKGoal.RightHand, avatarHandAnchor[1].transform.position);
-                        anim.SetIKRotation(AvatarIKGoal.LeftHand, avatarHandAnchor[0].transform.rotation);
-                        anim.SetIKRotation(AvatarIKGoal.RightHand, avatarHandAnchor[1].transform.rotation);
-                    }
-                }
+                // Update target position and rotation
+                anim.SetIKPosition(AvatarIKGoal.LeftHand, InputTracking.GetLocalPosition(VRNode.LeftHand));
+                anim.SetIKPosition(AvatarIKGoal.RightHand, InputTracking.GetLocalPosition(VRNode.RightHand));
+                anim.SetIKRotation(AvatarIKGoal.LeftHand, InputTracking.GetLocalRotation(VRNode.LeftHand));
+                anim.SetIKRotation(AvatarIKGoal.RightHand, InputTracking.GetLocalRotation(VRNode.RightHand));
+            }
+            else
+            {
+                EnableHandIK = InputManager.isBothCtrlerFound;
             }
         }
 

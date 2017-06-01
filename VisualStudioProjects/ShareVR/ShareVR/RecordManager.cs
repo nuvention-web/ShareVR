@@ -8,6 +8,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.VR;
 using ShareVR.Capture;
 using ShareVR.Utils;
 
@@ -29,7 +30,7 @@ namespace ShareVR.Core
         [Tooltip ("Camera motion smooth factor")]
         public float camMotionDamp = 2.0f;
         [Tooltip ("Make the spectator camera visible")]
-        public bool showCameraModel = false;
+        public bool showCameraModel = true;
         [Tooltip ("Adjust camera model scale if it's too big or small")]
         public float cameraModelScale = 1.0f;
         [Tooltip ("Show a camera preview window?")]
@@ -48,11 +49,9 @@ namespace ShareVR.Core
         public bool useVoiceCommand = true;
 
         [Tooltip ("Specify your main player gameobject")]
-        public GameObject playerHeadGameObject;
-        [Tooltip ("Specify your vive controller gameobject")]
-        public PlayerHandTransform playerHandTransform;
+        public GameObject trackingTarget;
         [Tooltip ("Display debug message")]
-        public bool showDebugMessage = false;
+        public bool showDebugMessage = true;
 
         [Tooltip ("Specify recording video resolution")]
         public VRCaptureVideo.FrameSizeType frameSize = VRCaptureVideo.FrameSizeType._1280x720;
@@ -67,20 +66,16 @@ namespace ShareVR.Core
         public bool uploadFileOnline = false;
 
         [HideInInspector]
-        public bool isSteamVRActive = false;
+        public bool isVRDevicePresent = false;
         [HideInInspector]
         public S3Uploader s3Uploader;
 
         // Internal Scripts Reference
         private GameObject cameraRigPrefab;
         private GameObject playerAvatarPrefab;
-
-        private RecordManager recManager;
         private CameraController camCtrler;
-        private InputManager inputManager;
         private AvatarController avatarCtrler;
         private LiveFeed liveFeed;
-        //private bool isUsingLiveFeed;
 
         void Awake()
         {
@@ -91,31 +86,22 @@ namespace ShareVR.Core
         {
             InitializeReference();
 
-            if (recManager.showDebugMessage)
+            if (showDebugMessage)
                 Debug.Log("Checking active SteamVR instance...");
 
-            // Search for avtive SteamVR Session every one second
-            Type steamvr = Type.GetType ("SteamVR");
-            if (steamvr != null)
+            // Search for avtive VR Device every one second
+            isVRDevicePresent = VRDevice.isPresent;
+            if (showDebugMessage)
             {
-                // Found SteamVR
-                isSteamVRActive = true;
-                if (recManager.showDebugMessage)
-                    Debug.Log("Found active SteamVR!");
-            }
-            else
-            {
-                // SteamVR not active or not present
-                Debug.LogError("ShareVR requires SteamVR plugin!");
+                if (isVRDevicePresent)
+                    Debug.Log("ShareVR: Found HMD - " + VRDevice.model);
+                else
+                    Debug.LogWarning("ShareVR: No HMD device found, switch to PC mode");
             }
         }
 
         void InitializeReference()
         {
-            // Reference ShareVR scripts
-            inputManager = FindObjectOfType(typeof(InputManager)) as InputManager;
-            recManager = FindObjectOfType(typeof(RecordManager)) as RecordManager;
-
             // Instantiate a new capture camera
             cameraRigPrefab = Resources.Load("Prefabs/ShareVRCameraRig") as GameObject;
             camCtrler = Instantiate(cameraRigPrefab).GetComponent<CameraController>();
@@ -138,10 +124,7 @@ namespace ShareVR.Core
                 avatarCtrler = Instantiate(playerAvatarPrefab).GetComponent<AvatarController>();
                 DontDestroyOnLoad(avatarCtrler.gameObject);
                 SetLayer(avatarCtrler.gameObject, LayerMask.NameToLayer("ShareVRIgnoreViewOnly"));
-                if (playerHandTransform.isHandTransformValid)
-                    avatarCtrler.EnableAvatar(showPlayerAvatar, avatarScale, playerHandTransform);
-                else
-                    avatarCtrler.EnableAvatar(showPlayerAvatar, avatarScale);
+                avatarCtrler.EnableAvatar(showPlayerAvatar, avatarScale);
 
                 avatarCtrler.UpdateAvatarOffset(avatarOffset);
             }
@@ -189,28 +172,28 @@ namespace ShareVR.Core
 
         private void ProceedUserAction()
         {
-            if (inputManager.userAct.startRec)
+            if (InputManager.userAct.startRec)
             {
                 StartRecording();
                 return;
             }
-            if (inputManager.userAct.stopRec)
+            if (InputManager.userAct.stopRec)
             {
                 StopRecording();
                 return;
             }
-            if (inputManager.userAct.toggleAvatar)
+            if (InputManager.userAct.toggleAvatar)
             {
                 avatarCtrler.EnableAvatar(!avatarCtrler.isAvatarEnabled);
                 return;
             }
-            if (inputManager.userAct.toggleCam)
+            if (InputManager.userAct.toggleCam)
             {
                 camCtrler.ShowCameraModel(!camCtrler.isCamModelEnabled);
                 return;
             }
 
-            if (inputManager.userAct.toggleRec)
+            if (InputManager.userAct.toggleRec)
             {
                 if (camCtrler.isCapturing)
                     StopRecording();
@@ -233,13 +216,13 @@ namespace ShareVR.Core
         public Transform GetPlayerTransform()
         {
             // Fall back reference
-            if (playerHeadGameObject == null)
+            if (trackingTarget == null)
             {
-                Debug.LogWarning("ShareVR: Tracking target not specified, using main player instead");
-                playerHeadGameObject = GameObject.FindObjectOfType<AudioListener>().gameObject;
+                Debug.Log("ShareVR: Tracking target not specified, using HMD instead");
+                trackingTarget = GameObject.FindObjectOfType<AudioListener>().gameObject;
             }
 
-            return playerHeadGameObject.transform;
+            return trackingTarget.transform;
         }
 
         public void UpdateCameraParameters()

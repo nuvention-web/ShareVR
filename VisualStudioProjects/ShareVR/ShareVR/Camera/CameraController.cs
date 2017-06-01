@@ -47,7 +47,6 @@ namespace ShareVR.Core
         // Smooth LookAt function related variables and parameters
         private Vector3 camPos;
         private Quaternion camRot;
-        private Color camIdleColor;
 
         private Vector3 m_orbitOffset;
         private Vector3 m_playerRefOffset;
