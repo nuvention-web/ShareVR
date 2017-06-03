@@ -7,11 +7,64 @@ using System.Runtime.InteropServices;
 namespace ShareVR.Capture
 {
     /// <summary>
+    /// Frame size type.
+    /// </summary>
+    public enum FrameSizeType
+    {
+        /// <summary>
+        /// 480p (640 x 480) Standard Definition (SD).
+        /// </summary>
+        _640x480,
+        /// <summary>
+        /// 480p (720 x 480) Standard Definition (SD) (resolution of DVD video).
+        /// </summary>
+        _720x480,
+        /// <summary>
+        /// 540p (960 x 540).
+        /// </summary>
+        _960x540,
+        /// <summary>
+        /// 720p (1280 x 720) High Definition (HD).
+        /// </summary>
+        _1280x720,
+        /// <summary>
+        /// 1080p (1920 x 1080) Full High Definition (FHD).
+        /// </summary>
+        _1920x1080,
+        /// <summary>
+        /// 2K (2048 x 1080).
+        /// </summary>
+        _2048x1080,
+        /// <summary>
+        /// 4K (3840 x 2160) Quad Full High Definition (QFHD)
+        /// (also known as UHDTV/UHD-1, resolution of Ultra High Definition TV).
+        /// </summary>
+        _3840x2160,
+        /// <summary>
+        /// 4K (4096 x 2160) Ultra High Definition (UHD).
+        /// </summary>
+        _4096x2160,
+    }
+
+    /// <summary>
+    /// Target framerate type.
+    /// </summary>
+    public enum TargetFramerateType
+    {
+        _18,
+        _24,
+        _30,
+        _45,
+        _60,
+    }
+
+    /// <summary>
     /// VRCapture video component.
     /// </summary>
     [RequireComponent(typeof(Camera))]
     public class VRCaptureVideo : MonoBehaviour
     {
+        #region Type Definition
         /// <summary>
         /// Format type.
         /// </summary>
@@ -60,46 +113,6 @@ namespace ShareVR.Capture
         }
 
         /// <summary>
-        /// Frame size type.
-        /// </summary>
-        public enum FrameSizeType
-        {
-            /// <summary>
-            /// 480p (640 x 480) Standard Definition (SD).
-            /// </summary>
-            _640x480,
-            /// <summary>
-            /// 480p (720 x 480) Standard Definition (SD) (resolution of DVD video).
-            /// </summary>
-            _720x480,
-            /// <summary>
-            /// 540p (960 x 540).
-            /// </summary>
-            _960x540,
-            /// <summary>
-            /// 720p (1280 x 720) High Definition (HD).
-            /// </summary>
-            _1280x720,
-            /// <summary>
-            /// 1080p (1920 x 1080) Full High Definition (FHD).
-            /// </summary>
-            _1920x1080,
-            /// <summary>
-            /// 2K (2048 x 1080).
-            /// </summary>
-            _2048x1080,
-            /// <summary>
-            /// 4K (3840 x 2160) Quad Full High Definition (QFHD)
-            /// (also known as UHDTV/UHD-1, resolution of Ultra High Definition TV).
-            /// </summary>
-            _3840x2160,
-            /// <summary>
-            /// 4K (4096 x 2160) Ultra High Definition (UHD).
-            /// </summary>
-            _4096x2160,
-        }
-
-        /// <summary>
         /// Cubemap size type.
         /// </summary>
         public enum CubemapSizeType
@@ -139,18 +152,6 @@ namespace ShareVR.Capture
             _2,
             _4,
             _8,
-        }
-
-        /// <summary>
-        /// Target framerate type.
-        /// </summary>
-        public enum TargetFramerateType
-        {
-            _18,
-            _24,
-            _30,
-            _45,
-            _60,
         }
 
         /// <summary>
@@ -421,6 +422,7 @@ namespace ShareVR.Capture
                 return framerate;
             }
         }
+        #endregion
 
         /// <summary>
         /// To be notified when the video is complete, register a delegate
@@ -472,7 +474,7 @@ namespace ShareVR.Capture
         /// For generate equirectangular video.
         /// </summary>
         [HideInInspector]
-        public Material transformMaterial;
+        public Material transformMaterial = null;
         /// <summary>
         /// The original maximum delta time.
         /// </summary>
@@ -634,7 +636,8 @@ namespace ShareVR.Capture
             Graphics.Blit(src, dest);
 
             // Copy rendertexture for live play rendertexture
-            Graphics.Blit(null, copyTargetRT);
+            if (copyTargetRT != null)
+                Graphics.Blit(null, copyTargetRT);
         }
 
         /// <summary>

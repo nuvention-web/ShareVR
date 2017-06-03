@@ -1,13 +1,13 @@
 ﻿//======= Copyright (c) ShareVR ===========================
 //
 // Purpose: Spectator Camera Controller
-// Version: 0.4b
+// Version: 0.4c
 // Chen Chen
 // 4/30/2017
 //=========================================================
 using System.Collections;
 using UnityEngine;
-using ShareVR.Core;
+using UnityEngine.VR;
 using System;
 using ShareVR.Capture;
 
@@ -17,14 +17,17 @@ namespace ShareVR.Core
     public enum CameraFollowMethod
     {
         FixedSmooth,
-        OrbitSmooth
+        OrbitSmooth,
+        HandHeldCamera,
+        HandSelfieCamera,
+        CustomCamera
     }
 
     // Make sure a Camera component is attached
     [RequireComponent(typeof(Camera))]
     [RequireComponent(typeof(VRCapture))]
     [RequireComponent(typeof(VRCaptureVideo))]
-    public class CameraController : MonoBehaviour
+    internal class CameraController : MonoBehaviour
     {
         [NonSerializedAttribute]
         public bool isCapturing = false;
@@ -34,15 +37,13 @@ namespace ShareVR.Core
         // Game object reference - to be set internally
         protected GameObject camStatusLight;
         protected GameObject camModelPrefab;
-        protected GameObject camPreviewPanelPrefab;
+        protected static GameObject camPreviewPanelPrefab;
         protected Camera capCam;
         protected Transform playerTr;
 
-        private VRCapture vrcap;
-        private VRCaptureVideo vrcapVideo;
         private RecordManager recManager;
         private GameObject m_camModelInstance;
-        private GameObject m_camPreviewPanelInstance;
+        private static GameObject m_camPreviewPanelInstance;
 
         // Smooth LookAt function related variables and parameters
         private Vector3 camPos;
@@ -52,7 +53,7 @@ namespace ShareVR.Core
         private Vector3 m_playerRefOffset;
 
         // Local component reference
-        private Transform m_Transform;
+        private static Transform m_Transform;
 
         void Awake()
         {
@@ -63,7 +64,7 @@ namespace ShareVR.Core
         void Start()
         {
             // Initialize Camera
-            InitializeCamera();
+            InitializeCamera(capCam);
             m_playerRefOffset = playerTr.position;
             UpdateOrbitCameraParameters();
         }
@@ -103,36 +104,6 @@ namespace ShareVR.Core
                 playerTr = UnityEngine.Object.FindObjectOfType<AudioListener>().transform;
             }
 
-            // Reference VRCaptureVideo and set video spec
-            vrcapVideo = GetComponent<VRCaptureVideo>();
-            if (vrcapVideo == null)
-                vrcapVideo = gameObject.AddComponent<VRCaptureVideo>();
-            vrcapVideo.frameSize = recManager.frameSize;
-            vrcapVideo.targetFramerate = recManager.frameRate;
-            vrcapVideo.encodeQuality = VRCaptureVideo.EncodeQualityType.High;
-            vrcapVideo.antiAliasing = VRCaptureVideo.AntiAliasingType._1;
-            vrcapVideo.formatType = VRCaptureVideo.FormatType.NORMAL;
-            vrcapVideo.isDedicated = true;
-            vrcapVideo.isEnabled = true;
-
-            vrcap = GetComponent<VRCapture>();
-            if (vrcap == null)
-                vrcap = gameObject.AddComponent<VRCapture>();
-            vrcap.CaptureVideos = new[] { vrcapVideo };
-
-            // Find main AudioListener in the scene and attach VRCaptureAudio component to it
-            var audioListener = FindObjectOfType (typeof(AudioListener)) as AudioListener;
-            if (audioListener != null)
-            {
-                vrcap.CaptureAudio = audioListener.gameObject.AddComponent<VRCaptureAudio>();
-                if (recManager.showDebugMessage)
-                    Debug.Log("ShareVR: Found main AudioSource - " + vrcap.CaptureAudio);
-            }
-            else
-            {
-                // Maybe add AudioSource to the Main Player?
-            }
-
             if (camModelPrefab == null)
                 camModelPrefab = Resources.Load("Prefabs/CameraModel") as GameObject;
 
@@ -140,16 +111,22 @@ namespace ShareVR.Core
                 camPreviewPanelPrefab = Resources.Load("Prefabs/CameraPreviewPanel") as GameObject;
         }
 
-        private void InitializeCamera()
+        public static void InitializeCamera( Camera cam )
         {
-            capCam.depth = 99.0f;
-            capCam.fieldOfView = 60.0f;
-            capCam.farClipPlane = 500.0f;
-            capCam.nearClipPlane = 0.8f;
+            cam.enabled = false;
+            cam.targetDisplay = 8;
+            cam.stereoTargetEye = StereoTargetEyeMask.None;
+            cam.allowHDR = false;
+            cam.allowMSAA = false;
+            cam.depth = 99.0f;
+            cam.fieldOfView = 60.0f;
+            cam.farClipPlane = 400.0f;
+            cam.nearClipPlane = 0.8f;
+            cam.enabled = true;
 
             // Remove ShareVRIgnoreCaptureOnly and add ShareVRIgnoreViewOnly in culling mask
-            capCam.cullingMask &= ~( 1 << LayerMask.NameToLayer("ShareVRIgnoreCaptureOnly") );
-            capCam.cullingMask |= ( 1 << LayerMask.NameToLayer("ShareVRIgnoreViewOnly") );
+            cam.cullingMask &= ~( 1 << LayerMask.NameToLayer("ShareVRIgnoreCaptureOnly") );
+            cam.cullingMask |= ( 1 << LayerMask.NameToLayer("ShareVRIgnoreViewOnly") );
 
             // Remove ShareVRIgnoreViewOnly in culling mask
             Camera.main.cullingMask &= ~( 1 << LayerMask.NameToLayer("ShareVRIgnoreViewOnly") );
@@ -177,7 +154,7 @@ namespace ShareVR.Core
             return capCam;
         }
 
-        public void ShowCameraPreviewPanel( bool state )
+        public static void ShowCameraPreviewPanel( bool state, float scale = 1.0f )
         {
             if (state)
             {
@@ -188,7 +165,7 @@ namespace ShareVR.Core
 
                     m_camPreviewPanelInstance.transform.localPosition = new Vector3(0.75f, 0, 0.5f);
                     m_camPreviewPanelInstance.transform.localEulerAngles = new Vector3(90, 0, 0);
-                    m_camPreviewPanelInstance.transform.localScale = new Vector3(0.07f, 1.0f, 0.05f) * recManager.cameraModelScale;
+                    m_camPreviewPanelInstance.transform.localScale = new Vector3(0.07f, 1.0f, 0.05f) * scale;
 
                     // Enable Preview
                     m_camPreviewPanelInstance.GetComponent<LiveFeed>().InitializeReference();
@@ -237,35 +214,12 @@ namespace ShareVR.Core
         }
 
         // Purpose: Start capture session
-        public void StartCapture()
+        public void EnableCaptureLED( bool state )
         {
-            if (isCapturing)
-                return;
-            isCapturing = true;
-
-            if (recManager.showDebugMessage)
-                Debug.Log("ShareVR: Start Recording!");
-
-            if (recManager.showCameraModel)
+            if (state)
                 StartCoroutine(BlinkCameraLight());
-
-            vrcap.StartCapture();
-        }
-
-        // Purpose: End capture session
-        public void StopCapture()
-        {
-            if (!isCapturing)
-                return;
-            isCapturing = false;
-
-            if (recManager.showDebugMessage)
-                Debug.Log("Stop Recording!");
-
-            if (recManager.showCameraModel)
+            else
                 StopCoroutine(BlinkCameraLight());
-
-            vrcap.StopCapture(recManager.saveFileName);
         }
 
         // Purpose: Smoothly move and rotate the camera so that it will always follow and look at player
@@ -306,6 +260,66 @@ namespace ShareVR.Core
                 else
                     yield break;
             }
+        }
+    }
+
+    [RequireComponent(typeof(Camera))]
+    [RequireComponent(typeof(VRCapture))]
+    [RequireComponent(typeof(VRCaptureVideo))]
+    internal class HandHeldCameraController : MonoBehaviour
+    {
+        private Camera capCam;
+        private Ctrler m_targetCtrler = Ctrler.leftHand;
+        private bool isSelfieMode = false;
+
+        // Local Variables
+        private Transform m_cameraTransform;
+        private Vector3 handPosition;
+        private Quaternion handRotation;
+        private Quaternion handTiltRotation = Quaternion.Euler(0.0f, 30.0f, 0.0f);
+        private Quaternion selfieModeRotation = Quaternion.Euler(180.0f, 30.0f, 0.0f);
+
+        private void Start()
+        {
+            capCam = GetComponent<Camera>();
+            m_cameraTransform = transform;
+        }
+
+        private void LateUpdate()
+        {
+            if (m_targetCtrler == Ctrler.leftHand)
+                handPosition = InputTracking.GetLocalPosition(VRNode.LeftHand);
+            else
+                handPosition = InputTracking.GetLocalPosition(VRNode.RightHand);
+
+            // Get hand rotation
+            if (isSelfieMode)
+            {
+                if (m_targetCtrler == Ctrler.leftHand)
+                    handRotation = InputTracking.GetLocalRotation(VRNode.LeftHand) * selfieModeRotation;
+                else
+                    handRotation = InputTracking.GetLocalRotation(VRNode.RightHand) * selfieModeRotation;
+            }
+            else
+            {
+                if (m_targetCtrler == Ctrler.leftHand)
+                    handRotation = InputTracking.GetLocalRotation(VRNode.LeftHand) * handTiltRotation;
+                else
+                    handRotation = InputTracking.GetLocalRotation(VRNode.RightHand) * handTiltRotation;
+            }
+
+            // Update transform
+            m_cameraTransform.SetPositionAndRotation(handPosition, handRotation);
+        }
+
+        public void SetTargetHand( Ctrler ctl )
+        {
+            m_targetCtrler = ctl;
+        }
+
+        public void EnableSelfieMode( bool b )
+        {
+            isSelfieMode = b;
         }
     }
 }

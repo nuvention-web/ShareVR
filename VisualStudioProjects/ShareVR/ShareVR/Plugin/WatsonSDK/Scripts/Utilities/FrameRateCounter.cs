@@ -33,7 +33,7 @@ namespace IBM.Watson.DeveloperCloud.Utilities
         private int m_CurrentFps;
 
         [SerializeField]
-        private Text m_Text;
+        private Text m_Text = null;
 
         private void Start()
         {

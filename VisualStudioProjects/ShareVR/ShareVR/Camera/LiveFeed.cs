@@ -12,7 +12,7 @@ using ShareVR.Capture;
 
 namespace ShareVR.Core
 {
-    public class LiveFeed : MonoBehaviour
+    internal class LiveFeed : MonoBehaviour
     {
         [HideInInspector]
         public RenderTexture livePlayRT;
@@ -22,53 +22,49 @@ namespace ShareVR.Core
         [NonSerializedAttribute]
         public bool enableLiveFeed = false;
 
-        private CameraController camCtrler;
         private RecordManager recManager;
         private Camera capCam;
         private Material liveFeedMaterial;
 
         private int rtHeight;
         private int rtWidth;
-        bool camFound = false;
 
         public void InitializeReference()
         {
-            camCtrler = FindObjectOfType(typeof(CameraController)) as CameraController;
             recManager = FindObjectOfType(typeof(RecordManager)) as RecordManager;
-
             liveFeedMaterial = Resources.Load("Materials/LiveFeedMaterial") as Material;
 
             switch (recManager.frameSize)
             {
-                case VRCaptureVideo.FrameSizeType._640x480:
+                case FrameSizeType._640x480:
                     rtHeight = 480;
                     rtWidth = 640;
                     break;
-                case VRCaptureVideo.FrameSizeType._720x480:
+                case FrameSizeType._720x480:
                     rtHeight = 480;
                     rtWidth = 720;
                     break;
-                case VRCaptureVideo.FrameSizeType._960x540:
+                case FrameSizeType._960x540:
                     rtHeight = 540;
                     rtWidth = 960;
                     break;
-                case VRCaptureVideo.FrameSizeType._1280x720:
+                case FrameSizeType._1280x720:
                     rtHeight = 720;
                     rtWidth = 1280;
                     break;
-                case VRCaptureVideo.FrameSizeType._1920x1080:
+                case FrameSizeType._1920x1080:
                     rtHeight = 1080;
                     rtWidth = 1920;
                     break;
-                case VRCaptureVideo.FrameSizeType._2048x1080:
+                case FrameSizeType._2048x1080:
                     rtHeight = 1080;
                     rtWidth = 2048;
                     break;
-                case VRCaptureVideo.FrameSizeType._3840x2160:
+                case FrameSizeType._3840x2160:
                     rtHeight = 2160;
                     rtWidth = 3840;
                     break;
-                case VRCaptureVideo.FrameSizeType._4096x2160:
+                case FrameSizeType._4096x2160:
                     rtHeight = 2160;
                     rtWidth = 4096;
                     break;
@@ -90,14 +86,9 @@ namespace ShareVR.Core
 
             if (enableLiveFeed)
             {
-                if (camCtrler == null)
-                    camCtrler = FindObjectOfType(typeof(CameraController)) as CameraController;
-                else if (!camFound)
-                {
-                    capCam = camCtrler.GetCaptureCamera();
-                    capCam.targetTexture = livePlayRT;
-                    camFound = true;
-                }
+                capCam = recManager.GetCaptureCamera();
+                capCam.targetTexture = livePlayRT;
+
             }
         }
 
@@ -118,14 +109,8 @@ namespace ShareVR.Core
             {
                 yield return new WaitForSeconds(1.0f / fps);
 
-                if (camCtrler == null)
-                    camCtrler = FindObjectOfType(typeof(CameraController)) as CameraController;
-                else if (!camFound)
-                {
-                    capCam = camCtrler.GetCaptureCamera();
-                    capCam.targetTexture = livePlayRT;
-                    camFound = true;
-                }
+                capCam = recManager.GetCaptureCamera();
+                capCam.targetTexture = livePlayRT;
             }
         }
     }

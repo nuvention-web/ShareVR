@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace ShareVR.Capture
 {
-    public class VRCaptureAudio : MonoBehaviour
+    internal class VRCaptureAudio : MonoBehaviour
     {
         /// <summary>
         /// Whether this audio listiner is enabled for capture.

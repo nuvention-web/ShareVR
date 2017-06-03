@@ -10,7 +10,7 @@ using UnityEngine.VR;
 
 namespace ShareVR.Core
 {
-    public class AvatarController : MonoBehaviour
+    internal class AvatarController : MonoBehaviour
     {
         struct AvatarHandTr
         {
@@ -175,8 +175,8 @@ namespace ShareVR.Core
 
             // Update Head pitch angle only if gaze IK is not enabled
             if (!EnableGazeIK)
-                avatarHeadTr.eulerAngles = new Vector3(playerRot.x, avatarHeadTr.eulerAngles.y, playerRot.z);
-            //avatarHeadTr.eulerAngles = new Vector3 (avatarHeadTr.eulerAngles.x, avatarHeadTr.eulerAngles.y, -playerRot.x - 90.0f);
+                avatarHeadTr.eulerAngles = new Vector3(playerRot.z, avatarHeadTr.eulerAngles.y, -playerRot.x - 90.0f);
+            //avatarHeadTr.eulerAngles = new Vector3(playerRot.x, avatarHeadTr.eulerAngles.y, playerRot.z);
         }
 
         // Purpose: Estimate player velocity

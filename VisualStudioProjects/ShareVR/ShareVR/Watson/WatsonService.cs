@@ -9,7 +9,7 @@ namespace ShareVR.Utils
 {
     using ShareVR.Core;
 
-    public class WatsonService : MonoBehaviour
+    internal class WatsonService : MonoBehaviour
     {
         [HideInInspector]
         public bool isActive = false;

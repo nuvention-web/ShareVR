@@ -19,6 +19,10 @@ namespace ShareVR.Core
     {
         [Tooltip ("Select the way you want the camera to move")]
         public CameraFollowMethod cameraFollowMethod = CameraFollowMethod.FixedSmooth;
+        [Tooltip ("Reference your own spectator camera")]
+        public Camera trackingCamera;
+        [Tooltip ("Target hand for the hand held camera")]
+        public Ctrler targetCtrler = Ctrler.leftHand;
         [Tooltip ("Camera orbit speed")]
         public float cameraOrbitSpeed = 1.0f;
         [Tooltip ("Camera height")]
@@ -54,13 +58,13 @@ namespace ShareVR.Core
         public bool showDebugMessage = true;
 
         [Tooltip ("Specify recording video resolution")]
-        public VRCaptureVideo.FrameSizeType frameSize = VRCaptureVideo.FrameSizeType._1280x720;
+        public FrameSizeType frameSize = FrameSizeType._1280x720;
         [Tooltip ("Specify recording video framerate")]
-        public VRCaptureVideo.TargetFramerateType frameRate = VRCaptureVideo.TargetFramerateType._30;
+        public TargetFramerateType frameRate = TargetFramerateType._30;
         [Tooltip ("Specify video file save folder (leave it blank if want to use default: Documents/ShareVR/)")]
-        public string saveFolder;
+        public string saveFolder = null;
         [Tooltip ("Specify video file name (leave it blank if want to use default)")]
-        public string saveFileName;
+        public string saveFileName = null;
 
         [Tooltip ("Do you want to automatically upload video online?")]
         public bool uploadFileOnline = false;
@@ -68,18 +72,24 @@ namespace ShareVR.Core
         [HideInInspector]
         public bool isVRDevicePresent = false;
         [HideInInspector]
-        public S3Uploader s3Uploader;
+        internal S3Uploader s3Uploader;
 
         // Internal Scripts Reference
         private GameObject cameraRigPrefab;
         private GameObject playerAvatarPrefab;
+        private GameObject cameraGameObj;
         private CameraController camCtrler;
         private AvatarController avatarCtrler;
         private LiveFeed liveFeed;
+        private VRCapture vrCap;
+        private VRCaptureVideo vrCapVideo;
+        private bool isCapturing = false;
 
         void Awake()
         {
             DontDestroyOnLoad(gameObject);
+            _Instance = this;
+            MetaDataContainer.unityVersion = Application.unityVersion;
         }
 
         void Start()
@@ -87,7 +97,7 @@ namespace ShareVR.Core
             InitializeReference();
 
             if (showDebugMessage)
-                Debug.Log("Checking active SteamVR instance...");
+                Debug.Log("Checking active VR instance...");
 
             // Search for avtive VR Device every one second
             isVRDevicePresent = VRDevice.isPresent;
@@ -100,25 +110,83 @@ namespace ShareVR.Core
             }
         }
 
+        internal static RecordManager _Instance;
+
         void InitializeReference()
         {
-            // Instantiate a new capture camera
-            cameraRigPrefab = Resources.Load("Prefabs/ShareVRCameraRig") as GameObject;
-            camCtrler = Instantiate(cameraRigPrefab).GetComponent<CameraController>();
+            if (cameraFollowMethod == CameraFollowMethod.CustomCamera)
+            {
+                cameraGameObj = trackingCamera.gameObject;
+                CameraController.InitializeCamera(cameraGameObj.GetComponent<Camera>());
+                showCameraPreview = false;
+
+            }
+            else if (cameraFollowMethod == CameraFollowMethod.HandHeldCamera)
+            {
+                // Instantiate a new capture camera
+                cameraRigPrefab = Resources.Load("Prefabs/ShareVRCameraRig") as GameObject;
+                cameraGameObj = Instantiate(cameraRigPrefab);
+                cameraGameObj.AddComponent<HandHeldCameraController>();
+                trackingCamera = cameraGameObj.GetComponent<Camera>();
+
+                // Initialize Camera Model
+                if (showCameraModel)
+                    camCtrler.ShowCameraModel(true, cameraModelScale);
+            }
+            else
+            {
+                // Instantiate a new capture camera
+                cameraRigPrefab = Resources.Load("Prefabs/ShareVRCameraRig") as GameObject;
+                cameraGameObj = Instantiate(cameraRigPrefab);
+                camCtrler = cameraGameObj.AddComponent<CameraController>();
+                trackingCamera = cameraGameObj.GetComponent<Camera>();
+
+                // Initialize Camera Model
+                if (showCameraModel)
+                    camCtrler.ShowCameraModel(true, cameraModelScale);
+            }
+
+            if (cameraGameObj == null)
+                Debug.LogError("ShareVR: Please make sure you DO specify a spectator camera when using custom camera mode!");
+
             // Find or attach capture scripts
-            VRCapture vrCap = camCtrler.gameObject.GetComponent <VRCapture> ();
-            VRCaptureVideo vrCapVideo = camCtrler.gameObject.GetComponent <VRCaptureVideo> ();
+            vrCap = cameraGameObj.GetComponent<VRCapture>();
+            vrCapVideo = cameraGameObj.GetComponent<VRCaptureVideo>();
             if (vrCap == null)
-                vrCap = camCtrler.gameObject.AddComponent<VRCapture>();
+                vrCap = cameraGameObj.AddComponent<VRCapture>();
             if (vrCapVideo == null)
-                vrCapVideo = camCtrler.gameObject.AddComponent<VRCaptureVideo>();
+                vrCapVideo = cameraGameObj.AddComponent<VRCaptureVideo>();
+
+            // Initialize Capture scripts
+            // Reference VRCaptureVideo and set video spec
+            vrCapVideo.frameSize = frameSize;
+            vrCapVideo.targetFramerate = frameRate;
+            vrCapVideo.encodeQuality = VRCaptureVideo.EncodeQualityType.High;
+            vrCapVideo.antiAliasing = VRCaptureVideo.AntiAliasingType._1;
+            vrCapVideo.formatType = VRCaptureVideo.FormatType.NORMAL;
+            vrCapVideo.isDedicated = true;
+            vrCapVideo.isEnabled = true;
+            vrCap.CaptureVideos = new[] { vrCapVideo };
+            // Find main AudioListener in the scene and attach VRCaptureAudio component to it
+            var audioListener = FindObjectOfType (typeof(AudioListener)) as AudioListener;
+            if (audioListener != null)
+            {
+                vrCap.CaptureAudio = audioListener.gameObject.AddComponent<VRCaptureAudio>();
+                if (showDebugMessage)
+                    Debug.Log("ShareVR: Found main AudioSource - " + vrCap.CaptureAudio);
+            }
+            else
+            {
+                // Maybe add AudioSource to the Main Player?
+            }
+
             // Dont destory this on load
-            DontDestroyOnLoad(camCtrler.gameObject);
+            DontDestroyOnLoad(cameraGameObj);
             if (showCameraPreview)
-                camCtrler.ShowCameraPreviewPanel(true);
+                CameraController.ShowCameraPreviewPanel(true);
 
             // Avatar Control
-            playerAvatarPrefab = Resources.Load("Prefabs/August_Lowpoly") as GameObject;
+            playerAvatarPrefab = Resources.Load("Prefabs/GenericMale1") as GameObject;
             if (showPlayerAvatar)
             {
                 avatarCtrler = Instantiate(playerAvatarPrefab).GetComponent<AvatarController>();
@@ -143,10 +211,6 @@ namespace ShareVR.Core
                 // Reference live play render texture
                 vrCapVideo.copyTargetRT = liveFeed.livePlayRT;
             }
-
-            // Initialize Camera Model
-            if (showCameraModel)
-                camCtrler.ShowCameraModel(true, cameraModelScale);
 
             // Attach WatsonService Object if using voice command feature
             if (useVoiceCommand)
@@ -205,12 +269,40 @@ namespace ShareVR.Core
 
         public void StartRecording()
         {
-            camCtrler.StartCapture();
+            if (isCapturing)
+                return;
+            isCapturing = true;
+
+            if (showDebugMessage)
+                Debug.Log("ShareVR: Start Recording!");
+
+            if (showCameraModel)
+                camCtrler.EnableCaptureLED(true);
+
+            vrCap.StartCapture();
         }
 
         public void StopRecording()
         {
-            camCtrler.StopCapture();
+            if (!isCapturing)
+                return;
+            isCapturing = false;
+
+            if (showDebugMessage)
+                Debug.Log("ShareVR: Stop Recording!");
+
+            if (showCameraModel)
+                camCtrler.EnableCaptureLED(false);
+
+            vrCap.StopCapture();
+
+            // Update ShareVR Log
+            MetaDataContainer.UpdateMetaData(saveFileName);
+        }
+
+        public Camera GetCaptureCamera()
+        {
+            return trackingCamera;
         }
 
         public Transform GetPlayerTransform()
