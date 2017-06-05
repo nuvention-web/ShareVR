@@ -10,14 +10,13 @@ namespace ShareVR.Utils
     public static class GlobalParameters
     {
         public const string SDKversion = "0.4c";
-        internal const string ClientID = "DigitasLBi";
-        internal const string GameName = "ShareVR Demo";
+        internal const string ClientID = "VR Monster Awaken";
+        internal const string GameName = "VR Monster Awaken";
 
         internal const string GameString = GameName;
         internal const string GameTag = ClientID;
 
         public static int VideoID = 0;
-
 
         internal const string WatsonConfigJSON = "{"+
     "\"m_ClassifierDirectory\": \"Watson/Scripts/Editor/Classifiers/\","+

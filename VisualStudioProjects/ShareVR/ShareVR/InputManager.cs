@@ -192,8 +192,12 @@ namespace ShareVR.Core
                 yield return new WaitForSeconds(1.0f);
 
                 string[] joyStickName = Input.GetJoystickNames ();
+
                 isLeftHandFound = Array.BinarySearch(joyStickName, "OpenVR Controller - Left") >= 0;
                 isRightHandFound = Array.BinarySearch(joyStickName, "OpenVR Controller - Right") >= 0;
+
+                Debug.Log("Checking L Controllers..." + isLeftHandFound);
+                Debug.Log("Checking R Controllers..." + isRightHandFound);
 
                 isBothCtrlerFound = isLeftHandFound && isRightHandFound;
 

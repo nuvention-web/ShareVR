@@ -18,8 +18,8 @@ namespace ShareVR.Core
     {
         FixedSmooth,
         OrbitSmooth,
-        HandHeldCamera,
-        HandSelfieCamera,
+        //HandHeldCamera,
+        //HandSelfieCamera,
         CustomCamera
     }
 
@@ -154,14 +154,17 @@ namespace ShareVR.Core
             return capCam;
         }
 
-        public static void ShowCameraPreviewPanel( bool state, float scale = 1.0f )
+        public static void ShowCameraPreviewPanel( bool state, Transform tr = null, float scale = 1.0f )
         {
             if (state)
             {
                 if (m_camPreviewPanelInstance == null)
                 {
-                    m_camPreviewPanelInstance = Instantiate(camPreviewPanelPrefab);
-                    m_camPreviewPanelInstance.transform.SetParent(m_Transform);
+                    m_camPreviewPanelInstance = Instantiate(Resources.Load("Prefabs/CameraPreviewPanel") as GameObject);
+                    if (tr != null)
+                        m_camPreviewPanelInstance.transform.SetParent(tr);
+                    else
+                        m_camPreviewPanelInstance.transform.SetParent(m_Transform);
 
                     m_camPreviewPanelInstance.transform.localPosition = new Vector3(0.75f, 0, 0.5f);
                     m_camPreviewPanelInstance.transform.localEulerAngles = new Vector3(90, 0, 0);
@@ -270,14 +273,20 @@ namespace ShareVR.Core
     {
         private Camera capCam;
         private Ctrler m_targetCtrler = Ctrler.leftHand;
-        private bool isSelfieMode = false;
+        [HideInInspector]
+        public bool isSelfieMode = false;
 
         // Local Variables
         private Transform m_cameraTransform;
         private Vector3 handPosition;
         private Quaternion handRotation;
-        private Quaternion handTiltRotation = Quaternion.Euler(0.0f, 30.0f, 0.0f);
-        private Quaternion selfieModeRotation = Quaternion.Euler(180.0f, 30.0f, 0.0f);
+        [SerializeField]
+        private Vector3 handTiltRotation = new Vector3(30.0f, 0.0f, 0.0f);
+        [SerializeField]
+        private Vector3 selfieModeRotation = new Vector3(-30.0f, 180.0f, 0.0f);
+        [SerializeField]
+        private Vector3 selfieModeOffset = new Vector3(0.0f, 0.0f, 0.0f);
+
 
         private void Start()
         {
@@ -296,20 +305,20 @@ namespace ShareVR.Core
             if (isSelfieMode)
             {
                 if (m_targetCtrler == Ctrler.leftHand)
-                    handRotation = InputTracking.GetLocalRotation(VRNode.LeftHand) * selfieModeRotation;
+                    handRotation = InputTracking.GetLocalRotation(VRNode.LeftHand) * Quaternion.Euler(selfieModeRotation);
                 else
-                    handRotation = InputTracking.GetLocalRotation(VRNode.RightHand) * selfieModeRotation;
+                    handRotation = InputTracking.GetLocalRotation(VRNode.RightHand) * Quaternion.Euler(selfieModeRotation);
             }
             else
             {
                 if (m_targetCtrler == Ctrler.leftHand)
-                    handRotation = InputTracking.GetLocalRotation(VRNode.LeftHand) * handTiltRotation;
+                    handRotation = InputTracking.GetLocalRotation(VRNode.LeftHand) * Quaternion.Euler(handTiltRotation);
                 else
-                    handRotation = InputTracking.GetLocalRotation(VRNode.RightHand) * handTiltRotation;
+                    handRotation = InputTracking.GetLocalRotation(VRNode.RightHand) * Quaternion.Euler(handTiltRotation);
             }
 
             // Update transform
-            m_cameraTransform.SetPositionAndRotation(handPosition, handRotation);
+            transform.SetPositionAndRotation(handPosition, handRotation);
         }
 
         public void SetTargetHand( Ctrler ctl )

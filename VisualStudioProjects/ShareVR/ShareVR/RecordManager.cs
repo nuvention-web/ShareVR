@@ -118,21 +118,30 @@ namespace ShareVR.Core
             {
                 cameraGameObj = trackingCamera.gameObject;
                 CameraController.InitializeCamera(cameraGameObj.GetComponent<Camera>());
-                showCameraPreview = false;
+
+                if (showCameraPreview)
+                    CameraController.ShowCameraPreviewPanel(true, cameraGameObj.transform);
 
             }
-            else if (cameraFollowMethod == CameraFollowMethod.HandHeldCamera)
+            /*
+            else if (cameraFollowMethod == CameraFollowMethod.HandHeldCamera || cameraFollowMethod == CameraFollowMethod.HandSelfieCamera)
             {
                 // Instantiate a new capture camera
                 cameraRigPrefab = Resources.Load("Prefabs/ShareVRCameraRig") as GameObject;
                 cameraGameObj = Instantiate(cameraRigPrefab);
                 cameraGameObj.AddComponent<HandHeldCameraController>();
+                if (cameraFollowMethod == CameraFollowMethod.HandSelfieCamera)
+                    cameraGameObj.GetComponent<HandHeldCameraController>().isSelfieMode = true;
                 trackingCamera = cameraGameObj.GetComponent<Camera>();
+                CameraController.InitializeCamera(trackingCamera);
 
                 // Initialize Camera Model
                 if (showCameraModel)
                     camCtrler.ShowCameraModel(true, cameraModelScale);
-            }
+
+                if (showCameraPreview)
+                    CameraController.ShowCameraPreviewPanel(true, cameraGameObj.transform);
+            }*/
             else
             {
                 // Instantiate a new capture camera
@@ -144,10 +153,14 @@ namespace ShareVR.Core
                 // Initialize Camera Model
                 if (showCameraModel)
                     camCtrler.ShowCameraModel(true, cameraModelScale);
+
+                if (showCameraPreview)
+                    CameraController.ShowCameraPreviewPanel(true);
             }
+            Debug.Log("Loaded camera model");
 
             if (cameraGameObj == null)
-                Debug.LogError("ShareVR: Please make sure you DO specify a spectator camera when using custom camera mode!");
+                Debug.Log("ShareVR: Please make sure you DO specify a spectator camera when using custom camera mode!");
 
             // Find or attach capture scripts
             vrCap = cameraGameObj.GetComponent<VRCapture>();
@@ -182,8 +195,6 @@ namespace ShareVR.Core
 
             // Dont destory this on load
             DontDestroyOnLoad(cameraGameObj);
-            if (showCameraPreview)
-                CameraController.ShowCameraPreviewPanel(true);
 
             // Avatar Control
             playerAvatarPrefab = Resources.Load("Prefabs/GenericMale1") as GameObject;

@@ -9,6 +9,7 @@ namespace ShareVR.Capture
         /// <summary>
         /// Whether this audio listiner is enabled for capture.
         /// </summary>
+        [HideInInspector]
         public bool isEnabled = true;
         /// <summary>
         /// Whether or not capturing from this audio listener is currently in progress.
