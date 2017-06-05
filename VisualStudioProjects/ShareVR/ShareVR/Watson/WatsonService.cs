@@ -20,7 +20,10 @@ namespace ShareVR.Utils
         private const int m_RecordingBufferSize = 2;
         private const int m_RecordingHZ = 22050;
 
-        private SpeechToText m_SpeechToText = new SpeechToText ();
+        internal int retryCount = 0;
+        internal const int MAX_RETRY_LIMIT = 4;
+
+        private SpeechToText m_SpeechToText;
 
         // ShareVR Object Reference
         private RecordManager recManager;
@@ -48,10 +51,11 @@ namespace ShareVR.Utils
 
         void InitializeWatsonSTT()
         {
+            m_SpeechToText = new SpeechToText();
             m_SpeechToText.DetectSilence = true;
             m_SpeechToText.EnableWordConfidence = false;
             m_SpeechToText.EnableTimestamps = false;
-            m_SpeechToText.SilenceThreshold = 0.03f;
+            m_SpeechToText.SilenceThreshold = 0.05f;
             m_SpeechToText.MaxAlternatives = 1;
             m_SpeechToText.EnableContinousRecognition = true;
             m_SpeechToText.EnableInterimResults = false;
@@ -62,6 +66,30 @@ namespace ShareVR.Utils
         {
             isActive = false;
             Debug.LogWarning("ShareVR (Watson): " + "Error! " + error);
+
+
+            if (retryCount < MAX_RETRY_LIMIT)
+            {
+                retryCount++;
+                RestartWatsonService();
+            }
+            else
+                return;
+        }
+
+        private void RestartWatsonService()
+        {
+            InitializeWatsonSTT();
+
+            StopListening();
+            StopRecording();
+
+            if (recManager.useVoiceCommand)
+            {
+                StartRecording();
+                StartListening();
+                Debug.Log("ShareVR (Watson): Service restarted...");
+            }
         }
 
         private IEnumerator RecordingHandler()
@@ -85,7 +113,7 @@ namespace ShareVR.Utils
                 int writePos = Microphone.GetPosition (m_MicrophoneID);
                 if (writePos > m_Recording.samples || !Microphone.IsRecording(m_MicrophoneID))
                 {
-                    Debug.LogError("ShareVR - Watson STT Service: " + "Microphone disconnected.");
+                    Debug.LogError("ShareVR (Watson): " + "Microphone disconnected.");
 
                     StopRecording();
                     yield break;
@@ -103,7 +131,7 @@ namespace ShareVR.Utils
                     record.Clip = AudioClip.Create("Recording", midPoint, m_Recording.channels, m_RecordingHZ, false);
                     record.Clip.SetData(samples, 0);
 
-                    //Debug.Log ("Audio Maxlevel: " + record.MaxLevel);
+                    Debug.Log ("ShareVR (Watson): Audio Maxlevel: " + record.MaxLevel);
 
                     m_SpeechToText.OnListen(record);
 

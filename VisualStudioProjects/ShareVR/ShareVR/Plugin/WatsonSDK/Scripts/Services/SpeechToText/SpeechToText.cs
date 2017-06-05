@@ -47,12 +47,12 @@ namespace IBM.Watson.DeveloperCloud.Services.SpeechToText.v1
         /// <summary>
         /// How often to send a message to the web socket to keep it alive.
         /// </summary>
-        private const float WS_KEEP_ALIVE_TIME = 40.0f;
+        private const float WS_KEEP_ALIVE_TIME = 50.0f;
         /// <summary>
         /// If no listen state is received after start is sent within this time, we will timeout
         /// and stop listening.
         /// </summary>
-        private const float LISTEN_TIMEOUT = 30.0f;
+        private const float LISTEN_TIMEOUT = 40.0f;
         /// <summary>
         /// How many recording AudioClips will we queue before we enter a error state.
         /// </summary>
