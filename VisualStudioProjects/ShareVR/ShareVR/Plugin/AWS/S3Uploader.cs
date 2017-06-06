@@ -19,7 +19,7 @@ namespace ShareVR.Utils
 {
     using MetaData = Dictionary<string, string>;
 
-    public class S3Uploader : MonoBehaviour
+    internal class S3Uploader : MonoBehaviour
     {
         internal const string IdentityPoolId = "us-east-1:5b2bd164-6a84-421b-b29f-d400528169aa";
         internal const string S3BucketName = "sharevr-beta-test-video";
@@ -113,7 +113,7 @@ namespace ShareVR.Utils
                 Key = objName,
                 InputStream = stream,
                 CannedACL = S3CannedACL.Private,
-                Metadata=LogManager.Metadata
+                Metadata=LogManager.GetMetadata
             };
 
             Client.PostObjectAsync(request, ( responseObj ) =>

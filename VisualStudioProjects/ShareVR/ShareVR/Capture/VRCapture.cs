@@ -11,7 +11,7 @@ namespace ShareVR.Capture
     /// VRCapture is a plugin helping VR player to record and share
     /// their gameplay easily and nicely.
     /// </summary>
-    public class VRCapture : MonoBehaviour
+    internal class VRCapture : MonoBehaviour
     {
         /// <summary>
         /// VRCapture instance reference.
@@ -214,7 +214,7 @@ namespace ShareVR.Capture
             return isPorcessing;
         }
 
-        public void SetS3Instance( S3Uploader s3 )
+        internal void SetS3Instance( S3Uploader s3 )
         {
             VRCaptureMerger.s3Uploader = s3;
         }
@@ -321,14 +321,11 @@ namespace ShareVR.Capture
         /// when the video file is complete, register a CompleteDelegate.
         /// </summary>
         /// <returns>The capture session.</returns>
-        public StatusCode StopCapture( string playerName = null )
+        public StatusCode StopCapture()
         {
             // If the client calls EndRecordingSession for a failed session, do nothing.
             if (sessionStatus != StatusCode.Success)
                 return sessionStatus;
-
-            // Update ShareVR Log
-            LogManager.UpdateMetaData(playerName);
 
             foreach (VRCaptureVideo captureVideo in vrCaptureVideos)
             {
@@ -525,7 +522,7 @@ namespace ShareVR.Capture
     /// temp audio captured. If audio captured, it will merge the video and audio
     /// within same file.
     /// </summary>
-    class VRCaptureMerger
+    internal class VRCaptureMerger
     {
         /// <summary>
         /// The capture video instance.

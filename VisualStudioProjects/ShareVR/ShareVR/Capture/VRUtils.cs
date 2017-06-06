@@ -10,34 +10,34 @@ namespace ShareVR.Capture
     ////////////////////////////////////////////////////////////////////////////
     public class VRCommonUtils
     {
-        public const float EPSILON = 0.000001f;
-        public static string DATA_PATH = Application.dataPath;
-        public static string PERSISTENT_DATA_PATH = Application.persistentDataPath;
-        public static string STREAMING_ASSETS_PATH = Application.streamingAssetsPath;
-        public static string MY_DOCUMENTS_PATH = Environment.GetFolderPath (
+        internal const float EPSILON = 0.000001f;
+        internal static string DATA_PATH = Application.dataPath;
+        internal static string PERSISTENT_DATA_PATH = Application.persistentDataPath;
+        internal static string STREAMING_ASSETS_PATH = Application.streamingAssetsPath;
+        internal static string MY_DOCUMENTS_PATH = Environment.GetFolderPath (
                                                      Environment.SpecialFolder.MyDocuments);
 
-        static string GetTimeString()
+        internal static string GetTimeString()
         {
             return DateTime.Now.ToString("yyyy-MM-dd-HH-mm");
         }
 
-        public static string GetPngFileName()
+        internal static string GetPngFileName()
         {
             return GetPngFileName(null);
         }
 
-        public static string GetPngFileName( string name )
+        internal static string GetPngFileName( string name )
         {
             return GetTimeString() + ( name == null ? "" : "-" ) + name + ".png";
         }
 
-        public static string GetMp4FileName()
+        internal static string GetMp4FileName()
         {
             return GetMp4FileName(null);
         }
 
-        public static string GetMp4FileName( string name )
+        internal static string GetMp4FileName( string name )
         {
             string fileName;
             int videoID = 0;
@@ -94,12 +94,12 @@ namespace ShareVR.Capture
             return fileName;
         }
 
-        public static string GetWavFileName()
+        internal static string GetWavFileName()
         {
             return GetWavFileName(null);
         }
 
-        public static string GetWavFileName( string name )
+        internal static string GetWavFileName( string name )
         {
             string fileName;
             int audioFileID = 0;
@@ -115,12 +115,12 @@ namespace ShareVR.Capture
             return fileName;
         }
 
-        public static string GetTxtFileName()
+        internal static string GetTxtFileName()
         {
             return GetTxtFileName(null);
         }
 
-        public static string GetTxtFileName( string name )
+        internal static string GetTxtFileName( string name )
         {
             return GetTimeString() + ( name == null ? "" : "-" ) + name + ".txt";
         }
@@ -249,7 +249,7 @@ namespace ShareVR.Capture
     ////////////////////////////////////////////////////////////////////////////
     ///                     VR device releated Utils.                        ///
     ////////////////////////////////////////////////////////////////////////////
-    public class VRDeviceUtils
+    internal class VRDeviceUtils
     {
 
         public static bool UseSteamVR
@@ -274,7 +274,7 @@ namespace ShareVR.Capture
     /// Serializable Vector2 to replace Unity Vector2 struct.
     /// </summary>
     [Serializable]
-    public struct SerializableVector2
+    internal struct SerializableVector2
     {
         public float x;
         public float y;
@@ -295,7 +295,7 @@ namespace ShareVR.Capture
     /// Serializable Vector3 to replace Unity Vector3 struct.
     /// </summary>
     [Serializable]
-    public struct SerializableVector3
+    internal struct SerializableVector3
     {
         public float x;
         public float y;
@@ -318,7 +318,7 @@ namespace ShareVR.Capture
     /// Serializable Quaternion to replace Unity Quaternion struct.
     /// </summary>
     [Serializable]
-    public struct SerializableQuaternion
+    internal struct SerializableQuaternion
     {
         public float x;
         public float y;
@@ -343,7 +343,7 @@ namespace ShareVR.Capture
     /// Serializable Transform to replace Unity Transform struct.
     /// </summary>
     [Serializable]
-    public class SerializableTransform
+    internal class SerializableTransform
     {
         public string Name { get; private set; }
 
