@@ -9,6 +9,9 @@ namespace ShareVR.Utils
 {
     public static class GlobalParameters
     {
+        // Behavior control
+        internal const bool showDebugMessage = false;
+
         public const string SDKversion = "0.4c";
         internal const string ClientID = "Fight 4 Dream";
         internal const string GameName = "VR Monster Awaken";

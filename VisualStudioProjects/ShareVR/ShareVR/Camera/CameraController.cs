@@ -154,7 +154,7 @@ namespace ShareVR.Core
             return capCam;
         }
 
-        public static void ShowCameraPreviewPanel( bool state, Transform tr = null, float scale = 1.0f )
+        public static LiveFeed ShowCameraPreviewPanel( bool state, Transform tr = null, float scale = 1.0f )
         {
             if (state)
             {
@@ -181,6 +181,8 @@ namespace ShareVR.Core
                     Destroy(m_camPreviewPanelInstance);
                 m_camPreviewPanelInstance = null;
             }
+
+            return m_camPreviewPanelInstance.GetComponent<LiveFeed>();
         }
 
         // Purpose: Toggle the camera model while in game
