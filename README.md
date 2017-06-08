@@ -56,8 +56,6 @@ You will notice the recording has started by the blinking red frame surrounding 
 
 - In the center of the scene you will see a giant screen called "ShareVR Live Feed". This is a live preview of what our spectator camera sees right now.
 
-  <img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/Q1-Deliverable/Images/Q1-Deliverable-Scene2.png?raw=true" width="320">
-
 - We adopted a cute avatar and implemented basic invert kinematics (IK) system to allow gaze and hand tracking. Gaze tracking is used in PC mode to make the avatar always look at your mouse. Hand tracking is used in VR mode to ensure avatar's hands are always synced with player's Vive controllers.
 
   <img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/Q1-Deliverable/Images/Q1-Deliverable-GazeIK.gif?raw=true" width="320">
