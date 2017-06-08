@@ -43,8 +43,9 @@ If you are using HTC Vive and have SteamVR installed, ShareVR will automatically
 
 You will notice the recording has started by the blinking red frame surrounding the camera preview panel. Once you finished a capture session, a video file will be created under your Documents/ShareVR folder.
 
-<img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/Q1-Deliverable/Images/Q1-Deliverable-Scene3.png?raw=true" width="300">
-### Q1 Deliverable Feature Overview
+<img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/MVP_Slice/2017-Q2/UnityPackage-Release/v0.4c/Imgs/v0.4c_PreviewRecStatus.gif?raw=true" width="300">
+
+### Q2 Deliverable Feature Overview
 - ShareVR adopted some interactive contents from SteamVR's interaction system.
 
   <img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/Q1-Deliverable/Images/Q1-Deliverable-Scene1.png?raw=true" width="320">
