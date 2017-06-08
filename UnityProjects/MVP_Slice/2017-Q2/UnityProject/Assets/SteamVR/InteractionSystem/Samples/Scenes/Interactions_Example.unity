@@ -2767,7 +2767,7 @@ Prefab:
       objectReference: {fileID: 1931877124}
     - target: {fileID: 2014920, guid: dc06161b6d97feb419f45f03b62e14b9, type: 2}
       propertyPath: m_CullingMask.m_Bits
-      value: 3087007743
+      value: 4160749567
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc06161b6d97feb419f45f03b62e14b9, type: 2}
@@ -3076,6 +3076,48 @@ Transform:
   m_Father: {fileID: 1587536141}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &935074752
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4686526830191112, guid: c8aee42c6998af2408a611658bde9277, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 4686526830191112, guid: c8aee42c6998af2408a611658bde9277, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4686526830191112, guid: c8aee42c6998af2408a611658bde9277, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 7.897
+      objectReference: {fileID: 0}
+    - target: {fileID: 4686526830191112, guid: c8aee42c6998af2408a611658bde9277, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4686526830191112, guid: c8aee42c6998af2408a611658bde9277, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4686526830191112, guid: c8aee42c6998af2408a611658bde9277, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4686526830191112, guid: c8aee42c6998af2408a611658bde9277, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4686526830191112, guid: c8aee42c6998af2408a611658bde9277, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c8aee42c6998af2408a611658bde9277, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &946939067
 GameObject:
   m_ObjectHideFlags: 0
@@ -3962,7 +4004,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: Valve.VR.InteractionSystem.CustomEvents+UnityEventHand, Assembly-CSharp,
-      Version=1.0.2.39413, Culture=neutral, PublicKeyToken=null
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1202137145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4737,6 +4779,48 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1354633062}
+--- !u!1001 &1375560877
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4282302150068994, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282302150068994, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282302150068994, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282302150068994, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282302150068994, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282302150068994, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282302150068994, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282302150068994, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a45f5d197a891c045bdfc593534f1486, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1400050011
 Prefab:
   m_ObjectHideFlags: 0
@@ -4928,7 +5012,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: Valve.VR.InteractionSystem.CustomEvents+UnityEventHand, Assembly-CSharp,
-      Version=1.0.2.39413, Culture=neutral, PublicKeyToken=null
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1411722471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5101,7 +5185,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: Valve.VR.InteractionSystem.CustomEvents+UnityEventHand, Assembly-CSharp,
-      Version=1.0.2.39413, Culture=neutral, PublicKeyToken=null
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1434184163
 MonoBehaviour:
   m_ObjectHideFlags: 0

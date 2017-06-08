@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 20927444580500932}
   - component: {fileID: 114423254977768468}
   - component: {fileID: 114761851758024914}
-  - component: {fileID: 114449038932735566}
   m_Layer: 0
   m_Name: ShareVRCameraRig
   m_TagString: Untagged
@@ -60,20 +59,20 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.8
-  far clip plane: 1000
+  far clip plane: 500
   field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: 99
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 3221225471
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 7
   m_TargetEye: 0
   m_HDR: 0
-  m_AllowMSAA: 1
+  m_AllowMSAA: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -87,32 +86,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1493225449721360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fbf0d2e4c40a974c9ed984ef66eeadf, type: 3}
+  m_Script: {fileID: 1330016526, guid: 0c4db7634a7e1c449b049e5447ded136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  formatType: 0
-  frameSize: 3
-  cubemapSize: 1
-  projectionType: 0
-  encodeQuality: 2
-  antiAliasing: 0
-  targetFramerate: 2
-  isDedicated: 1
-  rtmpServerAddress: 
-  offlineRender: 0
-  transformMaterial: {fileID: 0}
-  isEnabled: 1
---- !u!114 &114449038932735566
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1493225449721360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3984b3e16e871b64ab3e0e68400ae1fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  vrCaptureVideos: []
+  vrCaptureAudio: {fileID: 0}
+  debug: 0
 --- !u!114 &114761851758024914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -121,9 +100,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1493225449721360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7ec73f8dbcae84478ebfd357e4147dd, type: 3}
+  m_Script: {fileID: 111874064, guid: 0c4db7634a7e1c449b049e5447ded136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vrCaptureVideos: []
-  vrCaptureAudio: {fileID: 0}
-  debug: 0
+  formatType: 0
+  frameSize: 3
+  cubemapSize: 1
+  projectionType: 0
+  encodeQuality: 1
+  antiAliasing: 0
+  targetFramerate: 2
+  isDedicated: 1
+  rtmpServerAddress: 
+  offlineRender: 0
+  transformMaterial: {fileID: 0}
+  isEnabled: 1
+  copyTargetRT: {fileID: 0}
+  showDebugMessage: 0
