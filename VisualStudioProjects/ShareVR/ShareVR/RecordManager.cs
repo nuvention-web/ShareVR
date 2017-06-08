@@ -55,7 +55,7 @@ namespace ShareVR.Core
         [Tooltip ("Specify your main player gameobject")]
         public GameObject trackingTarget;
         [Tooltip ("Display debug message")]
-        public bool showDebugMessage = true;
+        public bool showDebugMessage = GlobalParameters.showDebugMessage;
 
         [Tooltip ("Specify recording video resolution")]
         public FrameSizeType frameSize = FrameSizeType._1280x720;
@@ -78,6 +78,9 @@ namespace ShareVR.Core
         private GameObject cameraRigPrefab;
         private GameObject playerAvatarPrefab;
         private GameObject cameraGameObj;
+
+        private LiveFeed cameraPreviewPanel;
+
         private CameraController camCtrler;
         private AvatarController avatarCtrler;
         private LiveFeed liveFeed;
@@ -120,8 +123,7 @@ namespace ShareVR.Core
                 CameraController.InitializeCamera(cameraGameObj.GetComponent<Camera>());
 
                 if (showCameraPreview)
-                    CameraController.ShowCameraPreviewPanel(true, cameraGameObj.transform);
-
+                    cameraPreviewPanel = CameraController.ShowCameraPreviewPanel(true, cameraGameObj.transform);
             }
             /*
             else if (cameraFollowMethod == CameraFollowMethod.HandHeldCamera || cameraFollowMethod == CameraFollowMethod.HandSelfieCamera)
@@ -140,7 +142,7 @@ namespace ShareVR.Core
                     camCtrler.ShowCameraModel(true, cameraModelScale);
 
                 if (showCameraPreview)
-                    CameraController.ShowCameraPreviewPanel(true, cameraGameObj.transform);
+                    cameraPreviewPanel = CameraController.ShowCameraPreviewPanel(true, cameraGameObj.transform);
             }*/
             else
             {
@@ -155,7 +157,7 @@ namespace ShareVR.Core
                     camCtrler.ShowCameraModel(true, cameraModelScale);
 
                 if (showCameraPreview)
-                    CameraController.ShowCameraPreviewPanel(true);
+                    cameraPreviewPanel = CameraController.ShowCameraPreviewPanel(true);
             }
             Debug.Log("Loaded camera model");
 
@@ -270,7 +272,7 @@ namespace ShareVR.Core
 
             if (InputManager.userAct.toggleRec)
             {
-                if (camCtrler.isCapturing)
+                if (isCapturing)
                     StopRecording();
                 else
                     StartRecording();
@@ -290,6 +292,9 @@ namespace ShareVR.Core
             if (showCameraModel)
                 camCtrler.EnableCaptureLED(true);
 
+            if (showCameraPreview && cameraPreviewPanel != null)
+                cameraPreviewPanel.EnableRecStatus(true);
+
             vrCap.StartCapture();
         }
 
@@ -304,6 +309,9 @@ namespace ShareVR.Core
 
             if (showCameraModel)
                 camCtrler.EnableCaptureLED(false);
+
+            if (showCameraPreview && cameraPreviewPanel != null)
+                cameraPreviewPanel.EnableRecStatus(false);
 
             vrCap.StopCapture();
 

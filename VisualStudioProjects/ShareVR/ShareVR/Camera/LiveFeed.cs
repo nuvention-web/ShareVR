@@ -19,7 +19,7 @@ namespace ShareVR.Core
         [HideInInspector]
         public float fps = 30.0f;
 
-        [NonSerializedAttribute]
+        [NonSerialized]
         public bool enableLiveFeed = false;
 
         private RecordManager recManager;
@@ -28,6 +28,18 @@ namespace ShareVR.Core
 
         private int rtHeight;
         private int rtWidth;
+
+        private Transform recStatus;
+        private bool enableRecStatus = false;
+
+        private void Start()
+        {
+            recStatus = transform.FindChild("RecStatus");
+            if (recStatus != null) {
+                //Debug.Log("Found RecStatus");
+                recStatus.gameObject.SetActive(false);
+            }
+        }
 
         public void InitializeReference()
         {
@@ -103,6 +115,19 @@ namespace ShareVR.Core
             capCam.targetTexture = livePlayRT;
         }
 
+        public void EnableRecStatus(bool state)
+        {
+            enableRecStatus = state;
+
+            if (enableRecStatus)
+                StartCoroutine(BlinkRecStatus());
+            else
+            {
+                StopCoroutine(BlinkRecStatus());
+                recStatus.gameObject.SetActive(false);
+            }
+        }
+
         IEnumerator LiveFeedRenderThread()
         {
             while (enableLiveFeed)
@@ -111,6 +136,24 @@ namespace ShareVR.Core
 
                 capCam = recManager.GetCaptureCamera();
                 capCam.targetTexture = livePlayRT;
+            }
+        }
+
+        IEnumerator BlinkRecStatus()
+        {
+            while (enableRecStatus)
+            {
+                yield return new WaitForSeconds(0.6f);
+
+                if(recStatus != null)
+                {
+                    recStatus.gameObject.SetActive(!recStatus.gameObject.activeInHierarchy);
+                }
+            }
+            if (!enableRecStatus)
+            {
+                recStatus.gameObject.SetActive(false);
+                yield break;
             }
         }
     }

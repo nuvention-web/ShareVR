@@ -2,18 +2,18 @@
 using UnityEditor;
 using UnityEditor.Callbacks;
 using System.IO;
-using VRCapture;
+using ShareVR.Capture;
 
-public class PostBuildProcess
+public static class PostBuildProcess
 {
 	[PostProcessBuild]
 	public static void OnPostprocessBuild (BuildTarget target, string pathToBuiltProject)
 	{
-		string saveFolder = pathToBuiltProject.Replace (".exe", "_Data/StreamingAssets/");
+		string saveFolder = pathToBuiltProject.Replace (".exe", "_Data/StreamingAssets/ShareVR/");
 		if (!Directory.Exists (saveFolder))
 			Directory.CreateDirectory (saveFolder);
+		saveFolder = Path.GetFullPath (saveFolder);
 		
-		File.Copy (VRCaptureUtils.FFmpegEditorPath, saveFolder + "/ffmpeg.exe");
-		File.Copy (Application.dataPath + "/ShareVR/Watson/Config.json", saveFolder + "/Config.json");
+		File.Copy (VRCaptureUtils.FFmpegEditorPath, saveFolder + "/ffmpeg.exe", true);
 	}
 }

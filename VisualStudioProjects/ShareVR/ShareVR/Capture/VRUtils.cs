@@ -43,11 +43,11 @@ namespace ShareVR.Capture
             int videoID = 0;
 
             //fileName = GetTimeString () + "-Camera-" + (name ?? "?") + "-Session-" + videoID + ".mp4";
-            fileName = GlobalParameters.ClientID + "-Session-" + videoID + ".mp4";
+            fileName = GlobalParameters.GameName + "-Session-" + videoID + ".mp4";
             while (File.Exists(VRCaptureUtils.SaveFolder + fileName))
             {
                 videoID++;
-                fileName = GlobalParameters.ClientID + "-Session-" + videoID + ".mp4";
+                fileName = GlobalParameters.GameName + "-Session-" + videoID + ".mp4";
             }
 
             return fileName;
@@ -105,11 +105,11 @@ namespace ShareVR.Capture
             int audioFileID = 0;
 
             //fileName = GetTimeString () + "-Session-" + audioFileID + ".wav";
-            fileName = GlobalParameters.ClientID + "-Session-" + audioFileID + ".wav";
+            fileName = GlobalParameters.GameName + "-Session-" + audioFileID + ".wav";
             while (File.Exists(VRCaptureUtils.SaveFolder + fileName))
             {
                 audioFileID++;
-                fileName = GlobalParameters.ClientID + "-Session-" + audioFileID + ".wav";
+                fileName = GlobalParameters.GameName + "-Session-" + audioFileID + ".wav";
             }
 
             return fileName;
