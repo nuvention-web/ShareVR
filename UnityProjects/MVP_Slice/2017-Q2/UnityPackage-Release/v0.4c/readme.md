@@ -33,7 +33,7 @@ Note that We have some additional options listed below if you want to customize 
 <img src="../Imgs/v0.4c_InspectorUI.png" alt="Saved file path" width="300">
 
 ### ShareVR Control Reference
-##### **Spectator Camera Control**
+##### **Spectator Camera Control** 
 - *Camera Follow Regime* - use this to control the way capture camera follows the main target
   - *Fixed Smooth* - Camera smoothly follows the target at a fixed angle
     - *Camera Motion Damp* - how fast should the camera move? A high damp value makes the camera moves quick but abrupt. In contrast, a low damp value makes the camera moves slowly but smooth.
