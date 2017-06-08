@@ -30,7 +30,7 @@ Our goal is make our ShareVR Unity plugin easy-to-use yet still adaptive and cus
 
 Note that We have some additional options listed below if you want to customize the plugin to better fit into your game. We kept all the available options in the ShareVR gameobject to make it easier to find. Below are the available options with description:
 
-<img src="../Imgs/v0.4c_InspectorUI.png" alt="Saved file path" width="300">
+<img src="./Imgs/v0.4c_InspectorUI.png" alt="Saved file path" width="300">
 
 ### ShareVR Control Reference
 ##### **Spectator Camera Control** 
