@@ -30,7 +30,7 @@ Our goal is make our ShareVR Unity plugin easy-to-use yet still adaptive and cus
 
 Note that We have some additional options listed below if you want to customize the plugin to better fit into your game. We kept all the available options in the ShareVR gameobject to make it easier to find. Below are the available options with description:
 
-<img src="./Imgs/v0.4c_InspectorUI.png" alt="Saved file path" width="300">
+<img src="../Imgs/v0.4c_InspectorUI.png" alt="Saved file path" width="300">
 
 ### ShareVR Control Reference
 ##### **Spectator Camera Control**
@@ -41,6 +41,7 @@ Note that We have some additional options listed below if you want to customize 
     - *Camera Orbit Speed* - angular speed of the orbit camera
   - *Custom Camera*
 - *Runtime Adjustable Camera Parameters* - Note that all the camera parameters, including (if applicable) *Camera Orbit Speed* and *Camera Motion Damp*, is adjustable during runtime as shown below
+
   <img src="./Imgs/v0.4_CameraParameters.gif" alt="Camera Parameters" width="500">
   - *Camera Distance* - how far the camera is to the target
   - *Camera Height* - how high the camera is
@@ -100,7 +101,7 @@ Release on 4/29/2017
 ##### New Features
 - **Completely Re-designed ShareVR Inspector UI** - NEW inspector UI! We knew it's annoying that you have to look into our code to adjust some parameters to customize our feature. And it's just too overwhelming if we simply dump all the parameters together in the ShareVR inspector fields. We addressed this with a brand new, full-customized inspector UI system. You can now access all the parameters and features to fully customize ShareVR into your own VR system. Hope you enjoy the clean and handy control it brings!
 
-  <img src="./Imgs/v0.4_InspectorUI.png" alt="New ShareVR Inspector UI" width="300">
+  <img src="./Imgs/v0.4c_InspectorUI.png" alt="New ShareVR Inspector UI" width="300">
 
 - **Fully Customizable Camera Position and Auto-follow Regime** - Now, with much more adjustable camera parameters, you can easily customize the spectator camera the way you want.
 
