@@ -9,22 +9,16 @@ Our team members include (in alphabetical order):
 - Qiqi Zhang (Vivian)
 
 ## Project Website
-Please visit our [project website](https://nuvention-web.github.io/Team-H/)
+Please visit our [website](https://sharevr.io)
 
-## Project Wiki
-Check out our [wiki page](https://github.com/nuvention-web/Team-H/wiki)
-
-## Project Architecture
-You can find our most recent project architecture here ([ShareVR Architecture](https://github.com/nuvention-web/Team-H/wiki/Architecture)).
-
-## Q1 Deliverable (MVP 1.0)
+## Q2 Deliverable (SDK v0.4c)
 Hello and welcome to Team H (ShareVR)'s final MVP project testing guide! Below are instructions to help you test our MVP project. Hope you enjoy our demo!
 
 ### Download and Launch ShareVR MVP Demo
 The MVP deliverable is a compiled Unity project in the form of Windows standalone application (Windows only). Below are instructions for downloading and launching ShareVR.
 
-1. Download the most recent standalone app package: [PC version](https://github.com/nuvention-web/Team-H/tree/submission/UnityProjects/Q1-Deliverable/ShareVR). Please make sure you have downloaded **both the ShareVR_v1_2.exe file and the ShareVR_v1_2_Data folder**.
-2. Once you finished download, simply launch *ShareVR_v1_2.exe* and you should be able to play.
+1. Download the most recent standalone app package: [PC version](https://github.com/nuvention-web/Team-H/tree/submission/UnityProjects/MVP_Slice/2017-Q2/StandaloneApp/Windows). Please make sure you have downloaded **both the *.exe file and the *_Data folder**.
+2. Once you finished download, simply launch the *.exe* file and you should be able to play.
 
 ### Control and Interact
 ShareVR is configured to work in both VR and non-VR PC environment. The control, however, is different.
@@ -43,14 +37,13 @@ If you are using HTC Vive and have SteamVR installed, ShareVR will automatically
   - Use your Vive controllers' *touchpad* to teleport
 
 ### How to Capture
-- **Start Recording** : You can start to capture a session by first navigate to the ShareVR Control Panel and then hit the "Start Recording" button.
+- **Start Recording** : You can start to capture a session by press the **X** button on your keyboard.
 - **During recording** : You can do anything you want, move around, interact with the objects, etc.
-- **Finish recording** : Stop the capture session by hitting the "Stop Recording" button.
+- **Finish recording** : Stop the capture session by press the **X** button on your keyboard again.
 
-Once you finished a capture session, you will see a new message displayed below the "Stop Recording" button. In the message you will find a full path which will lead you to the video file that you just recorded.
+You will notice the recording has started by the blinking red frame surrounding the camera preview panel. Once you finished a capture session, a video file will be created under your Documents/ShareVR folder.
 
 <img src="https://github.com/nuvention-web/Team-H/blob/submission/UnityProjects/Q1-Deliverable/Images/Q1-Deliverable-Scene3.png?raw=true" width="300">
-
 ### Q1 Deliverable Feature Overview
 - ShareVR adopted some interactive contents from SteamVR's interaction system.
 
