@@ -14,7 +14,7 @@ using ShareVR.Capture;
 namespace ShareVR.Core
 {
     [System.Serializable]
-    public enum CameraFollowMethod
+    internal enum CameraFollowMethod
     {
         FixedSmooth,
         OrbitSmooth,
@@ -111,7 +111,7 @@ namespace ShareVR.Core
                 camPreviewPanelPrefab = Resources.Load("Prefabs/CameraPreviewPanel") as GameObject;
         }
 
-        public static void InitializeCamera( Camera cam )
+        public static void InitializeCamera(Camera cam)
         {
             cam.enabled = false;
             cam.targetDisplay = 8;
@@ -125,11 +125,11 @@ namespace ShareVR.Core
             cam.enabled = true;
 
             // Remove ShareVRIgnoreCaptureOnly and add ShareVRIgnoreViewOnly in culling mask
-            cam.cullingMask &= ~( 1 << LayerMask.NameToLayer("ShareVRIgnoreCaptureOnly") );
-            cam.cullingMask |= ( 1 << LayerMask.NameToLayer("ShareVRIgnoreViewOnly") );
+            cam.cullingMask &= ~(1 << LayerMask.NameToLayer("ShareVRIgnoreCaptureOnly"));
+            cam.cullingMask |= (1 << LayerMask.NameToLayer("ShareVRIgnoreViewOnly"));
 
             // Remove ShareVRIgnoreViewOnly in culling mask
-            Camera.main.cullingMask &= ~( 1 << LayerMask.NameToLayer("ShareVRIgnoreViewOnly") );
+            Camera.main.cullingMask &= ~(1 << LayerMask.NameToLayer("ShareVRIgnoreViewOnly"));
         }
 
         // Purpose: Get current spectator recording status
@@ -154,7 +154,7 @@ namespace ShareVR.Core
             return capCam;
         }
 
-        public static LiveFeed ShowCameraPreviewPanel( bool state, Transform tr = null, float scale = 1.0f )
+        public static LiveFeed ShowCameraPreviewPanel(bool state, Transform tr = null, float scale = 1.0f)
         {
             if (state)
             {
@@ -186,7 +186,7 @@ namespace ShareVR.Core
         }
 
         // Purpose: Toggle the camera model while in game
-        public void ShowCameraModel( bool state, float scale = 1.0f )
+        public void ShowCameraModel(bool state, float scale = 1.0f)
         {
             // Create or Destroy Current Camera Model Instance
             if (state)
@@ -219,7 +219,7 @@ namespace ShareVR.Core
         }
 
         // Purpose: Start capture session
-        public void EnableCaptureLED( bool state )
+        public void EnableCaptureLED(bool state)
         {
             if (state)
                 StartCoroutine(BlinkCameraLight());
@@ -228,7 +228,7 @@ namespace ShareVR.Core
         }
 
         // Purpose: Smoothly move and rotate the camera so that it will always follow and look at player
-        private void SmoothLookAt( Transform target )
+        private void SmoothLookAt(Transform target)
         {
             // Calculate target camera position
             camPos = target.position + new Vector3(0.0f, recManager.camHeight, recManager.camDistance);
@@ -244,7 +244,7 @@ namespace ShareVR.Core
             m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, camRot, recManager.camMotionDamp * Time.deltaTime);
         }
 
-        private void SmoothFollow( Transform target )
+        private void SmoothFollow(Transform target)
         {
             m_orbitOffset = Quaternion.AngleAxis(recManager.cameraOrbitSpeed * Time.deltaTime * 10.0f, Vector3.up) * m_orbitOffset;
             m_Transform.position = target.position + m_orbitOffset;
@@ -323,12 +323,12 @@ namespace ShareVR.Core
             transform.SetPositionAndRotation(handPosition, handRotation);
         }
 
-        public void SetTargetHand( Ctrler ctl )
+        public void SetTargetHand(Ctrler ctl)
         {
             m_targetCtrler = ctl;
         }
 
-        public void EnableSelfieMode( bool b )
+        public void EnableSelfieMode(bool b)
         {
             isSelfieMode = b;
         }

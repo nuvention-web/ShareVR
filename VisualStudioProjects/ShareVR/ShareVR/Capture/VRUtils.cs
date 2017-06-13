@@ -8,13 +8,13 @@ namespace ShareVR.Capture
     ////////////////////////////////////////////////////////////////////////////
     ///                           Common Utils.                              ///
     ////////////////////////////////////////////////////////////////////////////
-    public class VRCommonUtils
+    internal class VRCommonUtils
     {
         internal const float EPSILON = 0.000001f;
         internal static string DATA_PATH = Application.dataPath;
         internal static string PERSISTENT_DATA_PATH = Application.persistentDataPath;
         internal static string STREAMING_ASSETS_PATH = Application.streamingAssetsPath;
-        internal static string MY_DOCUMENTS_PATH = Environment.GetFolderPath (
+        internal static string MY_DOCUMENTS_PATH = Environment.GetFolderPath(
                                                      Environment.SpecialFolder.MyDocuments);
 
         internal static string GetTimeString()
@@ -27,9 +27,9 @@ namespace ShareVR.Capture
             return GetPngFileName(null);
         }
 
-        internal static string GetPngFileName( string name )
+        internal static string GetPngFileName(string name)
         {
-            return GetTimeString() + ( name == null ? "" : "-" ) + name + ".png";
+            return GetTimeString() + (name == null ? "" : "-") + name + ".png";
         }
 
         internal static string GetMp4FileName()
@@ -37,7 +37,7 @@ namespace ShareVR.Capture
             return GetMp4FileName(null);
         }
 
-        internal static string GetMp4FileName( string name )
+        internal static string GetMp4FileName(string name)
         {
             string fileName;
             int videoID = 0;
@@ -99,7 +99,7 @@ namespace ShareVR.Capture
             return GetWavFileName(null);
         }
 
-        internal static string GetWavFileName( string name )
+        internal static string GetWavFileName(string name)
         {
             string fileName;
             int audioFileID = 0;
@@ -120,16 +120,16 @@ namespace ShareVR.Capture
             return GetTxtFileName(null);
         }
 
-        internal static string GetTxtFileName( string name )
+        internal static string GetTxtFileName(string name)
         {
-            return GetTimeString() + ( name == null ? "" : "-" ) + name + ".txt";
+            return GetTimeString() + (name == null ? "" : "-") + name + ".txt";
         }
     }
 
     ////////////////////////////////////////////////////////////////////////////
     ///                    Basic Utils for VRCapture.                        ///
     ////////////////////////////////////////////////////////////////////////////
-    public class VRCaptureUtils
+    internal class VRCaptureUtils
     {
         // ShareVR
         private static bool m_userDefinedSaveFolder = false;
@@ -256,7 +256,7 @@ namespace ShareVR.Capture
         {
             get
             {
-                Type steamvr = Type.GetType ("SteamVR");
+                Type steamvr = Type.GetType("SteamVR");
                 if (steamvr != null)
                 {
                     return true;
@@ -279,7 +279,7 @@ namespace ShareVR.Capture
         public float x;
         public float y;
 
-        public SerializableVector2( Vector2 v2 )
+        public SerializableVector2(Vector2 v2)
         {
             x = v2.x;
             y = v2.y;
@@ -301,7 +301,7 @@ namespace ShareVR.Capture
         public float y;
         public float z;
 
-        public SerializableVector3( Vector3 v3 )
+        public SerializableVector3(Vector3 v3)
         {
             x = v3.x;
             y = v3.y;
@@ -325,7 +325,7 @@ namespace ShareVR.Capture
         public float z;
         public float w;
 
-        public SerializableQuaternion( Quaternion q )
+        public SerializableQuaternion(Quaternion q)
         {
             x = q.x;
             y = q.y;
@@ -350,7 +350,7 @@ namespace ShareVR.Capture
         SerializableVector3 postion;
         SerializableQuaternion rotation;
 
-        public SerializableTransform( string name, Vector3 pos, Quaternion rot )
+        public SerializableTransform(string name, Vector3 pos, Quaternion rot)
         {
             Name = name;
             postion = new SerializableVector3(pos);

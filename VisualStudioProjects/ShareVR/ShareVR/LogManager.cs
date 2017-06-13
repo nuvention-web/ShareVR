@@ -188,7 +188,7 @@ namespace ShareVR.Utils
 
         public static string unityVersion;
 
-        public static void UpdateMetaData( string playerName = null )
+        public static void UpdateMetaData(string playerName = null)
         {
             // SDK Info
             metadata["sdk_version"] = GlobalParameters.SDKversion;

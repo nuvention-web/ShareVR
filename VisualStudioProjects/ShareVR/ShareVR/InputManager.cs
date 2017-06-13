@@ -112,7 +112,7 @@ namespace ShareVR.Core
         }
     }
 
-    public enum ViveCtrlerMapping
+    internal enum ViveCtrlerMapping
     {
         bothTriggerPressed,
         bothMenuKeyPressed,
@@ -124,7 +124,7 @@ namespace ShareVR.Core
         DontUseAnyKey
     }
 
-    public enum Ctrler
+    internal enum Ctrler
     {
         leftHand,
         rightHand
@@ -133,7 +133,7 @@ namespace ShareVR.Core
     internal class InputManager : MonoBehaviour
     {
         [HideInInspector]
-        public static UserAction userAct = new UserAction ();
+        public static UserAction userAct = new UserAction();
         [HideInInspector]
         public static bool isBothCtrlerFound = false;
 
@@ -191,7 +191,7 @@ namespace ShareVR.Core
                 // This will get refreshed every one second
                 yield return new WaitForSeconds(1.0f);
 
-                string[] joyStickName = Input.GetJoystickNames ();
+                string[] joyStickName = Input.GetJoystickNames();
 
                 isLeftHandFound = Array.BinarySearch(joyStickName, "OpenVR Controller - Left") >= 0;
                 isRightHandFound = Array.BinarySearch(joyStickName, "OpenVR Controller - Right") >= 0;
@@ -321,7 +321,7 @@ namespace ShareVR.Core
         }
 
         // Wrapper function for vive controller button state
-        protected bool GetTriggerDown( Ctrler ctrler )
+        protected bool GetTriggerDown(Ctrler ctrler)
         {
             if (ctrler == Ctrler.leftHand)
                 return Input.GetKeyDown(CtrlerKeyCode.viveTriggerL);
@@ -331,7 +331,7 @@ namespace ShareVR.Core
             return false;
         }
         // Wrapper function for vive controller button state
-        protected bool GetTriggerUp( Ctrler ctrler )
+        protected bool GetTriggerUp(Ctrler ctrler)
         {
             if (ctrler == Ctrler.leftHand)
                 return Input.GetKeyUp(CtrlerKeyCode.viveTriggerL);
@@ -341,17 +341,17 @@ namespace ShareVR.Core
             return false;
         }
         // Wrapper function for vive controller button state
-        protected bool GetGripDown( Ctrler ctrler )
+        protected bool GetGripDown(Ctrler ctrler)
         {
             return false;
         }
         // Wrapper function for vive controller button state
-        protected bool GetGripUp( Ctrler ctrler )
+        protected bool GetGripUp(Ctrler ctrler)
         {
             return false;
         }
         // Wrapper function for vive controller button state
-        protected bool GetMenuUp( Ctrler ctrler )
+        protected bool GetMenuUp(Ctrler ctrler)
         {
             if (ctrler == Ctrler.leftHand)
                 return Input.GetKeyUp(CtrlerKeyCode.viveMenuL);
@@ -361,7 +361,7 @@ namespace ShareVR.Core
             return false;
         }
         // Wrapper function for vive controller button state
-        protected bool GetMenuDown( Ctrler ctrler )
+        protected bool GetMenuDown(Ctrler ctrler)
         {
             if (ctrler == Ctrler.leftHand)
                 return Input.GetKeyDown(CtrlerKeyCode.viveMenuL);

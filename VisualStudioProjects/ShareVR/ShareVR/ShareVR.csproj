@@ -60,8 +60,11 @@
     <Compile Include="Avatar\AvatarController.cs" />
     <Compile Include="Camera\CameraController.cs" />
     <Compile Include="Camera\LiveFeed.cs" />
+    <Compile Include="Editor\LayerEditor.cs" />
+    <Compile Include="Editor\PostBuildProcess.cs" />
     <Compile Include="GlobalParameters.cs" />
     <Compile Include="InputManager.cs" />
+    <Compile Include="Editor\InspectorUIManager.cs" />
     <Compile Include="LogManager.cs" />
     <Compile Include="Plugin\AWS\S3Uploader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
