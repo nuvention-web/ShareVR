@@ -9,7 +9,7 @@ namespace ShareVR.Capture
     /// <summary>
     /// Frame size type.
     /// </summary>
-    public enum FrameSizeType
+    internal enum FrameSizeType
     {
         /// <summary>
         /// 480p (640 x 480) Standard Definition (SD).
@@ -49,7 +49,7 @@ namespace ShareVR.Capture
     /// <summary>
     /// Target framerate type.
     /// </summary>
-    public enum TargetFramerateType
+    internal enum TargetFramerateType
     {
         _18,
         _24,
@@ -62,7 +62,7 @@ namespace ShareVR.Capture
     /// VRCapture video component.
     /// </summary>
     [RequireComponent(typeof(Camera))]
-    public class VRCaptureVideo : MonoBehaviour
+    internal class VRCaptureVideo : MonoBehaviour
     {
         #region Type Definition
         /// <summary>
@@ -163,32 +163,32 @@ namespace ShareVR.Capture
         /// <summary>
         /// The size of the frame.
         /// </summary>
-        [Tooltip ("Resolution of recorded video"), HideInInspector]
+        [Tooltip("Resolution of recorded video"), HideInInspector]
         public FrameSizeType frameSize = FrameSizeType._1280x720;
         /// <summary>
         /// The size of the cubemap.
         /// </summary>
-        [Tooltip ("The cubemap size capture render to"), HideInInspector]
+        [Tooltip("The cubemap size capture render to"), HideInInspector]
         public CubemapSizeType cubemapSize = CubemapSizeType._1024;
         /// <summary>
         /// The type of the projection.
         /// </summary>
-        [Tooltip ("The panorama projection type"), HideInInspector]
+        [Tooltip("The panorama projection type"), HideInInspector]
         public PanoramaProjectionType projectionType = PanoramaProjectionType.CUBEMAP;
         /// <summary>
         /// The encode quality.
         /// </summary>
-        [Tooltip ("Lower quality will decrease filesize on disk"), HideInInspector]
+        [Tooltip("Lower quality will decrease filesize on disk"), HideInInspector]
         public EncodeQualityType encodeQuality = EncodeQualityType.Medium;
         /// <summary>
         /// The anti aliasing.
         /// </summary>
-        [Tooltip ("Anti aliasing setting for recorded video"), HideInInspector]
+        [Tooltip("Anti aliasing setting for recorded video"), HideInInspector]
         public AntiAliasingType antiAliasing = AntiAliasingType._1;
         /// <summary>
         /// The target framerate.
         /// </summary>
-        [Tooltip ("Target frameRate for recorded video"), HideInInspector]
+        [Tooltip("Target frameRate for recorded video"), HideInInspector]
         public TargetFramerateType targetFramerate = TargetFramerateType._30;
 
         /// <summary>
@@ -441,7 +441,7 @@ namespace ShareVR.Capture
         /// <param name='del'>
         /// The delegate to be invoked when complete.
         /// </param>
-        public void RegisterCaptureCompleteDelegate( VideoCaptureCompleteDelegate del )
+        public void RegisterCaptureCompleteDelegate(VideoCaptureCompleteDelegate del)
         {
             videoCaptureCompleteDelegate += del;
         }
@@ -565,7 +565,7 @@ namespace ShareVR.Capture
             /// <summary>
             /// Constructor.
             /// </summary>
-            public FrameData( byte[] p, int c )
+            public FrameData(byte[] p, int c)
             {
                 pixels = p;
                 count = c;
@@ -589,8 +589,8 @@ namespace ShareVR.Capture
         public bool IsProcessing()
         {
             return isCapturing ||
-            ( frameQueue != null && frameQueue.Count > 0 ) ||
-            ( encodeThread != null && encodeThread.IsAlive );
+            (frameQueue != null && frameQueue.Count > 0) ||
+            (encodeThread != null && encodeThread.IsAlive);
         }
 
         /// <summary>
@@ -630,7 +630,7 @@ namespace ShareVR.Capture
         [HideInInspector]
         public bool showDebugMessage = false;
 
-        void OnRenderImage( RenderTexture src, RenderTexture dest )
+        void OnRenderImage(RenderTexture src, RenderTexture dest)
         {
             // Passthrough
             Graphics.Blit(src, dest);
@@ -716,7 +716,7 @@ namespace ShareVR.Capture
                 if (isDedicated)
                 {
                     // Set the aspect ratio of the camera to match the rendertexture.
-                    videoCamera.aspect = FrameWidth / ( ( float ) FrameHeight );
+                    videoCamera.aspect = FrameWidth / ((float)FrameHeight);
                     videoCamera.targetTexture = frameRenderTexture;
                 }
             }
@@ -902,14 +902,14 @@ namespace ShareVR.Capture
             videoCamera.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
 
             // Create cubemap face render texture.
-            RenderTexture faceTexture = new RenderTexture (width, height, 24);
+            RenderTexture faceTexture = new RenderTexture(width, height, 24);
             faceTexture.antiAliasing = AntiAliasing;
 #if !( UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 )
             faceTexture.dimension = UnityEngine.Rendering.TextureDimension.Tex2D;
 #endif
             faceTexture.hideFlags = HideFlags.HideAndDontSave;
             // For intermediate saving
-            Texture2D swapTexture = new Texture2D (width, height, TextureFormat.RGB24, false);
+            Texture2D swapTexture = new Texture2D(width, height, TextureFormat.RGB24, false);
             swapTexture.hideFlags = HideFlags.HideAndDontSave;
             // Prepare for target render texture.
             videoCamera.targetTexture = faceTexture;
@@ -923,25 +923,25 @@ namespace ShareVR.Capture
                     videoCamera.Render();
                     RenderTexture.active = faceTexture;
                     swapTexture.ReadPixels(new Rect(0, 0, width, height), 0, 0, false);
-                    Color[] pixels = swapTexture.GetPixels ();
+                    Color[] pixels = swapTexture.GetPixels();
                     switch (i)
                     {
-                        case ( int ) CubemapFace.PositiveX:
+                        case (int)CubemapFace.PositiveX:
                             frameTexture.SetPixels(0, height, width, height, pixels);
                             break;
-                        case ( int ) CubemapFace.NegativeX:
+                        case (int)CubemapFace.NegativeX:
                             frameTexture.SetPixels(width, height, width, height, pixels);
                             break;
-                        case ( int ) CubemapFace.PositiveY:
+                        case (int)CubemapFace.PositiveY:
                             frameTexture.SetPixels(width * 2, height, width, height, pixels);
                             break;
-                        case ( int ) CubemapFace.NegativeY:
+                        case (int)CubemapFace.NegativeY:
                             frameTexture.SetPixels(0, 0, width, height, pixels);
                             break;
-                        case ( int ) CubemapFace.PositiveZ:
+                        case (int)CubemapFace.PositiveZ:
                             frameTexture.SetPixels(width, 0, width, height, pixels);
                             break;
-                        case ( int ) CubemapFace.NegativeZ:
+                        case (int)CubemapFace.NegativeZ:
                             frameTexture.SetPixels(width * 2, 0, width, height, pixels);
                             break;
                     }
@@ -958,12 +958,12 @@ namespace ShareVR.Capture
                     RenderTexture.active = faceTexture;
                     swapTexture.ReadPixels(new Rect(0, 0, width, height), 0, 0, false);
                     // Mirror vertically to meet the standard of unity cubemap.
-                    Color[] OrignalPixels = swapTexture.GetPixels ();
+                    Color[] OrignalPixels = swapTexture.GetPixels();
                     for (int y1 = 0; y1 < height; y1++)
                     {
                         for (int x1 = 0; x1 < width; x1++)
                         {
-                            mirroredPixels[y1 * width + x1] = OrignalPixels[( ( height - 1 - y1 ) * width ) + x1];
+                            mirroredPixels[y1 * width + x1] = OrignalPixels[((height - 1 - y1) * width) + x1];
                         }
                     }
                     frameCubemap.SetPixels(mirroredPixels, faces[i]);
@@ -1066,9 +1066,9 @@ namespace ShareVR.Capture
         /// </summary>
         /// <param name="rtex">Rtex.</param>
         /// <param name="fileName">File name.</param>
-        void RenderTextureToPNG( RenderTexture rtex, string fileName )
+        void RenderTextureToPNG(RenderTexture rtex, string fileName)
         {
-            Texture2D tex = new Texture2D (rtex.width, rtex.height, TextureFormat.RGB24, false);
+            Texture2D tex = new Texture2D(rtex.width, rtex.height, TextureFormat.RGB24, false);
             RenderTexture.active = rtex;
             tex.ReadPixels(new Rect(0, 0, rtex.width, rtex.height), 0, 0, false);
             RenderTexture.active = null;
@@ -1080,24 +1080,24 @@ namespace ShareVR.Capture
         /// </summary>
         /// <param name="tex">Tex.</param>
         /// <param name="fileName">File name.</param>
-        void TextureToPNG( Texture2D tex, string fileName )
+        void TextureToPNG(Texture2D tex, string fileName)
         {
             string filePath = VRCaptureUtils.SaveFolder + fileName;
-            byte[] imageBytes = tex.EncodeToPNG ();
+            byte[] imageBytes = tex.EncodeToPNG();
             System.IO.File.WriteAllBytes(filePath, imageBytes);
         }
 
         [DllImport("VRCaptureLib")]
-        static extern System.IntPtr LibVideoCaptureAPI_Get( int width, int height, int rate, string path, string ffpath );
+        static extern System.IntPtr LibVideoCaptureAPI_Get(int width, int height, int rate, string path, string ffpath);
 
         [DllImport("VRCaptureLib")]
-        static extern void LibVideoCaptureAPI_SendFrames( System.IntPtr api, byte[] data, int count );
+        static extern void LibVideoCaptureAPI_SendFrames(System.IntPtr api, byte[] data, int count);
 
         [DllImport("VRCaptureLib")]
-        static extern void LibVideoCaptureAPI_Close( System.IntPtr api );
+        static extern void LibVideoCaptureAPI_Close(System.IntPtr api);
 
         [DllImport("VRCaptureLib")]
-        static extern void LibVideoCaptureAPI_Clean( System.IntPtr api );
+        static extern void LibVideoCaptureAPI_Clean(System.IntPtr api);
 
     }
 }

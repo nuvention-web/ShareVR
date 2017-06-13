@@ -15,58 +15,58 @@ using ShareVR.Utils;
 namespace ShareVR.Core
 {
     [RequireComponent(typeof(InputManager))]
-    public class RecordManager : MonoBehaviour
+    internal class RecordManager : MonoBehaviour
     {
-        [Tooltip ("Select the way you want the camera to move")]
+        [Tooltip("Select the way you want the camera to move")]
         public CameraFollowMethod cameraFollowMethod = CameraFollowMethod.FixedSmooth;
-        [Tooltip ("Reference your own spectator camera")]
+        [Tooltip("Reference your own spectator camera")]
         public Camera trackingCamera;
-        [Tooltip ("Target hand for the hand held camera")]
+        [Tooltip("Target hand for the hand held camera")]
         public Ctrler targetCtrler = Ctrler.leftHand;
-        [Tooltip ("Camera orbit speed")]
+        [Tooltip("Camera orbit speed")]
         public float cameraOrbitSpeed = 1.0f;
-        [Tooltip ("Camera height")]
+        [Tooltip("Camera height")]
         public float camHeight = 2.0f;
-        [Tooltip ("Camera distance")]
+        [Tooltip("Camera distance")]
         public float camDistance = 3.0f;
-        [Tooltip ("Camera angle")]
+        [Tooltip("Camera angle")]
         public float camAngle = 30.0f;
-        [Tooltip ("Camera motion smooth factor")]
+        [Tooltip("Camera motion smooth factor")]
         public float camMotionDamp = 2.0f;
-        [Tooltip ("Make the spectator camera visible")]
+        [Tooltip("Make the spectator camera visible")]
         public bool showCameraModel = true;
-        [Tooltip ("Adjust camera model scale if it's too big or small")]
+        [Tooltip("Adjust camera model scale if it's too big or small")]
         public float cameraModelScale = 1.0f;
-        [Tooltip ("Show a camera preview window?")]
+        [Tooltip("Show a camera preview window?")]
         public bool showCameraPreview = true;
 
-        [Tooltip ("Show a cute avatar for demo")]
+        [Tooltip("Show a cute avatar for demo")]
         public bool showPlayerAvatar = false;
-        [Tooltip ("Adjust avatar scale if it's too big or small")]
+        [Tooltip("Adjust avatar scale if it's too big or small")]
         public float avatarScale = 1.0f;
-        [Tooltip ("Adjust avatar offset")]
-        public Vector3 avatarOffset = new Vector3 (0, -1.5f, 0);
+        [Tooltip("Adjust avatar offset")]
+        public Vector3 avatarOffset = new Vector3(0, -1.5f, 0);
 
-        [Tooltip ("Specify your preferred input method")]
+        [Tooltip("Specify your preferred input method")]
         public ViveCtrlerMapping toggleRecordingInput = ViveCtrlerMapping.KeyboardOnly_Key_X;
-        [Tooltip ("Do you want to use our voice command (beta) feature?")]
+        [Tooltip("Do you want to use our voice command (beta) feature?")]
         public bool useVoiceCommand = true;
 
-        [Tooltip ("Specify your main player gameobject")]
+        [Tooltip("Specify your main player gameobject")]
         public GameObject trackingTarget;
-        [Tooltip ("Display debug message")]
+        [Tooltip("Display debug message")]
         public bool showDebugMessage = GlobalParameters.showDebugMessage;
 
-        [Tooltip ("Specify recording video resolution")]
+        [Tooltip("Specify recording video resolution")]
         public FrameSizeType frameSize = FrameSizeType._1280x720;
-        [Tooltip ("Specify recording video framerate")]
+        [Tooltip("Specify recording video framerate")]
         public TargetFramerateType frameRate = TargetFramerateType._30;
-        [Tooltip ("Specify video file save folder (leave it blank if want to use default: Documents/ShareVR/)")]
+        [Tooltip("Specify video file save folder (leave it blank if want to use default: Documents/ShareVR/)")]
         public string saveFolder = null;
-        [Tooltip ("Specify video file name (leave it blank if want to use default)")]
+        [Tooltip("Specify video file name (leave it blank if want to use default)")]
         public string saveFileName = null;
 
-        [Tooltip ("Do you want to automatically upload video online?")]
+        [Tooltip("Do you want to automatically upload video online?")]
         public bool uploadFileOnline = false;
 
         [HideInInspector]
@@ -183,7 +183,7 @@ namespace ShareVR.Core
             vrCapVideo.isEnabled = true;
             vrCap.CaptureVideos = new[] { vrCapVideo };
             // Find main AudioListener in the scene and attach VRCaptureAudio component to it
-            var audioListener = FindObjectOfType (typeof(AudioListener)) as AudioListener;
+            var audioListener = FindObjectOfType(typeof(AudioListener)) as AudioListener;
             if (audioListener != null)
             {
                 vrCap.CaptureAudio = audioListener.gameObject.AddComponent<VRCaptureAudio>();
@@ -211,7 +211,7 @@ namespace ShareVR.Core
             }
 
             // Initialize LiveFeed Object
-            var livePlayGameObj = GameObject.Find ("LivePlayPlane");
+            var livePlayGameObj = GameObject.Find("LivePlayPlane");
             if (livePlayGameObj != null)
             {
                 liveFeed = livePlayGameObj.GetComponent<LiveFeed>();
@@ -343,7 +343,7 @@ namespace ShareVR.Core
         }
 
         // Purpose: Recursively apply a given layer to a gameobject
-        public static void SetLayer( GameObject parentGameObj, int layerID, bool applyChild = true )
+        public static void SetLayer(GameObject parentGameObj, int layerID, bool applyChild = true)
         {
             parentGameObj.layer = layerID;
             if (applyChild)
